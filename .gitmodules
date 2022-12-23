@@ -7,3 +7,7 @@
 [submodule "lvgl"]
 	path = lvgl
 	url = https://github.com/lvgl/lvgl.git
+[submodule "can"]
+	path = can
+	url = git@github.com:eagletrt/can.git
+	branch = build
