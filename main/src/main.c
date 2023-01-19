@@ -49,6 +49,8 @@ static int tick_thread(void *data);
 /*********************
  *      DEFINES
  *********************/
+#define 
+
 
 /**********************
  *      TYPEDEFS
@@ -61,6 +63,68 @@ static int tick_thread(void *data);
 /**********************
  *  STATIC PROTOTYPES
  **********************/
+
+void gridConstructions(){
+  lv_style_t colors;
+  lv_style_init(&colors);
+  lv_style_set_bg_color(&colors, lv_palette_main(LV_PALETTE_AMBER));
+
+
+  lv_obj_t *tab_racing = lv_scr_act();
+  lv_obj_set_scrollbar_mode(tab_racing, LV_SCROLLBAR_MODE_OFF);
+  lv_obj_set_layout(tab_racing, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_lv = lv_obj_create(tab_racing);
+  lv_obj_set_layout(panel_lv, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_hv = lv_obj_create(tab_racing);
+  lv_obj_set_layout(panel_hv, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_top_tab = lv_obj_create(tab_racing);
+  lv_obj_set_layout(panel_top_tab, LV_LAYOUT_GRID);
+
+  //...
+
+  // ho provato ad inserirlo nelle celle per vedere come fossero venute le dimensioni
+  lv_obj_t *color1 = lv_obj_create(tab_racing);
+  lv_obj_set_size(color1, LV_SIZE_CONTENT, LV_SIZE_CONTENT); // dovrebbe far prendere le dimensioni della cella in cui viene posizionato
+  lv_obj_set_style_bg_color(color1, lv_palette_main(LV_PALETTE_GREEN), LV_STATE_DEFAULT);
+ 
+  /* main panel */                         // put width
+  static lv_coord_t grid_main_col_dsc[] = {LV_GRID_CONTENT, LV_GRID_FR(1), 100, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t grid_main_row_dsc[] = {LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+
+  /* center panel grid */
+  static lv_coord_t center_main_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t center_main_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(5), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+
+  /* side main panel grid */
+  static lv_coord_t side_main_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t side_main_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(5), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+                                                          
+
+  /* focus panel grid */
+  static lv_coord_t focus_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(3), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t focus_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  
+  /* timing panel grid */
+  static lv_coord_t timing_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t timing_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+
+  /* speedometer panel grid */
+  static lv_coord_t speedometer_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t speedometer_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(4), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+
+  /* data panel grid */
+  static lv_coord_t data_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t data_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(1),LV_GRID_TEMPLATE_LAST};
+
+  lv_obj_set_grid_dsc_array(tab_racing, grid_main_col_dsc, grid_main_row_dsc);
+  lv_obj_set_grid_cell(color1, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  //lv_obj_set_width(color1, grid_main_col_dsc[1]);
+  //lv_obj_set_height(color1, LV_SIZE_CONTENT);
+
+}
 
 /**********************
  *   GLOBAL FUNCTIONS
@@ -93,13 +157,16 @@ int main(int argc, char **argv)
 //  lv_example_tabview_1();
 //  lv_example_tabview_1();
 //  lv_example_flex_3();
-//  lv_example_label_1();
+//  lv_example_label_1()
 
-  lv_demo_widgets();
+// lv_demo_widgets();
+
 //  lv_demo_keypad_encoder();
 //  lv_demo_benchmark();
 //  lv_demo_stress();
 //  lv_demo_music();
+
+gridConstructions();
 
   while(1) {
     /* Periodically call the lv_task handler.
