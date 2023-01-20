@@ -52,18 +52,35 @@ static int tick_thread(void *data);
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 480
 
-#define CENTER_PANEL_WIDTH SCREEN_WIDTH * 0.825
+#define CENTER_PANEL_WIDTH SCREEN_WIDTH * 82.5/100
 #define CENTER_PANEL_HEIGHT SCREEN_HEIGHT
 
 #define SIDE_PANEL_WIDTH 70
 #define SIDE_PANEL_HEIGHT SCREEN_HEIGHT
 
+#define FOCUS_PANEL_WIDTH CENTER_PANEL_WIDTH
+#define FOCUS_PANEL_HEIGHT CENTER_PANEL_HEIGHT * 56.25/100
+
+#define TOP_PANEL_WIDTH CENTER_PANEL_WIDTH
+#define TOP_PANEL_HEIGHT CENTER_PANEL_HEIGHT * 21.875/100  // (100 - 56.25) / 2
+
+#define BOTTOM_PANEL_WIDTH CENTER_PANEL_WIDTH
+#define BOTTOM_PANEL_HEIGHT CENTER_PANEL_HEIGHT * 21.875/100
+
+#define TIMING_PANEL_WIDTH FOCUS_PANEL_WIDTH * 25.0/100
+#define TIMING_PANEL_HEIGHT FOCUS_PANEL_HEIGHT
+
+#define DATA_PANEL_WIDTH FOCUS_PANEL_WIDTH * 25.0/100
+#define DATA_PANEL_HEIGHT FOCUS_PANEL_HEIGHT
+
+#define SPEEDOMETER_PANEL_WIDTH FOCUS_PANEL_WIDTH * 50.0/100
+#define SPEEDOMETER_PANEL_HEIGHT FOCUS_PANEL_HEIGHT
 
 /**********************
  *      TYPEDEFS
  **********************/
 
-/**********************
+/**********************FOCUS_PANEL_WIDTH * 25.0/100
  *      VARIABLES
  **********************/
 
@@ -96,29 +113,29 @@ void gridConstructions(){
   static lv_coord_t grid_main_row_dsc[] = {SCREEN_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
   /* center panel grid */
-  static lv_coord_t center_main_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t center_main_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(5), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t center_main_col_dsc[] = { CENTER_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t center_main_row_dsc[] = { TOP_PANEL_HEIGHT, FOCUS_PANEL_HEIGHT, BOTTOM_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
   /* side main panel grid */
-  static lv_coord_t side_main_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t side_main_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(5), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t side_main_col_dsc[] = { SIDE_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t side_main_row_dsc[] = { SIDE_PANEL_WIDTH * 12/100, SIDE_PANEL_WIDTH * 76/100, SIDE_PANEL_WIDTH * 12/100, LV_GRID_TEMPLATE_LAST};
                                                           
 
   /* focus panel grid */
-  static lv_coord_t focus_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(3), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t focus_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t focus_panel_col_dsc[] = { TIMING_PANEL_WIDTH, SPEEDOMETER_PANEL_WIDTH, DATA_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t focus_panel_row_dsc[] = { FOCUS_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
   
   /* timing panel grid */
-  static lv_coord_t timing_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t timing_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t timing_panel_col_dsc[] = { TIMING_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t timing_panel_row_dsc[] = { TIMING_PANEL_HEIGHT/3, TIMING_PANEL_HEIGHT/3, TIMING_PANEL_HEIGHT/3, LV_GRID_TEMPLATE_LAST};
 
   /* speedometer panel grid */
-  static lv_coord_t speedometer_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t speedometer_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(4), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t speedometer_panel_col_dsc[] = { SPEEDOMETER_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t speedometer_panel_row_dsc[] = { SPEEDOMETER_PANEL_HEIGHT * 12.96/100, SPEEDOMETER_PANEL_HEIGHT * 72.23/100, SPEEDOMETER_PANEL_HEIGHT * 14.81/100, LV_GRID_TEMPLATE_LAST};
 
   /* data panel grid */
-  static lv_coord_t data_panel_col_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t data_panel_row_dsc[] = { LV_GRID_FR(1), LV_GRID_FR(1),LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t data_panel_col_dsc[] = { DATA_PANEL_WIDTH * 0.5, DATA_PANEL_WIDTH * 0.5, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t data_panel_row_dsc[] = { DATA_PANEL_HEIGHT * 0.33, DATA_PANEL_HEIGHT * 0.33, DATA_PANEL_HEIGHT * 0.33, LV_GRID_TEMPLATE_LAST};
 
   lv_obj_set_grid_dsc_array(tab_racing, grid_main_col_dsc, grid_main_row_dsc);
   lv_obj_set_grid_cell(color1, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
