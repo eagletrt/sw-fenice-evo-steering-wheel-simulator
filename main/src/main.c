@@ -49,7 +49,14 @@ static int tick_thread(void *data);
 /*********************
  *      DEFINES
  *********************/
-#define 
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 480
+
+#define CENTER_PANEL_WIDTH SCREEN_WIDTH * 0.825
+#define CENTER_PANEL_HEIGHT SCREEN_HEIGHT
+
+#define SIDE_PANEL_WIDTH 70
+#define SIDE_PANEL_HEIGHT SCREEN_HEIGHT
 
 
 /**********************
@@ -65,13 +72,8 @@ static int tick_thread(void *data);
  **********************/
 
 void gridConstructions(){
-  lv_style_t colors;
-  lv_style_init(&colors);
-  lv_style_set_bg_color(&colors, lv_palette_main(LV_PALETTE_AMBER));
-
 
   lv_obj_t *tab_racing = lv_scr_act();
-  lv_obj_set_scrollbar_mode(tab_racing, LV_SCROLLBAR_MODE_OFF);
   lv_obj_set_layout(tab_racing, LV_LAYOUT_GRID);
 
   lv_obj_t *panel_lv = lv_obj_create(tab_racing);
@@ -87,12 +89,11 @@ void gridConstructions(){
 
   // ho provato ad inserirlo nelle celle per vedere come fossero venute le dimensioni
   lv_obj_t *color1 = lv_obj_create(tab_racing);
-  lv_obj_set_size(color1, LV_SIZE_CONTENT, LV_SIZE_CONTENT); // dovrebbe far prendere le dimensioni della cella in cui viene posizionato
   lv_obj_set_style_bg_color(color1, lv_palette_main(LV_PALETTE_GREEN), LV_STATE_DEFAULT);
  
   /* main panel */                         // put width
-  static lv_coord_t grid_main_col_dsc[] = {LV_GRID_CONTENT, LV_GRID_FR(1), 100, LV_GRID_TEMPLATE_LAST};
-  static lv_coord_t grid_main_row_dsc[] = {LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t grid_main_col_dsc[] = {SIDE_PANEL_WIDTH, CENTER_PANEL_WIDTH, SIDE_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t grid_main_row_dsc[] = {SCREEN_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
   /* center panel grid */
   static lv_coord_t center_main_col_dsc[] = { LV_GRID_FR(1), LV_GRID_TEMPLATE_LAST};
@@ -121,7 +122,8 @@ void gridConstructions(){
 
   lv_obj_set_grid_dsc_array(tab_racing, grid_main_col_dsc, grid_main_row_dsc);
   lv_obj_set_grid_cell(color1, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
-  //lv_obj_set_width(color1, grid_main_col_dsc[1]);
+  lv_obj_set_width(color1, grid_main_col_dsc[1]);
+  lv_obj_set_height(color1, grid_main_row_dsc[0]);
   //lv_obj_set_height(color1, LV_SIZE_CONTENT);
 
 }
