@@ -49,18 +49,165 @@ static int tick_thread(void *data);
 /*********************
  *      DEFINES
  *********************/
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 480
+
+#define CENTER_PANEL_WIDTH SCREEN_WIDTH * 82.5/100
+#define CENTER_PANEL_HEIGHT SCREEN_HEIGHT
+
+#define SIDE_PANEL_WIDTH 70
+#define SIDE_PANEL_HEIGHT SCREEN_HEIGHT
+
+#define FOCUS_PANEL_WIDTH CENTER_PANEL_WIDTH
+#define FOCUS_PANEL_HEIGHT CENTER_PANEL_HEIGHT * 56.25/100
+
+#define TOP_PANEL_WIDTH CENTER_PANEL_WIDTH
+#define TOP_PANEL_HEIGHT CENTER_PANEL_HEIGHT * 21.875/100  // (100 - 56.25) / 2
+
+#define BOTTOM_PANEL_WIDTH CENTER_PANEL_WIDTH
+#define BOTTOM_PANEL_HEIGHT CENTER_PANEL_HEIGHT * 21.875/100
+
+#define TIMING_PANEL_WIDTH FOCUS_PANEL_WIDTH * 25.0/100
+#define TIMING_PANEL_HEIGHT FOCUS_PANEL_HEIGHT
+
+#define DATA_PANEL_WIDTH FOCUS_PANEL_WIDTH * 25.0/100
+#define DATA_PANEL_HEIGHT FOCUS_PANEL_HEIGHT
+
+#define SPEEDOMETER_PANEL_WIDTH FOCUS_PANEL_WIDTH * 50.0/100
+#define SPEEDOMETER_PANEL_HEIGHT FOCUS_PANEL_HEIGHT
 
 /**********************
  *      TYPEDEFS
  **********************/
 
-/**********************
+/**********************FOCUS_PANEL_WIDTH * 25.0/100
  *      VARIABLES
  **********************/
 
 /**********************
  *  STATIC PROTOTYPES
  **********************/
+
+void gridConstructions(){
+
+  lv_obj_t *tab_racing = lv_scr_act();
+  lv_obj_set_layout(tab_racing, LV_LAYOUT_GRID);
+  lv_obj_set_style_pad_column(tab_racing, 0, 0);
+  lv_obj_set_style_pad_row(tab_racing, 0, 0);
+  lv_obj_clear_flag(tab_racing, LV_OBJ_FLAG_SCROLLABLE);
+
+  lv_obj_t *panel_lv = lv_obj_create(tab_racing);
+  lv_obj_set_layout(panel_lv, LV_LAYOUT_GRID);
+  lv_obj_set_scrollbar_mode(panel_lv, LV_SCROLLBAR_MODE_OFF);
+  lv_obj_set_style_pad_column(panel_lv, 0, 0);
+  lv_obj_set_style_pad_row(panel_lv, 0, 0);
+  lv_obj_clear_flag(panel_lv, LV_OBJ_FLAG_SCROLLABLE);
+
+  lv_obj_t *panel_hv = lv_obj_create(tab_racing);
+  lv_obj_set_style_pad_column(panel_hv, 0, 0);
+  lv_obj_set_style_pad_row(panel_hv, 0, 0);
+  lv_obj_clear_flag(panel_hv, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_layout(panel_hv, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_center = lv_obj_create(tab_racing);
+  lv_obj_set_style_pad_column(panel_center, 0, 0);
+  lv_obj_set_style_pad_row(panel_center, 0, 0);
+  lv_obj_clear_flag(panel_center, LV_OBJ_FLAG_SCROLLABLE);
+  lv_obj_set_layout(panel_center, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_top_tab = lv_obj_create(panel_center);
+  lv_obj_set_layout(panel_center, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_focus = lv_obj_create(panel_center);
+  lv_obj_set_layout(panel_center, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_bottom_bar = lv_obj_create(panel_center);
+  lv_obj_set_layout(panel_center, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_timing = lv_obj_create(panel_focus);
+  lv_obj_set_layout(panel_center, LV_LAYOUT_GRID);  
+
+  lv_obj_t *panel_speedometer = lv_obj_create(panel_focus);
+  lv_obj_set_layout(panel_center, LV_LAYOUT_GRID);
+
+  lv_obj_t *panel_data = lv_obj_create(panel_focus);
+  lv_obj_set_layout(panel_center, LV_LAYOUT_GRID);
+  
+
+  // ho provato ad inserirlo nelle celle per vedere come fossero venute le dimensioni
+  lv_obj_t *color1 = lv_obj_create(panel_lv);
+  lv_obj_set_style_bg_color(color1, lv_palette_main(LV_PALETTE_GREEN), LV_STATE_DEFAULT);
+ 
+  /* main panel */                         // put width
+  static lv_coord_t grid_main_col_dsc[] = {SIDE_PANEL_WIDTH, CENTER_PANEL_WIDTH, SIDE_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t grid_main_row_dsc[] = {SCREEN_HEIGHT, LV_GRID_TEMPLATE_LAST};
+
+  /* center panel grid */
+  static lv_coord_t center_main_col_dsc[] = { CENTER_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t center_main_row_dsc[] = { TOP_PANEL_HEIGHT, FOCUS_PANEL_HEIGHT, BOTTOM_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+
+  /* side main panel grid */
+  static lv_coord_t side_main_col_dsc[] = { SIDE_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t side_main_row_dsc[] = { SIDE_PANEL_HEIGHT * 12/100, SIDE_PANEL_HEIGHT * 76/100, SIDE_PANEL_HEIGHT * 12/100, LV_GRID_TEMPLATE_LAST};
+                                                          
+
+  /* focus panel grid */
+  static lv_coord_t focus_panel_col_dsc[] = { TIMING_PANEL_WIDTH, SPEEDOMETER_PANEL_WIDTH, DATA_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t focus_panel_row_dsc[] = { FOCUS_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+  
+  /* timing panel grid */
+  static lv_coord_t timing_panel_col_dsc[] = { TIMING_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t timing_panel_row_dsc[] = { TIMING_PANEL_HEIGHT/3, TIMING_PANEL_HEIGHT/3, TIMING_PANEL_HEIGHT/3, LV_GRID_TEMPLATE_LAST};
+
+  /* speedometer panel grid */
+  static lv_coord_t speedometer_panel_col_dsc[] = { SPEEDOMETER_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t speedometer_panel_row_dsc[] = { SPEEDOMETER_PANEL_HEIGHT * 12.96/100, SPEEDOMETER_PANEL_HEIGHT * 72.23/100, SPEEDOMETER_PANEL_HEIGHT * 14.81/100, LV_GRID_TEMPLATE_LAST};
+
+  /* data panel grid */
+  static lv_coord_t data_panel_col_dsc[] = { DATA_PANEL_WIDTH * 0.5, DATA_PANEL_WIDTH * 0.5, LV_GRID_TEMPLATE_LAST};
+  static lv_coord_t data_panel_row_dsc[] = { DATA_PANEL_HEIGHT * 0.33, DATA_PANEL_HEIGHT * 0.33, DATA_PANEL_HEIGHT * 0.33, LV_GRID_TEMPLATE_LAST};
+
+  lv_obj_set_grid_dsc_array(tab_racing, grid_main_col_dsc, grid_main_row_dsc);
+  lv_obj_set_grid_cell(panel_lv, LV_GRID_ALIGN_STRETCH, 0, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
+  lv_obj_set_grid_cell(panel_center, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
+  lv_obj_set_grid_cell(panel_hv, LV_GRID_ALIGN_STRETCH, 2, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
+
+  lv_obj_set_grid_dsc_array(panel_lv, side_main_col_dsc, side_main_row_dsc);
+  lv_obj_set_grid_cell(color1, LV_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  lv_obj_set_size(color1, side_main_col_dsc[0], side_main_row_dsc[0]);
+  // add obj to panel_lv
+
+  lv_obj_set_grid_dsc_array(panel_hv, side_main_col_dsc, side_main_row_dsc);
+  // add obj to panel_hv
+
+  lv_obj_set_grid_dsc_array(panel_center, center_main_col_dsc, center_main_row_dsc);
+  lv_obj_set_grid_cell(panel_top_tab, LV_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 0);
+  lv_obj_set_grid_cell(panel_focus, LV_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 0);
+  lv_obj_set_grid_cell(panel_bottom_bar, LV_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 2, 0);
+
+  lv_obj_set_grid_dsc_array(panel_focus, focus_panel_col_dsc, focus_panel_row_dsc);
+  lv_obj_set_grid_cell(panel_timing, LV_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  lv_obj_set_grid_cell(panel_speedometer, LV_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  lv_obj_set_grid_cell(panel_data, LV_ALIGN_CENTER, 2, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+
+  lv_obj_set_grid_dsc_array(panel_timing, timing_panel_col_dsc, timing_panel_row_dsc);
+  // add obj to panel_timing
+
+  lv_obj_set_grid_dsc_array(panel_speedometer, speedometer_panel_col_dsc, speedometer_panel_row_dsc);
+  //lv_obj_set_height(color1, speedometer_panel_row_dsc[1]);
+  // add obj to panel_speedometer
+
+  lv_obj_set_grid_dsc_array(panel_data, data_panel_col_dsc, data_panel_row_dsc);
+  // add obj to panel_data
+
+
+  /*
+  lv_obj_set_grid_cell(color1, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  lv_obj_set_width(color1, grid_main_col_dsc[1]);
+  lv_obj_set_height(color1, grid_main_row_dsc[0]);
+  */
+
+}
 
 /**********************
  *   GLOBAL FUNCTIONS
@@ -93,13 +240,16 @@ int main(int argc, char **argv)
 //  lv_example_tabview_1();
 //  lv_example_tabview_1();
 //  lv_example_flex_3();
-//  lv_example_label_1();
+//  lv_example_label_1()
 
-  lv_demo_widgets();
+// lv_demo_widgets();
+
 //  lv_demo_keypad_encoder();
 //  lv_demo_benchmark();
 //  lv_demo_stress();
 //  lv_demo_music();
+
+gridConstructions();
 
   while(1) {
     /* Periodically call the lv_task handler.
