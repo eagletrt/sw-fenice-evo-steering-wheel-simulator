@@ -55,7 +55,7 @@ static int tick_thread(void *data);
  *      TYPEDEFS
  **********************/
 
-/**********************FOCUS_PANEL_WIDTH * 25.0/100
+/**********************
  *      VARIABLES
  **********************/
 

@@ -66,10 +66,43 @@ void tab_manager() {
                          LV_GRID_ALIGN_STRETCH, 0, 1);
 
     // DATA PANEL
-    lv_obj_t * o2 = lv_obj_create(central_panel);
-    lv_obj_t * l2 = lv_label_create(o2);
-    lv_label_set_text(l2, "data panel");
-    lv_obj_set_grid_cell(o2, LV_GRID_ALIGN_STRETCH, 0, 1,
+    static lv_coord_t dpanel_cols[] =  {150, 300, 150, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t dpanel_rows[] = {320, LV_GRID_TEMPLATE_LAST};
+
+    lv_obj_t * data_panel = lv_obj_create(central_panel);
+    lv_obj_set_layout(data_panel, LV_LAYOUT_GRID);
+    lv_obj_clear_flag(data_panel, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_size(data_panel, 600, 320);
+
+    lv_obj_add_style(data_panel, &grid_style, 0);
+    lv_obj_center(data_panel);
+    lv_obj_set_style_base_dir(data_panel, LV_BASE_DIR_RTL, 0);
+    lv_obj_set_grid_dsc_array(data_panel, dpanel_cols, dpanel_rows);
+
+    // DATA LEFT
+    lv_obj_t * o4 = lv_obj_create(data_panel);
+    lv_obj_t * l4 = lv_label_create(o4);
+    lv_label_set_text(l4, "data left");
+    lv_obj_set_grid_cell(o4, LV_GRID_ALIGN_STRETCH, 0, 1,
+                         LV_GRID_ALIGN_STRETCH, 0, 1);
+
+    // DATA CENTER
+    lv_obj_t * o5 = lv_obj_create(data_panel);
+    lv_obj_t * l5 = lv_label_create(o5);
+    lv_label_set_text(l5, "data center");
+    lv_obj_set_grid_cell(o5, LV_GRID_ALIGN_STRETCH, 1, 1,
+                         LV_GRID_ALIGN_STRETCH, 0, 1);
+
+    // DATA RIGHT
+    lv_obj_t * o6 = lv_obj_create(data_panel);
+    lv_obj_t * l6 = lv_label_create(o6);
+    lv_label_set_text(l6, "data right");
+    lv_obj_set_grid_cell(o6, LV_GRID_ALIGN_STRETCH, 2, 1,
+                         LV_GRID_ALIGN_STRETCH, 0, 1);
+
+
+    // setting data panel position in central panel
+    lv_obj_set_grid_cell(data_panel, LV_GRID_ALIGN_STRETCH, 0, 1,
                          LV_GRID_ALIGN_STRETCH, 1, 1);
 
     // BOTTOM BAR
@@ -79,6 +112,7 @@ void tab_manager() {
     lv_obj_set_grid_cell(o3, LV_GRID_ALIGN_STRETCH, 0, 1,
                          LV_GRID_ALIGN_STRETCH, 2, 1);
 
+    // setting central panel position in tab racing
     lv_obj_set_grid_cell(central_panel, LV_GRID_ALIGN_STRETCH, 1, 1,
                          LV_GRID_ALIGN_STRETCH, 0, 1);
 
