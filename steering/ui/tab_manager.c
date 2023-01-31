@@ -9,8 +9,8 @@ void tab_manager() {
     lv_style_set_pad_top(&grid_style, 0);
     lv_style_set_pad_row(&grid_style, 0);
 
-    static lv_coord_t main_panel_cols[] =  {100, 600, 100, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t main_panel_rows[] = {480, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t main_panel_cols[] =  {SIDE_BAR_WIDTH, CENTRAL_PANEL_WIDTH, SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t main_panel_rows[] = {SCREEN_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * tab_racing = lv_obj_create(lv_scr_act());
     lv_obj_set_layout(tab_racing, LV_LAYOUT_GRID);
@@ -44,14 +44,14 @@ void tab_manager() {
 
     // CENTRAL PANEL
 
-    static lv_coord_t cpanel_cols[] =  {600, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t cpanel_rows[] = {80, 320, 80, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t cpanel_cols[] =  {CENTRAL_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t cpanel_rows[] = {TOP_BAR_HEIGHT, DATA_PANEL_HEIGHT, BOTTOM_BAR_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
 
     lv_obj_t * central_panel = lv_obj_create(tab_racing);
     lv_obj_set_layout(central_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(central_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(central_panel, 600, SCREEN_HEIGHT);
+    lv_obj_set_size(central_panel, CENTRAL_PANEL_WIDTH, SCREEN_HEIGHT);
 
     lv_obj_add_style(central_panel, &grid_style, 0);
     lv_obj_center(central_panel);
@@ -66,13 +66,13 @@ void tab_manager() {
                          LV_GRID_ALIGN_STRETCH, 0, 1);
 
     // DATA PANEL
-    static lv_coord_t dpanel_cols[] =  {150, 300, 150, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t dpanel_rows[] = {320, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t dpanel_cols[] =  {DATA_LEFT_WIDTH, DATA_CENTER_WIDTH, DATA_RIGHT_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t dpanel_rows[] = {DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * data_panel = lv_obj_create(central_panel);
     lv_obj_set_layout(data_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(data_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(data_panel, 600, 320);
+    lv_obj_set_size(data_panel, CENTRAL_PANEL_WIDTH, DATA_PANEL_HEIGHT);
 
     lv_obj_add_style(data_panel, &grid_style, 0);
     lv_obj_center(data_panel);
