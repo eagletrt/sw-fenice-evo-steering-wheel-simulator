@@ -3,7 +3,8 @@
 
 #include "lvgl.h"
 #include "ratios.h"
+#include "tab_racing.h"
 
-void tab_manager();
+void tab_manager(void);
 
 #endif
