@@ -87,11 +87,44 @@ void tab_manager() {
                          LV_GRID_ALIGN_STRETCH, 0, 1);
 
     // DATA CENTER
+
+//    lv_obj_t * speedometer_panel = lv_obj_create(data_panel);
+//    lv_obj_set_layout(speedometer_panel, LV_LAYOUT_GRID);
+
+    /*
     lv_obj_t * o5 = lv_obj_create(data_panel);
     lv_obj_t * l5 = lv_label_create(o5);
     lv_label_set_text(l5, "data center");
     lv_obj_set_grid_cell(o5, LV_GRID_ALIGN_STRETCH, 1, 1,
-                         LV_GRID_ALIGN_STRETCH, 0, 1);
+                         LV_GRID_ALIGN_STRETCH, 0, 1); */
+
+    /* COMINCIA CODICE BACATO */
+
+    // top
+    lv_obj_t * power = lv_label_create(data_panel);
+    lv_label_set_text(power, "60%");
+    lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_START, 0, 1);
+
+    // center
+    lv_obj_t *speed = lv_label_create(data_panel);
+    lv_label_set_text_fmt(speed, "169 km/h");
+    lv_obj_set_grid_cell(speed, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+
+
+    lv_obj_t * arc = lv_arc_create(data_panel);
+    lv_obj_remove_style(arc, NULL, LV_PART_KNOB);
+    lv_obj_clear_flag(arc, LV_OBJ_FLAG_CLICKABLE);
+    lv_arc_set_end_angle(arc, 280);
+    lv_obj_set_size(arc, 250, 250);
+    lv_obj_set_grid_cell(arc, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+
+    // bottom 
+    lv_obj_t *lap_counter = lv_label_create(data_panel);
+    lv_label_set_text(lap_counter, "12 LAP");
+    lv_obj_set_grid_cell(lap_counter, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_END, 0, 1);
+
+    /* FINE CODICE BACATO */
+
 
     // DATA RIGHT
     lv_obj_t * o6 = lv_obj_create(data_panel);
