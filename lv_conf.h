@@ -358,7 +358,7 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
  *`LV_BASE_DIR_LTR` Left-to-Right
  *`LV_BASE_DIR_RTL` Right-to-Left
  *`LV_BASE_DIR_AUTO` detect texts base direction*/
-#define LV_BIDI_BASE_DIR_DEF  LV_BASE_DIR_AUTO
+#define LV_BIDI_BASE_DIR_DEF  LV_BASE_DIR_LTR
 #endif
 
 /*Enable Arabic/Persian processing
