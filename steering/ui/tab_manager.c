@@ -103,7 +103,7 @@ void tab_manager() {
     lv_obj_t * speedometer_panel = lv_obj_create(data_panel);
     lv_obj_set_layout(speedometer_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(speedometer_panel, LV_OBJ_FLAG_SCROLLABLE);
-
+    lv_obj_set_style_border_opa(speedometer_panel, 0, 0 );
     lv_obj_add_style(speedometer_panel, &grid_style, 0);
     lv_obj_center(speedometer_panel);
     lv_obj_set_style_base_dir(speedometer_panel, LV_BASE_DIR_LTR, 0);
@@ -139,6 +139,7 @@ void tab_manager() {
     // top
     lv_obj_t * power = lv_label_create(data_panel);
     lv_label_set_text(power, "POWER 60%");
+    lv_obj_set_style_text_color(power, lv_color_hex(COLOR_TERTIARY_HEX), NULL);
     lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_START, 0, 1);
     lv_obj_set_style_text_font(power, &lv_font_inter_bold_22, LV_STATE_DEFAULT);
     lv_obj_set_style_base_dir(power, LV_BASE_DIR_LTR, 0);
@@ -151,12 +152,12 @@ void tab_manager() {
     lv_label_set_text_fmt(speed, "169");
     lv_obj_align(speed, LV_ALIGN_CENTER, 20, 0);
     lv_obj_set_grid_cell(speed, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_END, 0, 1);
-    lv_obj_center(speed);
+    lv_obj_set_style_text_color(speed, lv_color_hex(COLOR_TERTIARY_HEX), NULL);
     lv_obj_set_style_text_font(speed, &lv_font_inter_bold_50, LV_STATE_DEFAULT);
     lv_obj_set_style_base_dir(speed, LV_BASE_DIR_LTR, 0);
     lv_obj_t *speed_unit = lv_label_create(speedometer_panel);
     lv_label_set_text_fmt(speed_unit, "km/h");
-    lv_obj_center(speed_unit);
+    lv_obj_set_style_text_color(speed_unit, lv_color_hex(COLOR_TERTIARY_HEX), NULL);
     lv_obj_set_grid_cell(speed_unit, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 1, 1);
     lv_obj_set_style_text_font(speed_unit, &lv_font_inter_bold_30, LV_STATE_DEFAULT);
     lv_obj_set_style_base_dir(speed_unit, LV_BASE_DIR_LTR, 0);
@@ -191,6 +192,7 @@ void tab_manager() {
     // bottom 
     lv_obj_t *lap_counter = lv_label_create(data_panel);
     lv_label_set_text(lap_counter, "  12\nLAP");
+    lv_obj_set_style_text_color(lap_counter, lv_color_hex(COLOR_TERTIARY_HEX), NULL);
     lv_obj_set_grid_cell(lap_counter, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_END, 0, 1);
     lv_obj_set_style_text_font(lap_counter, &lv_font_inter_bold_22, LV_STATE_DEFAULT);
     lv_obj_set_style_base_dir(lap_counter, LV_BASE_DIR_LTR, 0);
