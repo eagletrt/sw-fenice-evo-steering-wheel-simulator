@@ -120,7 +120,8 @@ static void hal_init(void)
   disp_drv.flush_cb = monitor_flush;
   disp_drv.hor_res = MONITOR_HOR_RES;
   disp_drv.ver_res = MONITOR_VER_RES;
-  disp_drv.antialiasing = 1;
+  disp_drv.antialiasing = -1;
+  disp_drv.dpi = 10;
 
   lv_disp_t * disp = lv_disp_drv_register(&disp_drv);
 
