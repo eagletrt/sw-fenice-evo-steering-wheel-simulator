@@ -2,7 +2,7 @@
 #define TAB_MANAGER_H
 
 #include "lvgl.h"
-#include "ratios.h"
+#include "utils.h"
 #include "tab_racing.h"
 
 void tab_manager(void);
