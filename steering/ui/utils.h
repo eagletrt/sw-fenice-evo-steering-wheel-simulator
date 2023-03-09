@@ -16,9 +16,13 @@
 #define DATA_CENTER_WIDTH 300
 
 #define COLOR_PRIMARY_HEX 0x383838
-#define COLOR_BLUE_STATUS_HEX 0x466189
-#define COLOR_TERTIARY_HEX 0xF2F3F5
 #define COLOR_SECONDARY_HEX 0X575757
+#define COLOR_TERTIARY_HEX 0xF2F3F5
+#define COLOR_BLUE_STATUS_HEX 0x466189
+#define COLOR_GREEN_STATUS_HEX 0x39D103
+#define COLOR_ORANGE_STATUS_HEX 0xE78A00
+#define COLOR_RED_STATUS_HEX 0xCE0000
+
 
 LV_FONT_DECLARE(lv_font_inter_bold_16);
 LV_FONT_DECLARE(lv_font_inter_bold_18);
@@ -33,8 +37,11 @@ LV_FONT_DECLARE(lv_font_inter_bold_50);
 LV_FONT_DECLARE(lv_font_inter_bold_70);
 
 static lv_style_t grid_style;
-static lv_style_t bar_style;
+static lv_style_t bar_hv_style;
+static lv_style_t bar_lv_style;
+static lv_style_t bar_back_style;
 static lv_style_t label_style;
+static lv_style_t side_panels_style;
 
 static void init_custom_styles(){
 
@@ -47,14 +54,24 @@ static void init_custom_styles(){
     lv_style_set_pad_row(&grid_style, 0);
     lv_style_set_bg_color(&grid_style, lv_color_hex(COLOR_PRIMARY_HEX));
     lv_style_set_bg_opa(&grid_style, LV_OPA_COVER);
-    // lv_style_set_border_opa(&grid_style, 0); to remove borders, keeping bc useful
+    //lv_style_set_border_opa(&grid_style, LV_OPA_COVER);
+    lv_style_set_border_opa(&grid_style, 0); //to remove borders, keeping bc useful
 
-    /* BAR_STYLE */
-    lv_style_init(&bar_style);
-    lv_style_set_bg_opa(&bar_style, LV_OPA_COVER);
-    lv_style_set_bg_color(&bar_style, lv_palette_main(LV_PALETTE_RED));
-    lv_style_set_bg_grad_color(&bar_style, lv_palette_main(LV_PALETTE_BLUE));
-    lv_style_set_bg_grad_dir(&bar_style, LV_GRAD_DIR_VER);
+    /* BAR_HV_STYLE */
+    lv_style_init(&bar_hv_style);
+    lv_style_set_bg_opa(&bar_hv_style, LV_OPA_COVER);
+    lv_style_set_bg_color(&bar_hv_style, lv_color_hex(COLOR_ORANGE_STATUS_HEX));
+
+    /* BAR_LV_STYLE */
+    lv_style_init(&bar_lv_style);
+    lv_style_set_bg_opa(&bar_lv_style, LV_OPA_COVER);
+    lv_style_set_bg_color(&bar_lv_style, lv_color_hex(COLOR_GREEN_STATUS_HEX));
+
+    /* BAR_BACKGROUND_STYLE */
+    lv_style_init(&bar_back_style);
+    lv_style_set_bg_opa(&bar_back_style, LV_OPA_COVER);
+    lv_style_set_bg_color(&bar_back_style, lv_color_hex(COLOR_SECONDARY_HEX));
+
 
     /* LABEL_STYLE */
     lv_style_init(&label_style);
@@ -62,6 +79,16 @@ static void init_custom_styles(){
     lv_style_set_bg_opa(&label_style, LV_OPA_TRANSP);
     lv_style_set_text_color(&label_style, lv_color_hex(COLOR_TERTIARY_HEX));
     lv_style_set_text_align(&label_style, LV_TEXT_ALIGN_CENTER);
+
+    /* SIDE_PANELS_STYLE */
+    lv_style_init(&side_panels_style);
+    lv_style_set_pad_all(&side_panels_style, 0);
+    lv_style_set_pad_bottom(&side_panels_style, 0);
+    lv_style_set_pad_column(&side_panels_style, 0);
+    lv_style_set_pad_top(&side_panels_style, 0);
+    lv_style_set_pad_row(&side_panels_style, 0);
+    lv_style_set_bg_opa(&side_panels_style, LV_OPA_TRANSP);
+    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_TERTIARY_HEX)); //to remove borders, keeping bc useful
 
 }
 

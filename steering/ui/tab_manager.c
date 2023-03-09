@@ -18,4 +18,5 @@ void tab_manager(void)
 
     lv_obj_t * label2 = lv_label_create(tab3);
     lv_label_set_text(label2, "Third tab");
+    
 }
