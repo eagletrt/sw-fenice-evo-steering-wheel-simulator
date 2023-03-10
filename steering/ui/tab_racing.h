@@ -71,6 +71,7 @@ static void lv_custom_meter(lv_obj_t *custom_meter)
 
     // lv_obj_set_grid_cell(custom_meter, LV_GRID_ALIGN_STRETCH, 2, 1, LV_GRID_ALIGN_STRETCH, 2, 1);
     lv_obj_set_size(custom_meter, 290, 290);
+    lv_obj_set_style_pad_top(custom_meter, 12, LV_PART_MAIN);
 
     /*Add a scale first*/
     lv_meter_scale_t *scale = lv_meter_add_scale(custom_meter);

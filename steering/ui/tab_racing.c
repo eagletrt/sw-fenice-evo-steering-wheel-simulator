@@ -11,6 +11,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_layout(tab_racing, LV_LAYOUT_GRID);
     lv_obj_set_size(tab_racing, SCREEN_WIDTH, SCREEN_HEIGHT);
     lv_obj_add_style(tab_racing, &grid_style, 0);
+    lv_obj_clear_flag(tab_racing, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_center(tab_racing);
     
     lv_obj_set_grid_dsc_array(tab_racing, main_panel_cols, main_panel_rows);
@@ -31,11 +32,8 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(bar_panel_lv, LV_GRID_CONTENT, 0, 1, LV_GRID_CONTENT, 0, 1);
     
     // lv percentage
-    lv_obj_t *lv_perc = lv_label_create(bar_panel_lv);
-    lv_obj_add_style(lv_perc, &label_style, LV_PART_MAIN);
-    lv_obj_set_style_text_font(lv_perc, &lv_font_inter_bold_38, LV_STATE_DEFAULT);
-    lv_label_set_text(lv_perc, "80");
-
+    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
     lv_obj_set_grid_cell(lv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
     // lv state of charge bar
@@ -126,9 +124,10 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_t *speed = lv_vertical_pair_label(data_panel, "169", &lv_font_inter_bold_70, "km/h", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(speed, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
-    lv_obj_t *custom_meter = lv_meter_create(lv_scr_act());
+    lv_obj_t *custom_meter = lv_meter_create(data_panel);
     lv_custom_meter(custom_meter);
-    lv_obj_align(custom_meter, LV_ALIGN_CENTER, 0, 15);
+    lv_obj_set_grid_cell(custom_meter, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+    //lv_obj_align(custom_meter, LV_ALIGN_CENTER, 0, 0);
 
     // lap counter
     lv_obj_t *lap_counter = lv_vertical_pair_label(data_panel, "12", &lv_font_inter_bold_38, "LAP", &lv_font_inter_bold_22);
@@ -183,12 +182,10 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(bar_panel_hv, LV_GRID_CONTENT, 2, 1, LV_GRID_CONTENT, 0, 1);
     
     // hv percentage
-    lv_obj_t *hv_perc = lv_label_create(bar_panel_hv);
-    lv_obj_add_style(hv_perc, &label_style, LV_PART_MAIN);
-    lv_obj_set_style_text_font(hv_perc, &lv_font_inter_bold_38, LV_STATE_DEFAULT);
-    lv_label_set_text(hv_perc, "50");
-
+    lv_obj_t *hv_perc = lv_horizontal_pair_label(bar_panel_hv, "50", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(hv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
     lv_obj_set_grid_cell(hv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+
 
     // hv state of charge bar
     lv_obj_t* hv_bar = lv_bar_create(bar_panel_hv);
