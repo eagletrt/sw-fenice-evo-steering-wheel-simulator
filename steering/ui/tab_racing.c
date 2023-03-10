@@ -39,36 +39,8 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(lv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
     // lv state of charge bar
-    lv_obj_t* lv_bar = lv_bar_create(bar_panel_lv);
-    lv_obj_remove_style_all(lv_bar);
-    lv_obj_add_style(lv_bar, &bar_lv_style, LV_PART_INDICATOR);
-    lv_obj_add_style(lv_bar, &bar_back_style, LV_PART_MAIN);
-    lv_obj_set_size(lv_bar, 65, 360);
-    lv_obj_center(lv_bar);
-    lv_bar_set_range(lv_bar, 0, 100);
-    lv_bar_set_value(lv_bar, 80, LV_ANIM_OFF);
-
-    /* adding levels for side bars LV_BAR */
-    lv_obj_t* rect6 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect6, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect6, 100, 5);
-    lv_obj_align(rect6, LV_ALIGN_CENTER, 0, 36);
-
-    lv_obj_t* rect7 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect7, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect7, 100, 5);
-    lv_obj_align(rect7, LV_ALIGN_CENTER, 0, -36);
-
-
-    lv_obj_t* rect8 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect8, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect8, 100, 5);
-    lv_obj_align(rect8, LV_ALIGN_CENTER, 0, 108);
-
-    lv_obj_t* rect9 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect9, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect9, 100, 5);
-    lv_obj_align(rect9, LV_ALIGN_CENTER, 0, -108);
+    lv_obj_t *lv_bar = lv_bar_create(bar_panel_lv);
+    custom_side_bar(lv_bar);
 
     lv_obj_set_grid_cell(lv_bar, LV_GRID_CONTENT, 0, 1, LV_GRID_ALIGN_END, 1, 1);
 
@@ -220,34 +192,9 @@ void tab_racing(lv_obj_t * parent){
 
     // hv state of charge bar
     lv_obj_t* hv_bar = lv_bar_create(bar_panel_hv);
-    lv_obj_remove_style_all(hv_bar);
-    lv_obj_add_style(hv_bar, &bar_hv_style, LV_PART_INDICATOR);
-    lv_obj_add_style(hv_bar, &bar_back_style, LV_PART_MAIN);
-    lv_obj_set_size(hv_bar, 65, 360);
-    lv_obj_center(hv_bar);
-    lv_bar_set_range(hv_bar, 0, 100);
+    custom_side_bar(hv_bar);
     lv_bar_set_value(hv_bar, 50, LV_ANIM_OFF);
-
-    /* adding levels for side bars LV_BAR */
-    lv_obj_t* rect2 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect2, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect2, 100, 5);
-    lv_obj_align(rect2, LV_ALIGN_CENTER, 0, 36);
-
-    lv_obj_t* rect3 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect3, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect3, 100, 5);
-    lv_obj_align(rect3, LV_ALIGN_CENTER, 0, -36);
-
-    lv_obj_t* rect4 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect4, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect4, 100, 5);
-    lv_obj_align(rect4, LV_ALIGN_CENTER, 0, 108);
-
-    lv_obj_t* rect5 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect5, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect5, 100, 5);
-    lv_obj_align(rect5, LV_ALIGN_CENTER, 0, -108);
+    lv_obj_set_style_bg_color(hv_bar, lv_color_hex(COLOR_ORANGE_STATUS_HEX), LV_PART_INDICATOR);
 
     lv_obj_set_grid_cell(hv_bar, LV_GRID_CONTENT, 0, 1, LV_GRID_ALIGN_END, 1, 1);
 

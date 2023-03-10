@@ -104,4 +104,36 @@ static void lv_custom_meter(lv_obj_t *custom_meter)
     // return custom_meter;
 }
 
+static void custom_side_bar(lv_obj_t *bar){
+    lv_obj_remove_style_all(bar);
+    lv_obj_add_style(bar, &bar_lv_style, LV_PART_INDICATOR);
+    lv_obj_add_style(bar, &bar_back_style, LV_PART_MAIN);
+    lv_obj_set_size(bar, 65, 360);
+    lv_obj_center(bar);
+    lv_bar_set_range(bar, 0, 100);
+    lv_bar_set_value(bar, 80, LV_ANIM_OFF);
+
+    /* adding levels for side bars LV_BAR */
+    lv_obj_t* rect1 = lv_bar_create(bar);
+    lv_obj_add_style(rect1, &grid_style, LV_PART_MAIN);
+    lv_obj_set_size(rect1, 100, 5);
+    lv_obj_align(rect1, LV_ALIGN_CENTER, 0, 36);
+
+    lv_obj_t* rect2 = lv_bar_create(bar);
+    lv_obj_add_style(rect2, &grid_style, LV_PART_MAIN);
+    lv_obj_set_size(rect2, 100, 5);
+    lv_obj_align(rect2, LV_ALIGN_CENTER, 0, -36);
+
+
+    lv_obj_t* rect3 = lv_bar_create(bar);
+    lv_obj_add_style(rect3, &grid_style, LV_PART_MAIN);
+    lv_obj_set_size(rect3, 100, 5);
+    lv_obj_align(rect3, LV_ALIGN_CENTER, 0, 108);
+
+    lv_obj_t* rect4 = lv_bar_create(bar);
+    lv_obj_add_style(rect4, &grid_style, LV_PART_MAIN);
+    lv_obj_set_size(rect4, 100, 5);
+    lv_obj_align(rect4, LV_ALIGN_CENTER, 0, -108);
+}
+
 #endif // TAB_RACING_H
