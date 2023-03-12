@@ -131,12 +131,14 @@ void tab_racing(lv_obj_t * parent){
 
     // lap counter
     lv_obj_t *lap_counter = lv_vertical_pair_label(data_panel, "12", &lv_font_inter_bold_38, "LAP", &lv_font_inter_bold_22);
-    lv_obj_set_grid_cell(lap_counter, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_END, 0, 1);
+    lv_obj_set_grid_cell(lap_counter, LV_GRID_ALIGN_START, 1, 1, LV_GRID_ALIGN_END, 0, 1);
     lv_obj_set_style_pad_bottom(lap_counter, 5, 0);
+    lv_obj_set_style_pad_right(lap_counter, 40, 0);
 
-    lv_obj_t *km_counter = lv_vertical_pair_label(data_panel, "12", &lv_font_inter_bold_38, "KM", &lv_font_inter_bold_22);
-    lv_obj_set_grid_cell(km_counter, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_END, 0, 1);
+    lv_obj_t *km_counter = lv_vertical_pair_label(data_panel, "1.12", &lv_font_inter_bold_38, "KM", &lv_font_inter_bold_22);
+    lv_obj_set_grid_cell(km_counter, LV_GRID_ALIGN_END, 1, 1, LV_GRID_ALIGN_END, 0, 1);
     lv_obj_set_style_pad_bottom(km_counter, 5, 0);
+    lv_obj_set_style_pad_left(km_counter, 40, 0);
 
 
     // DATA PANEL LEFT
