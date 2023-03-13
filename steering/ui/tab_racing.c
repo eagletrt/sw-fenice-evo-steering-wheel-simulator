@@ -9,46 +9,46 @@ void tab_racing(lv_obj_t * parent){
 
     lv_obj_t * tab_racing = lv_obj_create(parent);
     lv_obj_set_layout(tab_racing, LV_LAYOUT_GRID);
-    lv_obj_clear_flag(tab_racing, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_size(tab_racing, SCREEN_WIDTH, SCREEN_HEIGHT);
     lv_obj_add_style(tab_racing, &grid_style, 0);
+    lv_obj_clear_flag(tab_racing, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_center(tab_racing);
     
     lv_obj_set_grid_dsc_array(tab_racing, main_panel_cols, main_panel_rows);
 
     // LEFT BAR
-    lv_obj_t* lv_bar = lv_bar_create(tab_racing);
-    lv_obj_remove_style_all(lv_bar);
-    lv_obj_add_style(lv_bar, &bar_lv_style, LV_PART_INDICATOR);
-    lv_obj_add_style(lv_bar, &bar_back_style, LV_PART_MAIN);
-    lv_obj_set_size(lv_bar, 65, 300);
-    lv_obj_center(lv_bar);
-    lv_bar_set_range(lv_bar, 0, 100);
-    lv_bar_set_value(lv_bar, 80, LV_ANIM_OFF);
-    lv_obj_set_grid_cell(lv_bar, LV_GRID_ALIGN_STRETCH, 0, 1,
-                         LV_GRID_ALIGN_CENTER, 0, 1);
 
-    /* adding levels for side bars LV_BAR */
-    lv_obj_t* rect6 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect6, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect6, 100, 5);
-    lv_obj_align(rect6, LV_ALIGN_CENTER, 0, 30);
+    //  bar grid setup
+    static lv_coord_t bar_panel_cols[] =  {SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t bar_panel_rows[] = { 70, 360, 50, LV_GRID_TEMPLATE_LAST};
 
-    lv_obj_t* rect7 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect7, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect7, 100, 5);
-    lv_obj_align(rect7, LV_ALIGN_CENTER, 0, -30);
+    lv_obj_t * bar_panel_lv = lv_obj_create(tab_racing);
+    lv_obj_remove_style_all(bar_panel_lv);
+    lv_obj_add_style(bar_panel_lv, &grid_style, 0);
+    lv_obj_set_size(bar_panel_lv, SIDE_BAR_WIDTH, SCREEN_HEIGHT);
+    lv_obj_clear_flag(bar_panel_lv, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_grid_dsc_array(bar_panel_lv, bar_panel_cols, bar_panel_rows);
 
+    lv_obj_set_grid_cell(bar_panel_lv, LV_GRID_CONTENT, 0, 1, LV_GRID_CONTENT, 0, 1);
+    
+    // lv percentage
+    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
+    lv_obj_set_grid_cell(lv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
-    lv_obj_t* rect8 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect8, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect8, 100, 5);
-    lv_obj_align(rect8, LV_ALIGN_CENTER, 0, 90);
+    // lv state of charge bar
+    lv_obj_t *lv_bar = lv_bar_create(bar_panel_lv);
+    custom_side_bar(lv_bar);
 
-    lv_obj_t* rect9 = lv_bar_create(lv_bar);
-    lv_obj_add_style(rect9, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect9, 100, 5);
-    lv_obj_align(rect9, LV_ALIGN_CENTER, 0, -90);
+    lv_obj_set_grid_cell(lv_bar, LV_GRID_CONTENT, 0, 1, LV_GRID_ALIGN_END, 1, 1);
+
+    // lv label
+    lv_obj_t *label_lv = lv_label_create(bar_panel_lv);
+    lv_obj_add_style(label_lv, &label_style, LV_PART_MAIN);
+    lv_obj_set_style_text_font(label_lv, &lv_font_inter_bold_30, LV_STATE_DEFAULT);
+    lv_label_set_text(label_lv, "LV");
+
+    lv_obj_set_grid_cell(label_lv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 2, 1);
 
     /*-----------------------*/
 
@@ -124,17 +124,15 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_t *speed = lv_vertical_pair_label(data_panel, "169", &lv_font_inter_bold_70, "km/h", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(speed, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
-    lv_obj_t *custom_meter = lv_meter_create(lv_scr_act());
+    lv_obj_t *custom_meter = lv_meter_create(data_panel);
     lv_custom_meter(custom_meter);
-    lv_obj_align(custom_meter, LV_ALIGN_CENTER, 0, 15);
+    lv_obj_set_grid_cell(custom_meter, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+    //lv_obj_align(custom_meter, LV_ALIGN_CENTER, 0, 0);
 
     // lap counter
-    lv_obj_t *lap_counter = lv_label_create(data_panel);
-    lv_obj_add_style(lap_counter, &label_style, LV_PART_MAIN);
-    lv_label_set_text(lap_counter, "  12\nLAP");
+    lv_obj_t *lap_counter = lv_vertical_pair_label(data_panel, "12", &lv_font_inter_bold_38, "LAP", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(lap_counter, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_END, 0, 1);
-    lv_obj_set_style_text_font(lap_counter, &lv_font_inter_bold_22, LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(lap_counter, 10, 0);
+    lv_obj_set_style_pad_bottom(lap_counter, 5, 0);
 
 
     // DATA PANEL LEFT
@@ -171,39 +169,39 @@ void tab_racing(lv_obj_t * parent){
 
 
     //RIGHT BAR
-    lv_obj_t* hv_bar = lv_bar_create(tab_racing);
-    lv_obj_remove_style_all(hv_bar);
-    lv_obj_add_style(hv_bar, &bar_hv_style, LV_PART_INDICATOR);
-    lv_obj_add_style(hv_bar, &bar_back_style, LV_PART_MAIN);
-    lv_obj_set_size(hv_bar, 65, 300);
-    lv_obj_center(hv_bar);
-    lv_bar_set_range(hv_bar, 0, 100);
-    lv_bar_set_value(hv_bar, 50, LV_ANIM_OFF);
-    lv_obj_set_grid_cell(hv_bar, LV_GRID_ALIGN_STRETCH, 2, 1,
-                         LV_GRID_ALIGN_CENTER, 0, 1);
-
-    /* adding levels for side bars LV_BAR */
-    lv_obj_t* rect2 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect2, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect2, 100, 5);
-    lv_obj_align(rect2, LV_ALIGN_CENTER, 0, 30);
-
-    lv_obj_t* rect3 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect3, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect3, 100, 5);
-    lv_obj_align(rect3, LV_ALIGN_CENTER, 0, -30);
-
-
-    lv_obj_t* rect4 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect4, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect4, 100, 5);
-    lv_obj_align(rect4, LV_ALIGN_CENTER, 0, 90);
-
     
-    lv_obj_t* rect5 = lv_bar_create(hv_bar);
-    lv_obj_add_style(rect5, &grid_style, LV_PART_MAIN);
-    lv_obj_set_size(rect5, 100, 5);
-    lv_obj_align(rect5, LV_ALIGN_CENTER, 0, -90);
+    //  bar grid setup
+
+    lv_obj_t * bar_panel_hv = lv_obj_create(tab_racing);
+    lv_obj_remove_style_all(bar_panel_hv);
+    lv_obj_add_style(bar_panel_hv, &grid_style, 0);
+    lv_obj_set_size(bar_panel_hv, SIDE_BAR_WIDTH, SCREEN_HEIGHT);
+    lv_obj_clear_flag(bar_panel_hv, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_grid_dsc_array(bar_panel_hv, bar_panel_cols, bar_panel_rows);  // same as LEFT BAR
+
+    lv_obj_set_grid_cell(bar_panel_hv, LV_GRID_CONTENT, 2, 1, LV_GRID_CONTENT, 0, 1);
+    
+    // hv percentage
+    lv_obj_t *hv_perc = lv_horizontal_pair_label(bar_panel_hv, "50", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(hv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
+    lv_obj_set_grid_cell(hv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+
+
+    // hv state of charge bar
+    lv_obj_t* hv_bar = lv_bar_create(bar_panel_hv);
+    custom_side_bar(hv_bar);
+    lv_bar_set_value(hv_bar, 50, LV_ANIM_OFF);
+    lv_obj_set_style_bg_color(hv_bar, lv_color_hex(COLOR_ORANGE_STATUS_HEX), LV_PART_INDICATOR);
+
+    lv_obj_set_grid_cell(hv_bar, LV_GRID_CONTENT, 0, 1, LV_GRID_ALIGN_END, 1, 1);
+
+    // lv label
+    lv_obj_t *label_hv = lv_label_create(bar_panel_hv);
+    lv_obj_add_style(label_hv, &label_style, LV_PART_MAIN);
+    lv_obj_set_style_text_font(label_hv, &lv_font_inter_bold_30, LV_STATE_DEFAULT);
+    lv_label_set_text(label_hv, "HV");
+
+    lv_obj_set_grid_cell(label_hv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 2, 1);
 
     /*-------------------------------------*/
 
