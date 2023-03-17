@@ -16,12 +16,13 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_center(tab_racing);
     
     lv_obj_set_grid_dsc_array(tab_racing, main_panel_cols, main_panel_rows);
+    //lv_obj_set_grid_align(tab_racing, LV_GRID_ALIGN_SPACE_EVENLY, LV_GRID_ALIGN_SPACE_EVENLY);
 
-    // LEFT BAR
+    /*-------LEFT BAR-------*/
 
     //  bar grid setup
     static lv_coord_t bar_panel_cols[] =  {SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t bar_panel_rows[] = { 70, 360, 50, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t bar_panel_rows[] = { 70, 360, 70, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * bar_panel_lv = lv_obj_create(tab_racing);
     lv_obj_remove_style_all(bar_panel_lv);
@@ -45,16 +46,53 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_END, 1, 1);
 
     // lv label
+    
     lv_obj_t *label_lv = lv_label_create(bar_panel_lv);
     lv_obj_add_style(label_lv, &label_style, LV_PART_MAIN);
     lv_obj_set_style_text_font(label_lv, &lv_font_inter_bold_30, LV_STATE_DEFAULT);
     lv_label_set_text(label_lv, "LV");
-
     lv_obj_set_grid_cell(label_lv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 2, 1);
+
+    // lv state of charge bar
+    lv_obj_t *lv_bar = lv_bar_create(bar_panel_lv);
+    custom_side_bar(lv_bar);
+    lv_bar_set_value(lv_bar, 70, LV_ANIM_OFF);
+    lv_obj_set_grid_cell(lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
 
     /*-----------------------*/
 
+    /*---------RIGHT BAR-----------*/
+    
+    //bar grid setup
+    lv_obj_t * bar_panel_hv = lv_obj_create(tab_racing);
+    lv_obj_remove_style_all(bar_panel_hv);
+    lv_obj_add_style(bar_panel_hv, &grid_style, 0);
+    lv_obj_set_size(bar_panel_hv, SIDE_BAR_WIDTH, SCREEN_HEIGHT);
+    lv_obj_clear_flag(bar_panel_hv, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_grid_dsc_array(bar_panel_hv, bar_panel_cols, bar_panel_rows);  // same as LEFT BAR
+    lv_obj_set_grid_cell(bar_panel_hv, LV_GRID_ALIGN_CENTER, 2, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+    
+    //hv percentage
+    lv_obj_t *hv_perc = lv_horizontal_pair_label(bar_panel_hv, "50", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(hv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
+    lv_obj_set_grid_cell(hv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
+    // hv label
+    lv_obj_t *label_hv = lv_label_create(bar_panel_hv);
+    lv_obj_add_style(label_hv, &label_style, LV_PART_MAIN);
+    lv_obj_set_style_text_font(label_hv, &lv_font_inter_bold_30, LV_STATE_DEFAULT);
+    lv_label_set_text(label_hv, "LV");
+    lv_obj_set_grid_cell(label_hv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 2, 1);
+
+    // hv state of charge bar
+    lv_obj_t* hv_bar = lv_bar_create(bar_panel_hv);
+    custom_side_bar(hv_bar);
+    lv_bar_set_value(hv_bar, 50, LV_ANIM_OFF);
+    lv_obj_set_style_bg_color(hv_bar, lv_color_hex(COLOR_ORANGE_STATUS_HEX), LV_PART_INDICATOR);
+    lv_obj_set_grid_cell(hv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
+
+    
+    /*-------------------------------------*/
     // CENTRAL PANEL
 
     static lv_coord_t cpanel_cols[] =  {CENTRAL_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
@@ -72,10 +110,13 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_dsc_array(central_panel, cpanel_cols, cpanel_rows);
 
     // CHANGE-TABS VIEW (I don't remember the right name)
+    /*
     lv_obj_t * l1 = lv_label_create(central_panel);
     lv_label_set_text(l1, "change-tabs view");
     lv_obj_set_grid_cell(l1, LV_GRID_ALIGN_STRETCH, 2, 1,
-                         LV_GRID_ALIGN_STRETCH, 0, 1);
+                         LV_GRID_ALIGN_STRETCH, 0, 1);*/
+    
+    
 
     // DATA PANEL
     static lv_coord_t dpanel_cols[] =  {DATA_LEFT_WIDTH, DATA_CENTER_WIDTH, DATA_RIGHT_WIDTH, LV_GRID_TEMPLATE_LAST};
@@ -90,7 +131,6 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_center(data_panel);
     lv_obj_set_style_base_dir(data_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(data_panel, dpanel_cols, dpanel_rows);
-
 
     // DATA RIGHT PANEL
     
@@ -116,7 +156,30 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(left_data_panel, LV_GRID_ALIGN_START, 0, 1,
                          LV_GRID_ALIGN_CENTER, 0, 1);
 
+
+    /*inserting data into data right panel*/
     
+    lv_obj_t *trq = lv_vertical_pair_label(left_data_panel, "30", &lv_font_inter_bold_38, "TRQ", &lv_font_inter_bold_22);
+    lv_obj_set_grid_cell(trq, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
+
+    lv_obj_t *slip = lv_vertical_pair_label(left_data_panel, "20", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22);
+    lv_obj_set_grid_cell(slip, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 0,1);
+
+    lv_obj_t *test = lv_triple_label(left_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_set_grid_cell(test, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
+
+    
+    lv_obj_t *test1 = lv_triple_label(left_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_set_grid_cell(test1, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
+
+    lv_obj_t *test2 = lv_triple_label(left_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_set_grid_cell(test2, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 1,1);
+
+    lv_obj_t *test3 = lv_triple_label(left_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_set_grid_cell(test3, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 2,1);
+
+
+
     // DATA CENTER
 
     // power
@@ -169,6 +232,17 @@ void tab_racing(lv_obj_t * parent){
     
     lv_obj_set_grid_cell(right_data_panel, LV_GRID_ALIGN_START, 2, 1,
                          LV_GRID_ALIGN_CENTER, 0, 1);
+
+    /*inserting data into data left panel*/
+
+    lv_obj_t *best_time = lv_vertical_pair_label(right_data_panel, " 1:24:03", &lv_font_inter_bold_40, "BEST TIME", &lv_font_inter_bold_22);
+    lv_obj_set_grid_cell(best_time, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
+
+    lv_obj_t *last_time = lv_vertical_pair_label(right_data_panel, " 1:25:33", &lv_font_inter_bold_40, "LAST TIME", &lv_font_inter_bold_22);
+    lv_obj_set_grid_cell(last_time, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
+    
+    lv_obj_t *delta = lv_vertical_pair_label(left_dright_data_panelata_panel, "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
+    lv_obj_set_grid_cell(delta, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
 
 
     // setting data panel position in central panel
