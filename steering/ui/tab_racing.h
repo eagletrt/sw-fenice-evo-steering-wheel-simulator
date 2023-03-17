@@ -58,7 +58,6 @@ static void init_custom_styles(){
     lv_style_set_text_align(&label_style, LV_TEXT_ALIGN_CENTER);
 
     /* SIDE_DATA_PANELS_STYLE */
-    
     lv_style_init(&side_panels_style);
     lv_style_set_pad_all(&side_panels_style, 0);
     lv_style_set_pad_bottom(&side_panels_style, 0);
@@ -67,6 +66,7 @@ static void init_custom_styles(){
     lv_style_set_pad_row(&side_panels_style, 0);
     lv_style_set_bg_opa(&side_panels_style, LV_OPA_TRANSP);
     lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_TERTIARY_HEX)); //to remove borders, keeping bc useful
+    lv_style_set_border_width(&side_panels_style, 3);
     lv_style_set_radius(&side_panels_style, 10);
 
 }
