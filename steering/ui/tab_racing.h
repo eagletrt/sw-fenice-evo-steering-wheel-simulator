@@ -65,7 +65,7 @@ static void init_custom_styles(){
     lv_style_set_pad_top(&side_panels_style, 0);
     lv_style_set_pad_row(&side_panels_style, 0);
     lv_style_set_bg_opa(&side_panels_style, LV_OPA_TRANSP);
-    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_TERTIARY_HEX)); //to remove borders, keeping bc useful
+    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_SECONDARY_HEX)); //to remove borders, keeping bc useful
     lv_style_set_border_width(&side_panels_style, 3);
     lv_style_set_radius(&side_panels_style, 10);
 
