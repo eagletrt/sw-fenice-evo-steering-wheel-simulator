@@ -24,7 +24,9 @@ static void init_custom_styles(){
     lv_style_set_pad_row(&grid_style, 0);
     lv_style_set_bg_color(&grid_style, lv_color_hex(COLOR_PRIMARY_HEX));
     lv_style_set_bg_opa(&grid_style, LV_OPA_COVER);
-    //lv_style_set_border_opa(&grid_style, LV_OPA_COVER);
+    lv_style_set_border_opa(&grid_style, LV_OPA_COVER);
+    lv_style_set_outline_width(&grid_style, 0);
+    lv_style_set_border_width(&grid_style, 0);
     lv_style_set_border_opa(&grid_style, 0); //to remove borders, keeping bc useful
 
     /* BAR_HV_STYLE */
@@ -40,6 +42,11 @@ static void init_custom_styles(){
     /* BAR_BACKGROUND_STYLE */
     lv_style_init(&bar_back_style);
     lv_style_set_bg_opa(&bar_back_style, LV_OPA_COVER);
+    //lv_style_set_radius(&bar_back_style, 10);
+    lv_style_set_outline_color(&bar_back_style, lv_color_hex(COLOR_TERTIARY_HEX));
+
+    //lv_style_set_outline_width(&bar_back_style, 0); //used for testing
+
     lv_style_set_bg_color(&bar_back_style, lv_color_hex(COLOR_SECONDARY_HEX));
 
 
@@ -50,7 +57,7 @@ static void init_custom_styles(){
     lv_style_set_text_color(&label_style, lv_color_hex(COLOR_TERTIARY_HEX));
     lv_style_set_text_align(&label_style, LV_TEXT_ALIGN_CENTER);
 
-    /* SIDE_PANELS_STYLE */
+    /* SIDE_DATA_PANELS_STYLE */
     lv_style_init(&side_panels_style);
     lv_style_set_pad_all(&side_panels_style, 0);
     lv_style_set_pad_bottom(&side_panels_style, 0);
@@ -58,7 +65,9 @@ static void init_custom_styles(){
     lv_style_set_pad_top(&side_panels_style, 0);
     lv_style_set_pad_row(&side_panels_style, 0);
     lv_style_set_bg_opa(&side_panels_style, LV_OPA_TRANSP);
-    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_TERTIARY_HEX)); //to remove borders, keeping bc useful
+    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_SECONDARY_HEX)); //to remove borders, keeping bc useful
+    lv_style_set_border_width(&side_panels_style, 3);
+    lv_style_set_radius(&side_panels_style, 10);
 
 }
 
@@ -114,7 +123,7 @@ static void custom_side_bar(lv_obj_t *bar){
     lv_bar_set_range(bar, 0, 100);
     lv_bar_set_value(bar, 80, LV_ANIM_OFF);
 
-    /* adding levels for side bars LV_BAR */
+    /* adding levels for side bars */
     lv_obj_t* rect1 = lv_bar_create(bar);
     lv_obj_add_style(rect1, &grid_style, LV_PART_MAIN);
     lv_obj_set_size(rect1, 100, 5);
@@ -124,7 +133,6 @@ static void custom_side_bar(lv_obj_t *bar){
     lv_obj_add_style(rect2, &grid_style, LV_PART_MAIN);
     lv_obj_set_size(rect2, 100, 5);
     lv_obj_align(rect2, LV_ALIGN_CENTER, 0, -36);
-
 
     lv_obj_t* rect3 = lv_bar_create(bar);
     lv_obj_add_style(rect3, &grid_style, LV_PART_MAIN);
