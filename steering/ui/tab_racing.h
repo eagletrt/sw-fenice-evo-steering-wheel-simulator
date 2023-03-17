@@ -20,12 +20,14 @@ static void init_custom_styles(){
     lv_style_set_pad_all(&grid_style, 0);
     lv_style_set_pad_bottom(&grid_style, 0);
     lv_style_set_pad_column(&grid_style, 0);
+    lv_style_set_pad_right(&grid_style, 0);
+    lv_style_set_pad_left(&grid_style, 0);
     lv_style_set_pad_top(&grid_style, 0);
     lv_style_set_pad_row(&grid_style, 0);
     lv_style_set_bg_color(&grid_style, lv_color_hex(COLOR_PRIMARY_HEX));
     lv_style_set_bg_opa(&grid_style, LV_OPA_COVER);
-    //lv_style_set_border_opa(&grid_style, LV_OPA_COVER);
-    lv_style_set_border_opa(&grid_style, 0); //to remove borders, keeping bc useful
+    lv_style_set_border_opa(&grid_style, 0);
+   // lv_style_set_border_opa(&grid_style, 0); //to remove borders, keeping bc useful
 
     /* BAR_HV_STYLE */
     lv_style_init(&bar_hv_style);
@@ -58,8 +60,9 @@ static void init_custom_styles(){
     lv_style_set_pad_top(&side_panels_style, 0);
     lv_style_set_pad_row(&side_panels_style, 0);
     lv_style_set_bg_opa(&side_panels_style, LV_OPA_TRANSP);
-    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_TERTIARY_HEX)); //to remove borders, keeping bc useful
-
+    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_TERTIARY_HEX));
+    lv_style_set_border_width(&side_panels_style, 1);
+    lv_style_set_border_opa(&side_panels_style, LV_OPA_COVER);
 }
 
 static void lv_custom_meter(lv_obj_t *custom_meter)
@@ -109,7 +112,7 @@ static void custom_side_bar(lv_obj_t *bar){
     lv_obj_remove_style_all(bar);
     lv_obj_add_style(bar, &bar_lv_style, LV_PART_INDICATOR);
     lv_obj_add_style(bar, &bar_back_style, LV_PART_MAIN);
-    lv_obj_set_size(bar, 65, 360);
+    lv_obj_set_size(bar, 66, 360);
     lv_obj_center(bar);
     lv_bar_set_range(bar, 0, 100);
     lv_bar_set_value(bar, 80, LV_ANIM_OFF);
