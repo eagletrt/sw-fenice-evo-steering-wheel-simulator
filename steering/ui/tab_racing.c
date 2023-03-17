@@ -54,12 +54,11 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(label_lv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 2, 1);
 
     // lv state of charge bar
-    lv_obj_t *lv_bar = lv_bar_create(bar_panel_lv);
-    custom_side_bar(lv_bar);
-    lv_bar_set_value(lv_bar, 70, LV_ANIM_OFF);
-    lv_obj_set_grid_cell(lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
+//    lv_obj_t *lv_bar = lv_bar_create(bar_panel_lv);
+ //   custom_side_bar(lv_bar);
+ //   lv_bar_set_value(lv_bar, 70, LV_ANIM_OFF);
+ //   lv_obj_set_grid_cell(lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
 
-    /*-----------------------*/
 
     /*---------RIGHT BAR-----------*/
     
@@ -153,7 +152,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_dsc_array(left_data_panel, lxd_panel_cols, lxd_panel_rows);
     
     
-    lv_obj_set_grid_cell(left_data_panel, LV_GRID_ALIGN_START, 0, 1,
+    lv_obj_set_grid_cell(left_data_panel, LV_GRID_ALIGN_START, 2, 1,
                          LV_GRID_ALIGN_CENTER, 0, 1);
 
 
@@ -199,7 +198,7 @@ void tab_racing(lv_obj_t * parent){
 
     lv_obj_t *custom_meter = lv_meter_create(meter_container);
     lv_custom_meter(custom_meter);
-    lv_obj_align(custom_meter, LV_ALIGN_CENTER, -2, 0);
+    lv_obj_align(custom_meter, LV_ALIGN_CENTER, 0, 0);
 
     lv_obj_set_grid_cell(meter_container, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
@@ -229,9 +228,10 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_center(right_data_panel);
     lv_obj_set_style_base_dir(right_data_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(right_data_panel, rxd_panel_cols, rxd_panel_rows);
-    
-    lv_obj_set_grid_cell(right_data_panel, LV_GRID_ALIGN_START, 2, 1,
+
+    lv_obj_set_grid_cell(right_data_panel, LV_GRID_ALIGN_END, 0, 1,
                          LV_GRID_ALIGN_CENTER, 0, 1);
+
 
     /*inserting data into data left panel*/
 
@@ -241,7 +241,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_t *last_time = lv_vertical_pair_label(right_data_panel, " 1:25:33", &lv_font_inter_bold_40, "LAST TIME", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(last_time, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
     
-    lv_obj_t *delta = lv_vertical_pair_label(left_dright_data_panelata_panel, "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
+    lv_obj_t *delta = lv_vertical_pair_label(right_data_panel, "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(delta, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
 
 
@@ -268,7 +268,7 @@ void tab_racing(lv_obj_t * parent){
     //RIGHT BAR
     
     //  bar grid setup
-
+        /*
     lv_obj_t * bar_panel_hv = lv_obj_create(tab_racing);
     lv_obj_remove_style_all(bar_panel_hv);
     lv_obj_add_style(bar_panel_hv, &grid_style, 0);
@@ -299,6 +299,7 @@ void tab_racing(lv_obj_t * parent){
     lv_label_set_text(label_hv, "HV");
 
     lv_obj_set_grid_cell(label_hv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_END, 2, 1);
+    */
 
     /*-------------------------------------*/
 
