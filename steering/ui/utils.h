@@ -68,7 +68,7 @@ static lv_obj_t *lv_vertical_pair_label(lv_obj_t *parent, const char *up_text, c
     lv_obj_set_style_bg_opa(up_l, LV_OPA_TRANSP, LV_PART_MAIN);
     lv_obj_set_style_text_color(up_l, lv_color_hex(COLOR_TERTIARY_HEX), 0);
     //lv_obj_set_style_base_dir(up_l, LV_BASE_DIR_LTR, LV_PART_MAIN);
-    // lv_obj_align(up_l, LV_ALIGN_CENTER,0,0);
+    //lv_obj_align(up_l, LV_ALIGN_CENTER,0,0);
     lv_obj_set_grid_cell(up_l, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
     lv_obj_t *bot_l = lv_label_create(grid);
