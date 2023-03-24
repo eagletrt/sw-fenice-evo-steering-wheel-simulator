@@ -6,73 +6,6 @@
 
 void tab_racing(lv_obj_t *parent);
 
-static lv_style_t grid_style;
-static lv_style_t bar_hv_style;
-static lv_style_t bar_lv_style;
-static lv_style_t bar_back_style;
-static lv_style_t label_style;
-static lv_style_t side_panels_style;
-
-static void init_custom_styles(){
-
-    /* GRID_STYLE */
-    lv_style_init(&grid_style);
-    lv_style_set_pad_all(&grid_style, 0);
-    lv_style_set_pad_bottom(&grid_style, 0);
-    lv_style_set_pad_column(&grid_style, 0);
-    lv_style_set_pad_right(&grid_style, 0);
-    lv_style_set_pad_left(&grid_style, 0);
-    lv_style_set_pad_top(&grid_style, 0);
-    lv_style_set_pad_row(&grid_style, 0);
-    lv_style_set_bg_color(&grid_style, lv_color_hex(COLOR_PRIMARY_HEX));
-    lv_style_set_bg_opa(&grid_style, LV_OPA_COVER);
-    lv_style_set_border_opa(&grid_style, LV_OPA_COVER);
-    lv_style_set_outline_width(&grid_style, 0);
-    lv_style_set_border_width(&grid_style, 0);
-    lv_style_set_border_opa(&grid_style, 0); //to remove borders, keeping bc useful
-
-    /* BAR_HV_STYLE */
-    lv_style_init(&bar_hv_style);
-    lv_style_set_bg_opa(&bar_hv_style, LV_OPA_COVER);
-    lv_style_set_bg_color(&bar_hv_style, lv_color_hex(COLOR_ORANGE_STATUS_HEX));
-
-    /* BAR_LV_STYLE */
-    lv_style_init(&bar_lv_style);
-    lv_style_set_bg_opa(&bar_lv_style, LV_OPA_COVER);
-    lv_style_set_bg_color(&bar_lv_style, lv_color_hex(COLOR_GREEN_STATUS_HEX));
-
-    /* BAR_BACKGROUND_STYLE */
-    lv_style_init(&bar_back_style);
-    lv_style_set_bg_opa(&bar_back_style, LV_OPA_COVER);
-    //lv_style_set_radius(&bar_back_style, 10);
-    lv_style_set_outline_color(&bar_back_style, lv_color_hex(COLOR_TERTIARY_HEX));
-
-    //lv_style_set_outline_width(&bar_back_style, 0); //used for testing
-
-    lv_style_set_bg_color(&bar_back_style, lv_color_hex(COLOR_SECONDARY_HEX));
-
-
-    /* LABEL_STYLE */
-    lv_style_init(&label_style);
-    lv_style_set_base_dir(&label_style, LV_BASE_DIR_LTR);
-    lv_style_set_bg_opa(&label_style, LV_OPA_TRANSP);
-    lv_style_set_text_color(&label_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    lv_style_set_text_align(&label_style, LV_TEXT_ALIGN_CENTER);
-
-    /* SIDE_DATA_PANELS_STYLE */
-    lv_style_init(&side_panels_style);
-    lv_style_set_pad_all(&side_panels_style, 0);
-    lv_style_set_pad_bottom(&side_panels_style, 0);
-    lv_style_set_pad_column(&side_panels_style, 0);
-    lv_style_set_pad_top(&side_panels_style, 0);
-    lv_style_set_pad_row(&side_panels_style, 0);
-    lv_style_set_bg_opa(&side_panels_style, LV_OPA_TRANSP);
-    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_SECONDARY_HEX)); //to remove borders, keeping bc useful
-    lv_style_set_border_width(&side_panels_style, 3);
-    lv_style_set_radius(&side_panels_style, 10);
-
-}
-
 static void lv_custom_meter(lv_obj_t *custom_meter)
 {
 
@@ -81,7 +14,7 @@ static void lv_custom_meter(lv_obj_t *custom_meter)
     lv_obj_remove_style(custom_meter, NULL, LV_PART_INDICATOR);
 
     // lv_obj_set_grid_cell(custom_meter, LV_GRID_ALIGN_STRETCH, 2, 1, LV_GRID_ALIGN_STRETCH, 2, 1);
-    lv_obj_set_size(custom_meter, 290, 290);
+    lv_obj_set_size(custom_meter, 280, 290);
     lv_obj_set_style_pad_top(custom_meter, 12, LV_PART_MAIN);
 
     /*Add a scale first*/

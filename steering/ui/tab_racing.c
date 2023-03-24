@@ -107,15 +107,12 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_center(central_panel);
     lv_obj_set_style_base_dir(central_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(central_panel, cpanel_cols, cpanel_rows);
+    
+    // NOTCH
+    lv_obj_t *notch = create_notch(central_panel);
+    lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 5);
+    lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_STRETCH, 0, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
 
-    // CHANGE-TABS VIEW (I don't remember the right name)
-    /*
-    lv_obj_t * l1 = lv_label_create(central_panel);
-    lv_label_set_text(l1, "change-tabs view");
-    lv_obj_set_grid_cell(l1, LV_GRID_ALIGN_STRETCH, 2, 1,
-                         LV_GRID_ALIGN_STRETCH, 0, 1);*/
-    
-    
 
     // DATA PANEL
     static lv_coord_t dpanel_cols[] =  {DATA_LEFT_WIDTH, DATA_CENTER_WIDTH, DATA_RIGHT_WIDTH, LV_GRID_TEMPLATE_LAST};
