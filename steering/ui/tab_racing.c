@@ -3,7 +3,7 @@
 
 void tab_racing(lv_obj_t * parent){
 
-    init_custom_styles();
+   // init_custom_styles();
 
     static lv_coord_t main_panel_cols[] =  {SIDE_BAR_WIDTH, CENTRAL_PANEL_WIDTH, SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t main_panel_rows[] = {SCREEN_HEIGHT, LV_GRID_TEMPLATE_LAST};

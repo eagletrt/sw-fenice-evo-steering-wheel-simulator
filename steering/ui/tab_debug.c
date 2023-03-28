@@ -7,7 +7,6 @@
 
 void tab_debug(lv_obj_t * parent){
 
-    init_custom_styles();
 
     //optional label
     lv_obj_t * label2 = lv_label_create(parent);

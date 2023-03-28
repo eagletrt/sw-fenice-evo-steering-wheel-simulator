@@ -6,15 +6,6 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 480
 
-#define SIDE_BAR_WIDTH 70
-#define CENTRAL_PANEL_WIDTH 660
-#define BOTTOM_BAR_HEIGHT 80
-#define TOP_BAR_HEIGHT 80
-#define DATA_PANEL_HEIGHT 320
-#define DATA_LEFT_WIDTH 185
-#define DATA_RIGHT_WIDTH 185
-#define DATA_CENTER_WIDTH 290
-
 #define NOTCH_HEIGHT 40
 #define NOTCH_WIDTH 498
 
@@ -64,12 +55,12 @@ LV_FONT_DECLARE(lv_font_inter_bold_70);
 LV_FONT_DECLARE(lv_font_inter_bold_80);
 
 
-static lv_style_t grid_style;
-static lv_style_t bar_hv_style;
-static lv_style_t bar_lv_style;
-static lv_style_t bar_back_style;
-static lv_style_t label_style;
-static lv_style_t side_panels_style;
+lv_style_t grid_style;
+lv_style_t bar_hv_style;
+lv_style_t bar_lv_style;
+lv_style_t bar_back_style;
+lv_style_t label_style;
+lv_style_t side_panels_style;
 
 static void init_custom_styles(){
 

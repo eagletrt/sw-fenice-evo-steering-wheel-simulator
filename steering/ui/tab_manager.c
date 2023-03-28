@@ -7,7 +7,8 @@ lv_obj_t * scr3;
 int tab_num = 0; //change name to tab_position
 
 void tab_manager(void)
-{   
+{
+    init_custom_styles();
 
     scr1  = lv_obj_create(NULL);
     scr2  = lv_obj_create(NULL);
@@ -23,6 +24,7 @@ void tab_manager(void)
 
     tab_racing(scr1);
     tab_debug(scr2);
+    tab_calibration(scr3);
     lv_scr_load(scr2);
 
 }
@@ -31,16 +33,15 @@ void change_tab(scroll direction){
     
     if(direction == FORWARD){
         tab_num++;
+        tab_num = tab_num%N_SCREENS;
     }else{
         tab_num--;
         if(tab_num == -1){
             tab_num = 2;
         }
     }
-
-    //printf("tab_num: %d\n", tab_num);
         
-    switch (tab_num%N_SCREENS)
+    switch (tab_num)
     {
     case 0:
         lv_scr_load(scr1);
