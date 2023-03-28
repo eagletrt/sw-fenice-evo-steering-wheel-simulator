@@ -61,7 +61,7 @@ void tab_racing(lv_obj_t * parent){
 
 
     /*---------RIGHT BAR-----------*/
-    
+
     //bar grid setup
     lv_obj_t * bar_panel_hv = lv_obj_create(tab_racing);
     lv_obj_remove_style_all(bar_panel_hv);
@@ -90,13 +90,11 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_style_bg_color(hv_bar, lv_color_hex(COLOR_ORANGE_STATUS_HEX), LV_PART_INDICATOR);
     lv_obj_set_grid_cell(hv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
 
-    
     /*-------------------------------------*/
     // CENTRAL PANEL
 
     static lv_coord_t cpanel_cols[] =  {CENTRAL_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t cpanel_rows[] = {TOP_BAR_HEIGHT, DATA_PANEL_HEIGHT, BOTTOM_BAR_HEIGHT, LV_GRID_TEMPLATE_LAST};
-
 
     lv_obj_t * central_panel = lv_obj_create(tab_racing);
     lv_obj_set_layout(central_panel, LV_LAYOUT_GRID);
@@ -111,8 +109,7 @@ void tab_racing(lv_obj_t * parent){
     // NOTCH
     lv_obj_t *notch = create_notch(central_panel);
     lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 5);
-    lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_STRETCH, 0, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
-
+    lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
     // DATA PANEL
     static lv_coord_t dpanel_cols[] =  {DATA_LEFT_WIDTH, DATA_CENTER_WIDTH, DATA_RIGHT_WIDTH, LV_GRID_TEMPLATE_LAST};
@@ -127,7 +124,6 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_center(data_panel);
     lv_obj_set_style_base_dir(data_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(data_panel, dpanel_cols, dpanel_rows);
-
 
     // DATA PANEL LEFT
     static lv_coord_t lxd_panel_cols[] =  {DATA_LEFT_WIDTH- 5, LV_GRID_TEMPLATE_LAST};
@@ -177,7 +173,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_style_pad_left(right_data_panel, 1, LV_PART_MAIN);
     lv_obj_set_style_border_opa(right_data_panel, LV_OPA_COVER, LV_PART_MAIN);
     lv_obj_add_style(right_data_panel, &side_panels_style, 0);
-    lv_obj_center(right_data_panel);
+    //lv_obj_center(right_data_panel);
     lv_obj_set_style_base_dir(right_data_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(right_data_panel, rxd_panel_cols, rxd_panel_rows);
     
@@ -193,23 +189,16 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_t *slip = lv_vertical_pair_label(right_data_panel, "20", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(slip, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 0,1);
 
-    lv_obj_t *sep_o = lv_obj_create(right_data_panel);
-    lv_obj_remove_style_all(sep_o);
-    lv_obj_set_height(sep_o, LV_SIZE_CONTENT);
-    lv_obj_set_width(sep_o, 172);
-    lv_obj_t* sep_line = lv_bar_create(sep_o);
+    //adding separation line for right data panel
+    lv_obj_t* sep_line = lv_bar_create(right_data_panel);
     lv_obj_remove_style_all(sep_line);
-    lv_obj_set_style_border_width(sep_line, 2, LV_PART_MAIN);
-    lv_obj_set_style_border_color(sep_line, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
-    lv_obj_set_style_border_opa(sep_line, LV_OPA_COVER, LV_PART_MAIN);
-    lv_obj_set_size(sep_line, 280, 3);
-    lv_obj_align(sep_line, LV_ALIGN_TOP_MID, 1, 0);
-    lv_obj_set_grid_cell(sep_o, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_STRETCH, 1,1);
+    lv_obj_add_style(sep_line, &bar_back_style, 0);
+    lv_obj_set_size(sep_line, 185, 3);
+    lv_obj_set_grid_cell(sep_line, LV_GRID_ALIGN_CENTER, 0,2, LV_GRID_ALIGN_START, 1,1);
 
     lv_obj_t *test = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
     lv_obj_set_grid_cell(test, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
 
-    
     lv_obj_t *test1 = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
     lv_obj_set_grid_cell(test1, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
 
@@ -223,11 +212,14 @@ void tab_racing(lv_obj_t * parent){
     // DATA CENTER
 
     // power
-    lv_obj_t * power = lv_label_create(data_panel);
-    lv_obj_add_style(power, &label_style, LV_PART_MAIN);
-    lv_obj_set_style_text_font(power, &lv_font_inter_bold_22, LV_STATE_DEFAULT);
-    lv_label_set_text(power, "POWER 60%");
-    lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_START, 0, 1);
+    lv_obj_t * power = lv_triple_label(central_panel, "60", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22, "POWER", &lv_font_inter_bold_14);
+    //lv_obj_align(lv_obj_get_child(power, NULL), LV_GRID_ALIGN_CENTER, 0, -30);
+    lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 2);
+    lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -5, 0);
+    lv_obj_set_style_pad_top(power, 53, 0);
+    
+    //lv_obj_align(power, LV_ALIGN_CENTER, 0,0);
+
 
     // speedometer
     lv_obj_t *speed = lv_vertical_pair_label(data_panel, "169", &lv_font_inter_bold_70, "km/h", &lv_font_inter_bold_22);

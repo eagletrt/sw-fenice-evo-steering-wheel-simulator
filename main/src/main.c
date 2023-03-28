@@ -39,7 +39,7 @@ static int tick_thread(void *data);
  *  STATIC VARIABLES
  **********************/
 
-static lv_indev_data_t data;
+
 
 /**********************
  *      MACROS
@@ -51,6 +51,7 @@ static lv_indev_data_t data;
 
 void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
 { 
+  lv_indev_data_t data;
   keyboard_read(indev_drv, &data);
   
   /*to see witch key was taken as input*/

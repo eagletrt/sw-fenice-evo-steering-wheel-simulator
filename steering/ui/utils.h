@@ -103,10 +103,8 @@ static void init_custom_styles(){
     lv_style_init(&bar_back_style);
     lv_style_set_bg_opa(&bar_back_style, LV_OPA_COVER);
     //lv_style_set_radius(&bar_back_style, 10);
-    lv_style_set_outline_color(&bar_back_style, lv_color_hex(COLOR_TERTIARY_HEX));
-
+    //lv_style_set_outline_color(&bar_back_style, lv_color_hex(COLOR_TERTIARY_HEX));
     //lv_style_set_outline_width(&bar_back_style, 0); //used for testing
-
     lv_style_set_bg_color(&bar_back_style, lv_color_hex(COLOR_SECONDARY_HEX));
 
 
