@@ -25,7 +25,7 @@ void tab_manager(void)
     tab_racing(scr1);
     tab_debug(scr2);
     tab_calibration(scr3);
-    lv_scr_load(scr2);
+    lv_scr_load(scr3);
 
 }
 
