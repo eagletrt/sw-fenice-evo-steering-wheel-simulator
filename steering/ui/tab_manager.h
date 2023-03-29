@@ -4,6 +4,7 @@
 #include "lvgl.h"
 #include "utils.h"
 #include "tab_racing.h"
+#include "tab_debug.h"
 #include "lv_drivers/indev/keyboard.h"
 
 #define N_SCREENS 3

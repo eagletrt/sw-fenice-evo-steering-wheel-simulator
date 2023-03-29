@@ -3,7 +3,6 @@
 
 void tab_racing(lv_obj_t * parent){
 
-   // init_custom_styles();
 
     static lv_coord_t main_panel_cols[] =  {SIDE_BAR_WIDTH, CENTRAL_PANEL_WIDTH, SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t main_panel_rows[] = {SCREEN_HEIGHT, LV_GRID_TEMPLATE_LAST};
@@ -135,7 +134,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_clear_flag(left_data_panel, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_size(left_data_panel, DATA_LEFT_WIDTH-5, DATA_PANEL_HEIGHT-2);
 
-    lv_obj_add_style(left_data_panel, &side_panels_style, 0);
+    lv_obj_add_style(left_data_panel, &box_panels_style, 0);
     lv_obj_center(left_data_panel);
     lv_obj_set_style_base_dir(left_data_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(left_data_panel, lxd_panel_cols, lxd_panel_rows);
@@ -172,7 +171,7 @@ void tab_racing(lv_obj_t * parent){
 
     lv_obj_set_style_pad_left(right_data_panel, 1, LV_PART_MAIN);
     lv_obj_set_style_border_opa(right_data_panel, LV_OPA_COVER, LV_PART_MAIN);
-    lv_obj_add_style(right_data_panel, &side_panels_style, 0);
+    lv_obj_add_style(right_data_panel, &box_panels_style, 0);
     //lv_obj_center(right_data_panel);
     lv_obj_set_style_base_dir(right_data_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(right_data_panel, rxd_panel_cols, rxd_panel_rows);
@@ -192,10 +191,11 @@ void tab_racing(lv_obj_t * parent){
     //adding separation line for right data panel
     lv_obj_t* sep_line = lv_bar_create(right_data_panel);
     lv_obj_remove_style_all(sep_line);
-    lv_obj_add_style(sep_line, &bar_back_style, 0);
+    lv_obj_add_style(sep_line, &box_panels_style, 0);
     lv_obj_set_size(sep_line, 185, 3);
     lv_obj_set_grid_cell(sep_line, LV_GRID_ALIGN_CENTER, 0,2, LV_GRID_ALIGN_START, 1,1);
 
+    
     lv_obj_t *test = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
     lv_obj_set_grid_cell(test, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
 

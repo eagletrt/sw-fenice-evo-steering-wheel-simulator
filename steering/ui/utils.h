@@ -15,9 +15,9 @@
 #define NOTCH_BAR_HEIGHT_L 10
 
 
-#define COLOR_PRIMARY_HEX 0x383838
-#define COLOR_SECONDARY_HEX 0X575757
-#define COLOR_TERTIARY_HEX 0xF2F3F5
+#define COLOR_PRIMARY_HEX 0x383838 //dark grey backgroud
+#define COLOR_SECONDARY_HEX 0X575757 //light grey (borders)
+#define COLOR_TERTIARY_HEX 0xF2F3F5 //white
 #define COLOR_BLUE_STATUS_HEX 0x466189
 #define COLOR_GREEN_STATUS_HEX 0x39D103
 #define COLOR_ORANGE_STATUS_HEX 0xE78A00
@@ -60,7 +60,7 @@ lv_style_t bar_hv_style;
 lv_style_t bar_lv_style;
 lv_style_t bar_back_style;
 lv_style_t label_style;
-lv_style_t side_panels_style;
+lv_style_t box_panels_style;
 
 static void init_custom_styles(){
 
@@ -92,10 +92,8 @@ static void init_custom_styles(){
 
     /* BAR_BACKGROUND_STYLE */
     lv_style_init(&bar_back_style);
+    //lv_style_set_bg_opa(&bar_back_style, LV_OPA_COVER);
     lv_style_set_bg_opa(&bar_back_style, LV_OPA_COVER);
-    //lv_style_set_radius(&bar_back_style, 10);
-    //lv_style_set_outline_color(&bar_back_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    //lv_style_set_outline_width(&bar_back_style, 0); //used for testing
     lv_style_set_bg_color(&bar_back_style, lv_color_hex(COLOR_SECONDARY_HEX));
 
 
@@ -107,16 +105,16 @@ static void init_custom_styles(){
     lv_style_set_text_align(&label_style, LV_TEXT_ALIGN_CENTER);
 
     /* SIDE_DATA_PANELS_STYLE */
-    lv_style_init(&side_panels_style);
-    lv_style_set_pad_all(&side_panels_style, 0);
-    lv_style_set_pad_bottom(&side_panels_style, 0);
-    lv_style_set_pad_column(&side_panels_style, 0);
-    lv_style_set_pad_top(&side_panels_style, 0);
-    lv_style_set_pad_row(&side_panels_style, 0);
-    lv_style_set_bg_opa(&side_panels_style, LV_OPA_TRANSP);
-    lv_style_set_border_color(&side_panels_style, lv_color_hex(COLOR_SECONDARY_HEX)); //to remove borders, keeping bc useful
-    lv_style_set_border_width(&side_panels_style, 3);
-    lv_style_set_radius(&side_panels_style, 10);
+    lv_style_init(&box_panels_style);
+    lv_style_set_pad_all(&box_panels_style, 0);
+    lv_style_set_pad_bottom(&box_panels_style, 0);
+    lv_style_set_pad_column(&box_panels_style, 0);
+    lv_style_set_pad_top(&box_panels_style, 0);
+    lv_style_set_pad_row(&box_panels_style, 0);
+    lv_style_set_bg_opa(&box_panels_style, LV_OPA_TRANSP);
+    lv_style_set_border_color(&box_panels_style, lv_color_hex(COLOR_SECONDARY_HEX)); //to remove borders, keeping bc useful
+    lv_style_set_border_width(&box_panels_style, 3);
+    lv_style_set_radius(&box_panels_style, 10);
 
 }
 
