@@ -52,12 +52,6 @@ void tab_racing(lv_obj_t * parent){
     lv_label_set_text(label_lv, "LV");
     lv_obj_set_grid_cell(label_lv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 2, 1);
 
-    // lv state of charge bar
-//    lv_obj_t *lv_bar = lv_bar_create(bar_panel_lv);
- //   custom_side_bar(lv_bar);
- //   lv_bar_set_value(lv_bar, 70, LV_ANIM_OFF);
- //   lv_obj_set_grid_cell(lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
-
 
     /*---------RIGHT BAR-----------*/
 
