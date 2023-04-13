@@ -1,7 +1,13 @@
 #include "tab_calibration.h"
 
+lv_bar_t *lx_box;
+lv_bar_t *center_box;
+lv_bar_t *rx_box;
 
+lv_obj_t *new_screen;
 void tab_calibration(lv_obj_t *parent){
+    new_screen = lv_obj_create(NULL);
+
 
     /*---creating main grid---*/
 
@@ -22,7 +28,7 @@ void tab_calibration(lv_obj_t *parent){
     /*--- inserting TOP NOTCH ---*/
 
     lv_obj_t *notch = create_notch(main_panel);
-    lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 5);
+    lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 15);
     lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
 
@@ -47,7 +53,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_remove_style_all(box_container);
     lv_obj_set_grid_cell(box_container, LV_GRID_ALIGN_STRETCH, 0, 1, LV_GRID_ALIGN_STRETCH, 2, 1);
 
-    lv_bar_t *lx_box = lv_bar_create(box_container);
+    lx_box = lv_bar_create(box_container);
     lv_obj_set_size(lx_box, BOX_WIDTH, BOX_HEIGHT);
     lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(lx_box, LV_OPA_COVER, LV_PART_MAIN);
@@ -61,7 +67,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_style_text_font(lx_box_label, &lv_font_inter_bold_30, LV_PART_MAIN);
     lv_obj_set_align(lx_box_label, LV_ALIGN_CENTER);
 
-    lv_bar_t *center_box = lv_bar_create(box_container);
+    center_box = lv_bar_create(box_container);
     lv_obj_set_size(center_box, BOX_WIDTH, BOX_HEIGHT);
     lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(center_box, LV_OPA_COVER, LV_PART_MAIN);
@@ -75,7 +81,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_style_text_font(center_box_label, &lv_font_inter_bold_30, LV_PART_MAIN);
     lv_obj_set_align(center_box_label, LV_ALIGN_CENTER);
 
-    lv_bar_t *rx_box = lv_bar_create(box_container);
+    rx_box = lv_bar_create(box_container);
     lv_obj_set_size(rx_box, BOX_WIDTH, BOX_HEIGHT);
     lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(rx_box, LV_OPA_COVER, LV_PART_MAIN);
@@ -104,6 +110,43 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_style_text_font(bot_rx_label, &lv_font_inter_bold_20, LV_PART_MAIN);
     lv_obj_set_grid_cell(bot_rx_label, LV_GRID_ALIGN_END, 0, 1, LV_GRID_ALIGN_CENTER, 3, 1);
 
+}
+
+void shift_box_focus(shift direction){
+    
+    if(direction == LEFT && curr_focus > 0){
+        curr_focus--;
+    }else if(direction == RIGHT && curr_focus < 2){
+        curr_focus++;
+    }
+
+    printf("%d", curr_focus);    
+    fflush(stdout);
+
+    switch (curr_focus)
+    {
+    case 0:
+        lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+        break;
+
+    case 1:
+        lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+        break;
+
+    case 2:
+        lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+
+        break;
+    default:
+        break;
+    }
+}
 
 
+uint8_t get_box_selected(){
+    return curr_focus;
 }

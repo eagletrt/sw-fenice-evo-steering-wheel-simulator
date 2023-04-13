@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "lvgl.h": "c",
-        "keyboard.h": "c"
+        "keyboard.h": "c",
+        "tab_manager.h": "c"
     }
 }
