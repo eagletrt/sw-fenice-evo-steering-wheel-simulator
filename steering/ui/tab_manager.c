@@ -65,6 +65,7 @@ void change_tab(scroll direction){
     }
 }
 
+/* for old calibration
 void open_selected_calib_box(){
     if(lv_scr_act() == scr3){
         switch (get_box_selected())
@@ -85,3 +86,4 @@ void open_selected_calib_box(){
         }
     }
 }
+*/

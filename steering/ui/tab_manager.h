@@ -20,7 +20,7 @@ typedef enum{
 void tab_manager(void);
 void change_tab(scroll direction);
 
-void open_selected_calib_box();
+//void open_selected_calib_box(); for old calibration
 
 
 #endif

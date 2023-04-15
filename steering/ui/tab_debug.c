@@ -4,9 +4,8 @@
 #define CELL_HEIGHT 200
 #define CELL_WIDTH 180
 
-
 void tab_debug(lv_obj_t * parent){
-
+    init_sensors_styles();
 
     //optional label
     lv_obj_t * label2 = lv_label_create(parent);
@@ -180,3 +179,6 @@ void tab_debug(lv_obj_t * parent){
 
 }
 
+void init_sensors_styles(){
+
+}

@@ -76,9 +76,11 @@ void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
       shift_box_focus(RIGHT);
       break;
 
+  /* for old calibration
     case 'x':
       open_selected_calib_box();
       break;
+  */
 
     default:
       break;
