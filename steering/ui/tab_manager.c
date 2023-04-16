@@ -1,22 +1,64 @@
 #include "tab_manager.h"
 
 
+lv_obj_t * scr1;
+lv_obj_t * scr2;
+lv_obj_t * scr3;
+lv_obj_t * steer_calib_tab;
+
+int tab_num = 0; //change name to tab_position
 
 void tab_manager(void)
 {
-    lv_obj_t *tab_view = lv_tabview_create(lv_scr_act(), LV_DIR_TOP, 0);
+    init_custom_styles();
 
-    lv_obj_t *tab1 = lv_tabview_add_tab(tab_view, "Tab 1");
-    lv_obj_t *tab2 = lv_tabview_add_tab(tab_view, "Tab 2");
-    lv_obj_t *tab3 = lv_tabview_add_tab(tab_view, "Tab 3");
+    scr1  = lv_obj_create(NULL);
+    scr2  = lv_obj_create(NULL);
+    scr3  = lv_obj_create(NULL);
 
-    lv_obj_clear_flag(tab1, LV_OBJ_FLAG_SCROLLABLE);
-    tab_racing(tab1);
-
-    lv_obj_t * label1 = lv_label_create(tab2);
-    lv_label_set_text(label1, "Second tab");
-
-    lv_obj_t * label2 = lv_label_create(tab3);
-    lv_label_set_text(label2, "Third tab");
+    steer_calib_tab = lv_obj_create(NULL);
     
+    lv_group_add_obj(g, scr1);
+    lv_group_add_obj(g, scr2);
+    lv_group_add_obj(g, scr3);
+
+    lv_obj_t * label3 = lv_label_create(scr3);
+    lv_label_set_text(label3, "Third screen");
+
+    tab_racing(scr1);
+    tab_debug(scr2);
+    tab_calibration(scr3);
+    
+    lv_scr_load(scr3);
+
+}
+
+void change_tab(scroll direction){
+    
+    if(direction == FORWARD){
+        tab_num++;
+        tab_num = tab_num%N_SCREENS;
+    }else{
+        tab_num--;
+        if(tab_num == -1){
+            tab_num = 2;
+        }
+    }
+        
+    switch (tab_num)
+    {
+    case 0:
+        lv_scr_load(scr1);
+        break;
+
+    case 1:
+        lv_scr_load(scr2);
+        break;
+
+    case 2:
+        lv_scr_load(scr3); 
+        break;
+    default:
+        break;
+    }
 }

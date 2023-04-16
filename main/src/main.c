@@ -20,6 +20,7 @@
 #include "lv_drivers/indev/keyboard.h"
 #include "lv_drivers/indev/mousewheel.h"
 #include "steering/ui/tab_manager.h"
+#include "steering/ui/tab_calibration.h"
 
 /*********************
  *      DEFINES
@@ -39,6 +40,8 @@ static int tick_thread(void *data);
  *  STATIC VARIABLES
  **********************/
 
+
+
 /**********************
  *      MACROS
  **********************/
@@ -46,6 +49,8 @@ static int tick_thread(void *data);
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
+
+void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e);
 
 /*********************
  *      DEFINES
@@ -128,7 +133,8 @@ static void hal_init(void)
   lv_theme_t * th = lv_theme_default_init(disp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), LV_THEME_DEFAULT_DARK, LV_FONT_DEFAULT);
   lv_disp_set_theme(disp, th);
 
-  lv_group_t * g = lv_group_create();
+  //lv_group_t * g = lv_group_create();
+   g = lv_group_create();
   lv_group_set_default(g);
 
   /* Add the mouse as input device
@@ -147,6 +153,7 @@ static void hal_init(void)
   lv_indev_drv_init(&indev_drv_2); /*Basic initialization*/
   indev_drv_2.type = LV_INDEV_TYPE_KEYPAD;
   indev_drv_2.read_cb = keyboard_read;
+  indev_drv_2.feedback_cb = my_event_cb;
   lv_indev_t *kb_indev = lv_indev_drv_register(&indev_drv_2);
   lv_indev_set_group(kb_indev, g);
   mousewheel_init();
@@ -154,7 +161,6 @@ static void hal_init(void)
   lv_indev_drv_init(&indev_drv_3); /*Basic initialization*/
   indev_drv_3.type = LV_INDEV_TYPE_ENCODER;
   indev_drv_3.read_cb = mousewheel_read;
-
   lv_indev_t * enc_indev = lv_indev_drv_register(&indev_drv_3);
   lv_indev_set_group(enc_indev, g);
 
@@ -179,4 +185,40 @@ static int tick_thread(void *data) {
   }
 
   return 0;
+}
+
+
+/*
+ ** Handles keyboard events
+ * used for testing
+ */
+void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
+{ 
+  lv_indev_data_t data;
+  keyboard_read(indev_drv, &data);
+  
+  /*to see witch key was taken as input*/
+  printf("data: %c\n", data.key);
+
+  switch (data.key)
+  {
+    case ' ':
+      change_tab(FORWARD);
+      break;
+
+    case 'b':
+      change_tab(BACKWARD);
+      break;
+
+    case 'l':
+      shift_box_focus(LEFT);
+      break;
+
+    case 'r':
+      shift_box_focus(RIGHT);
+      break;
+
+    default:
+      break;
+  }
 }
