@@ -17,6 +17,6 @@
 
 void tab_debug(lv_obj_t *parent);
 
-void init_sensors_styles();
+void init_sensors_styles(void);
 
 #endif // TAB_DEBUG_H

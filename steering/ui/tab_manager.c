@@ -21,7 +21,6 @@ void tab_manager(void)
     lv_group_add_obj(g, scr1);
     lv_group_add_obj(g, scr2);
     lv_group_add_obj(g, scr3);
-    lv_group_add_obj(g, steer_calib_tab);
 
     lv_obj_t * label3 = lv_label_create(scr3);
     lv_label_set_text(label3, "Third screen");
@@ -29,7 +28,6 @@ void tab_manager(void)
     tab_racing(scr1);
     tab_debug(scr2);
     tab_calibration(scr3);
-    steer_calibration(steer_calib_tab);
     
     lv_scr_load(scr3);
 
@@ -64,26 +62,3 @@ void change_tab(scroll direction){
         break;
     }
 }
-
-/* for old calibration
-void open_selected_calib_box(){
-    if(lv_scr_act() == scr3){
-        switch (get_box_selected())
-        {
-        case 0:
-        
-            break;
-
-        case 1:
-            lv_scr_load(steer_calib_tab);
-            break;
-        
-        case 2:
-            break;   
-        
-        default:
-            break;
-        }
-    }
-}
-*/

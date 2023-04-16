@@ -11,7 +11,7 @@ lv_style_t box_label_style;
 lv_style_t buttons_style;
 lv_style_t buttons_label_style;
 
-void init_calibration_tab_styles(){
+void init_calibration_tab_styles(void){
     /* BOX STYLE */
     lv_style_init(&box_style);
     lv_style_set_width(&box_style, BOX_WIDTH);
@@ -58,7 +58,7 @@ void tab_calibration(lv_obj_t *parent){
     /*---creating main grid---*/
 
     static lv_coord_t main_panel_cols[] =  {SCREEN_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t main_panel_rows[] = {TOP_BAR_HEIGHT, CENTER_OPTIONS_HEIGHT, BUTTONS_BAR_HEIGHT,BOTTOM_LABELS_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t main_panel_rows[] = {CALIBR_TAB_TOP_BAR_HEIGHT, CALIBR_TAB_CENTER_OPTIONS_HEIGHT, CALIBR_TAB_BUTTONS_BAR_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * main_panel = lv_obj_create(parent);
     lv_obj_set_layout(main_panel, LV_LAYOUT_GRID);
@@ -189,9 +189,3 @@ void shift_box_focus(shift direction){
         break;
     }
 }
-
-/* stuff for old calibration
-uint8_t get_box_selected(){
-    return curr_focus;
-}
-*/

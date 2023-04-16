@@ -1,6 +1,6 @@
 #include "utils.h"
 
-void init_custom_styles(){
+void init_custom_styles(void){
 
     /* GRID_STYLE */
     lv_style_init(&grid_style);

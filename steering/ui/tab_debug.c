@@ -4,6 +4,10 @@
 #define CELL_HEIGHT 200
 #define CELL_WIDTH 180
 
+void init_sensors_styles(void){
+
+}
+
 void tab_debug(lv_obj_t * parent){
     init_sensors_styles();
 
@@ -176,9 +180,5 @@ void tab_debug(lv_obj_t * parent){
     lv_obj_set_grid_cell(g_data_panel, LV_GRID_ALIGN_STRETCH, 3, 1,
                          LV_GRID_ALIGN_CENTER, 1, 1);
 
-
-}
-
-void init_sensors_styles(){
 
 }

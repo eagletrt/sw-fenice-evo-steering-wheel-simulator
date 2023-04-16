@@ -5,14 +5,12 @@
 #include "utils.h"
 #include <stdio.h>
 
-#define TOP_BAR_HEIGHT 65
-#define TOP_BAR_WIDTH SCREEN_WIDTH
-#define CENTER_OPTIONS_HEIGHT 230
-#define CENTER_OPTIONS_WIDTH SCREEN_WIDTH
-#define BUTTONS_BAR_HEIGHT 55
-#define BUTTONS_BAR_WIDTH SCREEN_WIDTH
-#define BOTTOM_LABELS_HEIGHT 30
-#define BOTTOM_LABELS_WIDTH SCREEN_WIDTH 
+#define CALIBR_TAB_TOP_BAR_HEIGHT 65
+#define CALIBR_TAB_TOP_BAR_WIDTH SCREEN_WIDTH
+#define CALIBR_TAB_CENTER_OPTIONS_HEIGHT 230
+#define CALIBR_TAB_CENTER_OPTIONS_WIDTH SCREEN_WIDTH
+#define CALIBR_TAB_BUTTONS_BAR_HEIGHT 55
+#define CALIBR_TAB_BUTTONS_BAR_WIDTH SCREEN_WIDTH
 
 #define BOX_SIDE_PADDING 40
 
@@ -31,8 +29,6 @@ void tab_calibration(lv_obj_t *parent);
 
 void shift_box_focus(shift direction);
 
-//uint8_t get_box_selected(); old calibration
-
-void init_calibration_tab_styles();
+void init_calibration_tab_styles(void);
 
 #endif

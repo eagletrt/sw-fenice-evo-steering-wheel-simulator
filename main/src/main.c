@@ -50,43 +50,7 @@ static int tick_thread(void *data);
  *   GLOBAL FUNCTIONS
  **********************/
 
-void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
-{ 
-  lv_indev_data_t data;
-  keyboard_read(indev_drv, &data);
-  
-  /*to see witch key was taken as input*/
-  printf("data: %c\n", data.key);
-
-  switch (data.key)
-  {
-    case ' ':
-      change_tab(FORWARD);
-      break;
-
-    case 'b':
-      change_tab(BACKWARD);
-      break;
-
-    case 'l':
-      shift_box_focus(LEFT);
-      break;
-
-    case 'r':
-      shift_box_focus(RIGHT);
-      break;
-
-  /* for old calibration
-    case 'x':
-      open_selected_calib_box();
-      break;
-  */
-
-    default:
-      break;
-  }
-
-}
+void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e);
 
 /*********************
  *      DEFINES
@@ -221,4 +185,40 @@ static int tick_thread(void *data) {
   }
 
   return 0;
+}
+
+
+/*
+ ** Handles keyboard events
+ * used for testing
+ */
+void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
+{ 
+  lv_indev_data_t data;
+  keyboard_read(indev_drv, &data);
+  
+  /*to see witch key was taken as input*/
+  printf("data: %c\n", data.key);
+
+  switch (data.key)
+  {
+    case ' ':
+      change_tab(FORWARD);
+      break;
+
+    case 'b':
+      change_tab(BACKWARD);
+      break;
+
+    case 'l':
+      shift_box_focus(LEFT);
+      break;
+
+    case 'r':
+      shift_box_focus(RIGHT);
+      break;
+
+    default:
+      break;
+  }
 }

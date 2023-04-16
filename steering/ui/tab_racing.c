@@ -8,7 +8,7 @@ lv_style_t bar_back_style;
 void tab_racing(lv_obj_t * parent){
     init_racing_style();
 
-    static lv_coord_t main_panel_cols[] =  {SIDE_BAR_WIDTH, CENTRAL_PANEL_WIDTH, SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t main_panel_cols[] =  {RACING_TAB_SIDE_BAR_WIDTH, RACING_TAB_CENTRAL_PANEL_WIDTH, RACING_TAB_SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t main_panel_rows[] = {SCREEN_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * tab_racing = lv_obj_create(parent);
@@ -24,13 +24,13 @@ void tab_racing(lv_obj_t * parent){
     /*-------LEFT BAR-------*/
 
     //  bar grid setup
-    static lv_coord_t bar_panel_cols[] =  {SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t bar_panel_cols[] =  {RACING_TAB_SIDE_BAR_WIDTH, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t bar_panel_rows[] = { 70, 360, 70, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * bar_panel_lv = lv_obj_create(tab_racing);
     lv_obj_remove_style_all(bar_panel_lv);
     lv_obj_add_style(bar_panel_lv, &grid_style, 0);
-    lv_obj_set_size(bar_panel_lv, SIDE_BAR_WIDTH, SCREEN_HEIGHT);
+    lv_obj_set_size(bar_panel_lv, RACING_TAB_SIDE_BAR_WIDTH, SCREEN_HEIGHT);
     lv_obj_clear_flag(bar_panel_lv, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_grid_dsc_array(bar_panel_lv, bar_panel_cols, bar_panel_rows);
 
@@ -63,7 +63,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_t * bar_panel_hv = lv_obj_create(tab_racing);
     lv_obj_remove_style_all(bar_panel_hv);
     lv_obj_add_style(bar_panel_hv, &grid_style, 0);
-    lv_obj_set_size(bar_panel_hv, SIDE_BAR_WIDTH, SCREEN_HEIGHT);
+    lv_obj_set_size(bar_panel_hv, RACING_TAB_SIDE_BAR_WIDTH, SCREEN_HEIGHT);
     lv_obj_clear_flag(bar_panel_hv, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_grid_dsc_array(bar_panel_hv, bar_panel_cols, bar_panel_rows);  // same as LEFT BAR
     lv_obj_set_grid_cell(bar_panel_hv, LV_GRID_ALIGN_CENTER, 2, 1, LV_GRID_ALIGN_CENTER, 0, 1);
@@ -90,13 +90,13 @@ void tab_racing(lv_obj_t * parent){
     /*-------------------------------------*/
     // CENTRAL PANEL
 
-    static lv_coord_t cpanel_cols[] =  {CENTRAL_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t cpanel_rows[] = {TOP_BAR_HEIGHT, DATA_PANEL_HEIGHT, BOTTOM_BAR_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t cpanel_cols[] =  {RACING_TAB_CENTRAL_PANEL_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t cpanel_rows[] = {RACING_TAB_TOP_BAR_HEIGHT, RACING_TAB_DATA_PANEL_HEIGHT, RACING_TAB_BOTTOM_BAR_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * central_panel = lv_obj_create(tab_racing);
     lv_obj_set_layout(central_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(central_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(central_panel, CENTRAL_PANEL_WIDTH, SCREEN_HEIGHT);
+    lv_obj_set_size(central_panel, RACING_TAB_CENTRAL_PANEL_WIDTH, SCREEN_HEIGHT);
 
     lv_obj_add_style(central_panel, &grid_style, 0);
     lv_obj_center(central_panel);
@@ -109,13 +109,13 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
     // DATA PANEL
-    static lv_coord_t dpanel_cols[] =  {DATA_LEFT_WIDTH, DATA_CENTER_WIDTH, DATA_RIGHT_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t dpanel_rows[] = {DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t dpanel_cols[] =  {RACING_TAB_DATA_LEFT_WIDTH, RACING_TAB_DATA_CENTER_WIDTH, RACING_TAB_DATA_RIGHT_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t dpanel_rows[] = {RACING_TAB_DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * data_panel = lv_obj_create(central_panel);
     lv_obj_set_layout(data_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(data_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(data_panel, CENTRAL_PANEL_WIDTH, DATA_PANEL_HEIGHT);
+    lv_obj_set_size(data_panel, RACING_TAB_CENTRAL_PANEL_WIDTH, RACING_TAB_DATA_PANEL_HEIGHT);
 
     lv_obj_add_style(data_panel, &grid_style, 0);
     lv_obj_center(data_panel);
@@ -123,14 +123,14 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_dsc_array(data_panel, dpanel_cols, dpanel_rows);
 
     // DATA PANEL LEFT
-    static lv_coord_t lxd_panel_cols[] =  {DATA_LEFT_WIDTH- 5, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t lxd_panel_cols[] =  {RACING_TAB_DATA_LEFT_WIDTH- 5, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t lxd_panel_rows[] = {100, 100, 100, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * left_data_panel = lv_obj_create(data_panel);
     lv_obj_set_layout(left_data_panel, LV_LAYOUT_GRID);
     lv_obj_remove_style_all(left_data_panel);
     lv_obj_clear_flag(left_data_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(left_data_panel, DATA_LEFT_WIDTH-5, DATA_PANEL_HEIGHT-2);
+    lv_obj_set_size(left_data_panel, RACING_TAB_DATA_LEFT_WIDTH-5, RACING_TAB_DATA_PANEL_HEIGHT-2);
 
     lv_obj_add_style(left_data_panel, &box_panels_style, 0);
     lv_obj_center(left_data_panel);
@@ -165,7 +165,7 @@ void tab_racing(lv_obj_t * parent){
 
     lv_obj_set_layout(right_data_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(right_data_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(right_data_panel, DATA_RIGHT_WIDTH-5, DATA_PANEL_HEIGHT-2);
+    lv_obj_set_size(right_data_panel, RACING_TAB_DATA_RIGHT_WIDTH-5, RACING_TAB_DATA_PANEL_HEIGHT-2);
 
     lv_obj_set_style_pad_left(right_data_panel, 1, LV_PART_MAIN);
     lv_obj_set_style_border_opa(right_data_panel, LV_OPA_COVER, LV_PART_MAIN);
@@ -255,7 +255,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_remove_style_all(bottom_bar);
     //lv_obj_add_style(bottom_bar, &bar_lv_style, LV_PART_INDICATOR);
     lv_obj_add_style(bottom_bar, &bar_back_style, LV_PART_MAIN);
-    lv_obj_set_size(bottom_bar, 600 , BOTTOM_BAR_HEIGHT - 15);
+    lv_obj_set_size(bottom_bar, 600 , RACING_TAB_BOTTOM_BAR_HEIGHT - 15);
     lv_obj_center(bottom_bar);
     lv_obj_set_style_radius(bottom_bar, 6, LV_PART_MAIN);
     lv_obj_set_grid_cell(bottom_bar, LV_GRID_ALIGN_CENTER, 0, 1,
@@ -268,7 +268,7 @@ void tab_racing(lv_obj_t * parent){
 }
 
 
-void init_racing_style(){
+void init_racing_style(void){
     /* BAR_HV_STYLE */
     lv_style_init(&bar_hv_style);
     lv_style_set_bg_opa(&bar_hv_style, LV_OPA_COVER);
