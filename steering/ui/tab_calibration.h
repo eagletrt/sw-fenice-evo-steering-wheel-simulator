@@ -3,29 +3,36 @@
 
 #include "lvgl.h"
 #include "utils.h"
+#include <stdio.h>
 
-#define TOP_BAR_HEIGHT 70
+#define TOP_BAR_HEIGHT 65
 #define TOP_BAR_WIDTH SCREEN_WIDTH
-#define TOP_LABELS_HEIGHT 30
-#define TOP_LABELS_WIDTH SCREEN_WIDTH
-#define CENTER_OPTIONS_HEIGHT 270
+#define CENTER_OPTIONS_HEIGHT 230
 #define CENTER_OPTIONS_WIDTH SCREEN_WIDTH
+#define BUTTONS_BAR_HEIGHT 55
+#define BUTTONS_BAR_WIDTH SCREEN_WIDTH
 #define BOTTOM_LABELS_HEIGHT 30
 #define BOTTOM_LABELS_WIDTH SCREEN_WIDTH 
+
+#define BOX_SIDE_PADDING 40
 
 #define BOX_HEIGHT 200
 #define BOX_WIDTH 200
 
+#define BUTTON_WIDTH BOX_WIDTH
+#define BUTTON_HEIGHT 45
+
+typedef enum{
+ LEFT,
+ RIGHT
+}shift;
+
 void tab_calibration(lv_obj_t *parent);
 
-static lv_style_t info_label_style;
-static lv_style_t box_style;
-static lv_style_t box_label_style;
+void shift_box_focus(shift direction);
 
-void init_calibration_tab_styles(){
-    lv_style_init(&box_style);
+//uint8_t get_box_selected(); old calibration
 
-
-}
+void init_calibration_tab_styles();
 
 #endif

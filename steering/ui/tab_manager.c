@@ -4,6 +4,8 @@
 lv_obj_t * scr1;
 lv_obj_t * scr2;
 lv_obj_t * scr3;
+lv_obj_t * steer_calib_tab;
+
 int tab_num = 0; //change name to tab_position
 
 void tab_manager(void)
@@ -13,11 +15,13 @@ void tab_manager(void)
     scr1  = lv_obj_create(NULL);
     scr2  = lv_obj_create(NULL);
     scr3  = lv_obj_create(NULL);
+
+    steer_calib_tab = lv_obj_create(NULL);
     
     lv_group_add_obj(g, scr1);
     lv_group_add_obj(g, scr2);
     lv_group_add_obj(g, scr3);
-    
+    lv_group_add_obj(g, steer_calib_tab);
 
     lv_obj_t * label3 = lv_label_create(scr3);
     lv_label_set_text(label3, "Third screen");
@@ -25,6 +29,8 @@ void tab_manager(void)
     tab_racing(scr1);
     tab_debug(scr2);
     tab_calibration(scr3);
+    steer_calibration(steer_calib_tab);
+    
     lv_scr_load(scr3);
 
 }
@@ -59,3 +65,25 @@ void change_tab(scroll direction){
     }
 }
 
+/* for old calibration
+void open_selected_calib_box(){
+    if(lv_scr_act() == scr3){
+        switch (get_box_selected())
+        {
+        case 0:
+        
+            break;
+
+        case 1:
+            lv_scr_load(steer_calib_tab);
+            break;
+        
+        case 2:
+            break;   
+        
+        default:
+            break;
+        }
+    }
+}
+*/

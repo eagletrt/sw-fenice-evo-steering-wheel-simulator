@@ -20,6 +20,7 @@
 #include "lv_drivers/indev/keyboard.h"
 #include "lv_drivers/indev/mousewheel.h"
 #include "steering/ui/tab_manager.h"
+#include "steering/ui/tab_calibration.h"
 
 /*********************
  *      DEFINES
@@ -66,6 +67,20 @@ void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
     case 'b':
       change_tab(BACKWARD);
       break;
+
+    case 'l':
+      shift_box_focus(LEFT);
+      break;
+
+    case 'r':
+      shift_box_focus(RIGHT);
+      break;
+
+  /* for old calibration
+    case 'x':
+      open_selected_calib_box();
+      break;
+  */
 
     default:
       break;
