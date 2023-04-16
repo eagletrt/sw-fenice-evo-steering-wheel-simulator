@@ -55,10 +55,9 @@ LV_FONT_DECLARE(lv_font_inter_bold_60);
 LV_FONT_DECLARE(lv_font_inter_bold_70);
 LV_FONT_DECLARE(lv_font_inter_bold_80);
 
-
-lv_style_t grid_style;
-lv_style_t label_style;
-lv_style_t box_panels_style;
+extern lv_style_t grid_style;
+extern lv_style_t label_style;
+extern lv_style_t box_panels_style;
 
 void init_custom_styles(void);
 

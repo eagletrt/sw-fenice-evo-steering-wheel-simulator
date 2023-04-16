@@ -5,6 +5,7 @@ lv_obj_t * scr1;
 lv_obj_t * scr2;
 lv_obj_t * scr3;
 lv_obj_t * steer_calib_tab;
+lv_group_t * g;
 
 int tab_num = 0; //change name to tab_position
 

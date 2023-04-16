@@ -9,7 +9,7 @@
 #include "lv_drivers/indev/keyboard.h"
 
 #define N_SCREENS 3
-lv_group_t * g;
+extern lv_group_t * g;
 
 typedef enum{
  FORWARD,
