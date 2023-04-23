@@ -104,9 +104,9 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_dsc_array(central_panel, cpanel_cols, cpanel_rows);
     
     // NOTCH
-    lv_obj_t *notch = create_notch(central_panel);
-    lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 5);
-    lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
+   // lv_obj_t *notch = create_notch(central_panel);
+   // lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 5);
+   // lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
     // DATA PANEL
     static lv_coord_t dpanel_cols[] =  {RACING_TAB_DATA_LEFT_WIDTH, RACING_TAB_DATA_CENTER_WIDTH, RACING_TAB_DATA_RIGHT_WIDTH, LV_GRID_TEMPLATE_LAST};
@@ -142,11 +142,11 @@ void tab_racing(lv_obj_t * parent){
 
 
     /*inserting data into data left panel*/
-    lv_obj_t *best_time = lv_vertical_pair_label(left_data_panel, " 1:24:03", &lv_font_inter_bold_40, "BEST TIME", &lv_font_inter_bold_22);
+    lv_obj_t *best_time = lv_vertical_pair_label(left_data_panel, " 1:24:03", &lv_font_inter_bold_38, "BEST TIME", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(best_time, 1), NULL) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(best_time, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
 
-    lv_obj_t *last_time = lv_vertical_pair_label(left_data_panel, " 1:25:33", &lv_font_inter_bold_40, "LAST TIME", &lv_font_inter_bold_22);
+    lv_obj_t *last_time = lv_vertical_pair_label(left_data_panel, " 1:25:33", &lv_font_inter_bold_38, "LAST TIME", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(last_time, 1), NULL) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(last_time, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
     
@@ -213,7 +213,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_t * power = lv_triple_label(central_panel, "60", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22, "POWER", &lv_font_inter_bold_14);
     //lv_obj_align(lv_obj_get_child(power, NULL), LV_GRID_ALIGN_CENTER, 0, -30);
     lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 2);
-    lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -5, 0);
+    lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
     lv_obj_set_style_pad_top(power, 53, 0);
     
     //lv_obj_align(power, LV_ALIGN_CENTER, 0,0);

@@ -66,6 +66,7 @@ lv_obj_t *lv_vertical_pair_label(lv_obj_t *parent, const char *up_text, const lv
     lv_obj_t *bot_o = lv_obj_create(grid);
     lv_obj_remove_style_all(bot_o);
     lv_obj_set_size(bot_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    lv_obj_set_style_pad_top(bot_o, 8, LV_PART_MAIN);
     lv_obj_t *bot_l = lv_label_create(bot_o);
     lv_obj_add_style(bot_l, &label_style, LV_PART_MAIN);
     lv_label_set_text(bot_l, bottom_text);
@@ -129,6 +130,7 @@ lv_obj_t *lv_triple_label(lv_obj_t *parent, const char *left_text, const lv_font
     lv_obj_set_size(bot_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_t *bot_l = lv_label_create(bot_o);
     lv_obj_add_style(bot_l, &label_style, LV_PART_MAIN);
+    lv_obj_set_style_pad_top(bot_l, 5, LV_PART_MAIN);
     lv_label_set_text(bot_l, bottom_text);
     lv_obj_align(bot_l, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_text_font(bot_l, bottom_text_font, LV_STATE_DEFAULT);
@@ -211,8 +213,8 @@ lv_obj_t *create_notch(lv_obj_t *parent){
     lv_obj_t * center_l = lv_label_create(center_o);
     lv_obj_add_style(center_l, &label_style, LV_PART_MAIN);
     lv_label_set_text(center_l, "RACING");
-    lv_obj_set_style_text_font(center_l, &lv_font_inter_bold_20, LV_PART_MAIN);
-    lv_obj_align(center_l, LV_ALIGN_TOP_MID, 0, NOTCH_BAR_HEIGHT_L + 3);
+    lv_obj_set_style_text_font(center_l, &lv_font_inter_bold_22, LV_PART_MAIN);
+    lv_obj_align(center_l, LV_ALIGN_TOP_MID, 0, NOTCH_BAR_HEIGHT_L + 5);
     lv_obj_set_grid_cell(center_o, LV_GRID_ALIGN_CENTER, 2, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
 
 

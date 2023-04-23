@@ -45,7 +45,7 @@ void init_calibration_tab_styles(void){
     lv_style_set_text_color(&buttons_label_style, lv_color_hex(COLOR_TERTIARY_HEX));
     lv_style_set_text_align(&buttons_label_style, LV_TEXT_ALIGN_CENTER);
     lv_style_set_text_color(&buttons_label_style, lv_color_hex(0x000000));
-    lv_style_set_text_font(&buttons_label_style, &lv_font_inter_bold_24);
+    lv_style_set_text_font(&buttons_label_style, &lv_font_inter_bold_22);
     lv_style_set_align(&buttons_label_style, LV_ALIGN_CENTER);
 }
 
@@ -58,7 +58,7 @@ void tab_calibration(lv_obj_t *parent){
     /*---creating main grid---*/
 
     static lv_coord_t main_panel_cols[] =  {SCREEN_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t main_panel_rows[] = {CALIBR_TAB_TOP_BAR_HEIGHT, CALIBR_TAB_CENTER_OPTIONS_HEIGHT, CALIBR_TAB_BUTTONS_BAR_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t main_panel_rows[] = {CALIBR_TAB_TOP_BAR_HEIGHT, CALIBR_TAB_CENTER_OPTIONS_HEIGHT, CALIBR_TAB_BUTTONS_BAR_HEIGHT, CALIBR_TAB_TOOL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * main_panel = lv_obj_create(parent);
     lv_obj_set_layout(main_panel, LV_LAYOUT_GRID);
