@@ -228,7 +228,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_height(meter_container, LV_SIZE_CONTENT);
 
     steering.custom_meter = lv_meter_create(meter_container);
-    lv_custom_meter(&steering.custom_meter, &steering.lb_POWER, &steering.lb_GPS_SPEED, &steering.POWER);
+    lv_custom_meter(&steering.custom_meter, steering.lb_POWER, steering.lb_GPS_SPEED, &steering.POWER);
     lv_obj_align(steering.custom_meter, LV_ALIGN_CENTER, 0, 0);
 
     lv_obj_set_grid_cell(meter_container, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
@@ -289,7 +289,7 @@ void init_racing_style(void){
 
 }
 
-void lv_custom_meter(lv_obj_t **custom_meter, lv_obj_t **indicator_blue, lv_obj_t **indicator_white, uint8_t * max_indicator_value)
+void lv_custom_meter(lv_obj_t **custom_meter, lv_meter_indicator_t *indicator_blue, lv_meter_indicator_t *indicator_white, uint8_t * max_indicator_value)
 {
     /*Remove the circle from the middle*/
     lv_obj_remove_style(*custom_meter, NULL, LV_PART_MAIN);

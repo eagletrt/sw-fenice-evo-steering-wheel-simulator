@@ -75,7 +75,6 @@ typedef struct {
 
 
 extern steering_t steering;
-void test_value_update_incremental();
-
+void test_value_update_incremental(void);
 
 #endif
