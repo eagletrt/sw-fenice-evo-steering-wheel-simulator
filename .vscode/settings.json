@@ -3,6 +3,7 @@
         "lvgl.h": "c",
         "keyboard.h": "c",
         "tab_manager.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "steering.h": "c"
     }
 }

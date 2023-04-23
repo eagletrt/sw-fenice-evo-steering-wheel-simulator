@@ -21,6 +21,7 @@
 #include "lv_drivers/indev/mousewheel.h"
 #include "steering/ui/tab_manager.h"
 #include "steering/ui/tab_calibration.h"
+#include "steering/steering.h"
 
 /*********************
  *      DEFINES
@@ -36,10 +37,11 @@
 static void hal_init(void);
 static int tick_thread(void *data);
 
+static void data_init(void);
+
 /**********************
  *  STATIC VARIABLES
  **********************/
-
 
 
 /**********************
@@ -82,14 +84,19 @@ int main(int argc, char **argv)
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
+  data_init();
 
   tab_manager();
+
+  lv_timer_create(test_value_update, 2000, NULL);
+  lv_timer_create(test_value_update_incremental, 70, NULL);
 
   while(1) {
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
     lv_timer_handler();
     usleep(5 * 1000);
+    //test_value_update();
   }
 
   return 0;
@@ -134,7 +141,7 @@ static void hal_init(void)
   lv_disp_set_theme(disp, th);
 
   //lv_group_t * g = lv_group_create();
-   g = lv_group_create();
+  g = lv_group_create();
   lv_group_set_default(g);
 
   /* Add the mouse as input device
@@ -221,4 +228,9 @@ void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
     default:
       break;
   }
+}
+
+void data_init(void){
+  sensors_data.value_ESTIMATED_VELOCITY = 0;
+  sensors_data.value_POWER = 80;
 }

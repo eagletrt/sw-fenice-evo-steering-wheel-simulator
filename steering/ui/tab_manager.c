@@ -10,7 +10,8 @@ lv_group_t * g;
 int tab_num = 0; //change name to tab_position
 
 void tab_manager(void)
-{
+{   
+    srand(time(NULL)); //init time to gen random numbers
     init_custom_styles();
 
     scr1  = lv_obj_create(NULL);
@@ -30,7 +31,7 @@ void tab_manager(void)
     tab_debug(scr2);
     tab_calibration(scr3);
     
-    lv_scr_load(scr3);
+    lv_scr_load(scr1);
 
 }
 

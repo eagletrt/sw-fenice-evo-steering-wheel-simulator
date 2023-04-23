@@ -4,11 +4,9 @@
  * Opts: 
  ******************************************************************************/
 
-#ifdef LV_LVGL_H_INCLUDE_SIMPLE
+
+
 #include "lvgl.h"
-#else
-#include "lvgl/lvgl.h"
-#endif
 
 #ifndef LV_FONT_INTER_BOLD_26
 #define LV_FONT_INTER_BOLD_26 1
