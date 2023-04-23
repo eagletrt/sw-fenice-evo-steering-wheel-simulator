@@ -74,7 +74,7 @@ void tab_calibration(lv_obj_t *parent){
     /*--- inserting TOP NOTCH ---*/
 
     lv_obj_t *notch = create_notch(main_panel);
-    lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 15);
+    lv_obj_align(lv_obj_get_child(notch, 0), LV_ALIGN_TOP_MID, 0, 15);
     lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
 

@@ -1,8 +1,8 @@
 #include "utils.h"
 
-lv_style_t grid_style;
-lv_style_t label_style;
-lv_style_t box_panels_style;
+extern lv_style_t grid_style;
+extern lv_style_t label_style;
+extern lv_style_t box_panels_style;
 
 void init_custom_styles(void){
 

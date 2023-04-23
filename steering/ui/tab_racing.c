@@ -1,6 +1,5 @@
 #include "tab_racing.h"
 
-
 lv_style_t bar_hv_style;
 lv_style_t bar_lv_style;
 lv_style_t bar_back_style;
@@ -37,8 +36,8 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(bar_panel_lv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
     
     // lv percentage    
-    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, &sensors_data.lb_LV_PERCENT, "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
-    lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
+    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, &steering.lb_LV_PERCENT, "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), 0) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
     lv_obj_set_grid_cell(lv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
   
 
@@ -69,8 +68,8 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(bar_panel_hv, LV_GRID_ALIGN_CENTER, 2, 1, LV_GRID_ALIGN_CENTER, 0, 1);
     
     //hv percentage
-    lv_obj_t *hv_perc = lv_horizontal_pair_label(bar_panel_hv, &sensors_data.lb_HV_PERCENT, "50", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
-    lv_obj_align(lv_obj_get_child(lv_obj_get_child(hv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
+    lv_obj_t *hv_perc = lv_horizontal_pair_label(bar_panel_hv, &steering.lb_HV_PERCENT, "50", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(hv_perc, 1), 0) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
     lv_obj_set_grid_cell(hv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
     // hv label
@@ -105,7 +104,7 @@ void tab_racing(lv_obj_t * parent){
     
     // NOTCH
     lv_obj_t *notch = create_notch(central_panel);
-    lv_obj_align(lv_obj_get_child(notch, NULL), LV_ALIGN_TOP_MID, 0, 5);
+    lv_obj_align(lv_obj_get_child(notch, 0), LV_ALIGN_TOP_MID, 0, 5);
     lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
     // DATA PANEL
@@ -142,17 +141,17 @@ void tab_racing(lv_obj_t * parent){
 
 
     /*inserting data into data left panel*/
-    lv_obj_t *best_time = lv_vertical_pair_label(left_data_panel, &sensors_data.lb_BEST_TIME, " 1:24:03", &lv_font_inter_bold_40, "BEST TIME", &lv_font_inter_bold_22);
-    lv_obj_align(lv_obj_get_child(lv_obj_get_child(best_time, 1), NULL) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
+    lv_obj_t *best_time = lv_vertical_pair_label(left_data_panel, &steering.lb_BEST_TIME, " 1:24:03", &lv_font_inter_bold_40, "BEST TIME", &lv_font_inter_bold_22);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(best_time, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(best_time, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
 
-    lv_obj_t *last_time = lv_vertical_pair_label(left_data_panel, &sensors_data.lb_LAST_TIME, " 1:25:33", &lv_font_inter_bold_40, "LAST TIME", &lv_font_inter_bold_22);
-    lv_obj_align(lv_obj_get_child(lv_obj_get_child(last_time, 1), NULL) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
+    lv_obj_t *last_time = lv_vertical_pair_label(left_data_panel, &steering.lb_LAST_TIME, " 1:25:33", &lv_font_inter_bold_40, "LAST TIME", &lv_font_inter_bold_22);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(last_time, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(last_time, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
     
-    lv_obj_t *delta = lv_vertical_pair_label(left_data_panel, &sensors_data.lb_DELTA_TIME, "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
-    lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, NULL), NULL) , LV_ALIGN_LEFT_MID, 10, 0);  // change upper label position
-    lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 1), NULL) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
+    lv_obj_t *delta = lv_vertical_pair_label(left_data_panel, &steering.lb_DELTA_TIME, "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 0), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change upper label position
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(delta, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
 
 
@@ -180,11 +179,11 @@ void tab_racing(lv_obj_t * parent){
 
 
     /*inserting data into data right panel*/
-    lv_obj_t *trq = lv_vertical_pair_label(right_data_panel, &sensors_data.lb_TORQUE, "30", &lv_font_inter_bold_38, "TRQ", &lv_font_inter_bold_22);
-    //lv_obj_t *trq = lv_test_label(right_data_panel, &sensors_data.lb_TORQUE ,"30", &lv_font_inter_bold_38, "TRQ", &lv_font_inter_bold_22);
+    lv_obj_t *trq = lv_vertical_pair_label(right_data_panel, &steering.lb_TORQUE, "30", &lv_font_inter_bold_38, "TRQ", &lv_font_inter_bold_22);
+    //lv_obj_t *trq = lv_test_label(right_data_panel, &steering.lb_TORQUE ,"30", &lv_font_inter_bold_38, "TRQ", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(trq, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
 
-    lv_obj_t *slip = lv_vertical_pair_label(right_data_panel, &sensors_data.lb_SLIP, "20", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22);
+    lv_obj_t *slip = lv_vertical_pair_label(right_data_panel, &steering.lb_SLIP, "20", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(slip, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 0,1);
 
     //adding separation line for right data panel
@@ -195,23 +194,23 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(sep_line, LV_GRID_ALIGN_CENTER, 0,2, LV_GRID_ALIGN_START, 1,1);
 
     
-    lv_obj_t *test = lv_triple_label(right_data_panel, &sensors_data.lb_INVERTER_TEMP, "60", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_t *test = lv_triple_label(right_data_panel, &steering.lb_INVERTER_TEMP, "60", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
     lv_obj_set_grid_cell(test, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
 
-    lv_obj_t *test1 = lv_triple_label(right_data_panel, &sensors_data.lb_MOTOR_TEMP, "30", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR", &lv_font_inter_bold_18);
+    lv_obj_t *test1 = lv_triple_label(right_data_panel, &steering.lb_MOTOR_TEMP, "30", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR", &lv_font_inter_bold_18);
     lv_obj_set_grid_cell(test1, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
 
-    lv_obj_t *test2 = lv_triple_label(right_data_panel, &sensors_data.lb_LV_TEMP, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_18);
+    lv_obj_t *test2 = lv_triple_label(right_data_panel, &steering.lb_LV_TEMP, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_18);
     lv_obj_set_grid_cell(test2, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 1,1);
 
-    lv_obj_t *test3 = lv_triple_label(right_data_panel, &sensors_data.lb_HV_TEMP, "12", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_18);
+    lv_obj_t *test3 = lv_triple_label(right_data_panel, &steering.lb_HV_TEMP, "12", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_18);
     lv_obj_set_grid_cell(test3, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 2,1);
     
 
     // DATA CENTER
 
     // power
-    lv_obj_t * power = lv_triple_label(central_panel, &sensors_data.lb_POWER, "60", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22, "POWER", &lv_font_inter_bold_14);
+    lv_obj_t * power = lv_triple_label(central_panel, &steering.lb_POWER, "60", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22, "POWER", &lv_font_inter_bold_14);
     //lv_obj_align(lv_obj_get_child(power, NULL), LV_GRID_ALIGN_CENTER, 0, -30);
     lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 2);
     lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -5, 0);
@@ -221,28 +220,28 @@ void tab_racing(lv_obj_t * parent){
 
 
     // speedometer
-    lv_obj_t *speed = lv_vertical_pair_label(data_panel, &sensors_data.lb_ESTIMATED_VELOCITY, "169", &lv_font_inter_bold_70, "km/h", &lv_font_inter_bold_22);
+    lv_obj_t *speed = lv_vertical_pair_label(data_panel, &steering.lb_ESTIMATED_VELOCITY, "169", &lv_font_inter_bold_70, "km/h", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(speed, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
     lv_obj_t *meter_container = lv_obj_create(data_panel);
     lv_obj_remove_style_all(meter_container);
     lv_obj_set_height(meter_container, LV_SIZE_CONTENT);
 
-    sensors_data.custom_meter = lv_meter_create(meter_container);
-    lv_custom_meter(&sensors_data.custom_meter, &sensors_data.lb_POWER, &sensors_data.lb_GPS_SPEED, &sensors_data.value_POWER);
-    lv_obj_align(sensors_data.custom_meter, LV_ALIGN_CENTER, 0, 0);
+    steering.custom_meter = lv_meter_create(meter_container);
+    lv_custom_meter(&steering.custom_meter, &steering.lb_POWER, &steering.lb_GPS_SPEED, &steering.POWER);
+    lv_obj_align(steering.custom_meter, LV_ALIGN_CENTER, 0, 0);
 
     lv_obj_set_grid_cell(meter_container, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
     // lap counter
     
-    lv_obj_t *lap_counter = lv_vertical_pair_label(data_panel, &sensors_data.lb_LAP_COUNT, "12", &lv_font_inter_bold_38, "LAP", &lv_font_inter_bold_22);
+    lv_obj_t *lap_counter = lv_vertical_pair_label(data_panel, &steering.lb_LAP_COUNT, "12", &lv_font_inter_bold_38, "LAP", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(lap_counter, LV_GRID_ALIGN_START, 1, 1, LV_GRID_ALIGN_END, 0, 1);
     lv_obj_set_style_pad_bottom(lap_counter, 5, 0);
     lv_obj_set_style_pad_left(lap_counter, 40, 0);
 
     
-    lv_obj_t *km_counter = lv_vertical_pair_label(data_panel, &sensors_data.lb_KM , "1.12", &lv_font_inter_bold_38, "KM", &lv_font_inter_bold_22);
+    lv_obj_t *km_counter = lv_vertical_pair_label(data_panel, &steering.lb_KM , "1.12", &lv_font_inter_bold_38, "KM", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(km_counter, LV_GRID_ALIGN_END, 1, 1, LV_GRID_ALIGN_END, 0, 1);
     lv_obj_set_style_pad_bottom(km_counter, 5, 0);
     lv_obj_set_style_pad_right(km_counter, 40, 0);
