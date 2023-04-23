@@ -42,10 +42,6 @@ static void data_init(void);
  *  STATIC VARIABLES
  **********************/
 
-lv_style_t grid_style;
-lv_style_t label_style;
-lv_style_t box_panels_style;
-
 /**********************
  *      MACROS
  **********************/
