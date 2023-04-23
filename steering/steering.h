@@ -10,16 +10,24 @@
     type name; \
     lv_obj_t * lb_##name;
 
+#define LV_UPDATE_PROPERTY(name, value) \
+    steering.name = value; \
+    lv_label_set_text_fmt(steering.lb_##name, "%d", steering.name);
+
 typedef struct {
  
     /*----primary messages-----*/
     LV_PROPERTY(uint8_t, AMBIENT_TEMPERATURE)
 
+    // struct {
+        LV_PROPERTY(uint8_t, HV_VOLTAGE)
+        LV_PROPERTY(uint8_t, HV_CURRENT)
+        LV_PROPERTY(uint8_t, HV_TEMP)
+        LV_PROPERTY(uint8_t, HV_PERCENT)
+    // } hv;
+
     /*--HV system--*/
-    LV_PROPERTY(uint8_t, HV_VOLTAGE)
-    LV_PROPERTY(uint8_t, HV_CURRENT)
-    LV_PROPERTY(uint8_t, HV_TEMP)
-    LV_PROPERTY(uint8_t, HV_PERCENT)
+    
 
     /*--LV system--*/
     LV_PROPERTY(uint8_t, LV_VOLTAGE)
@@ -66,8 +74,7 @@ typedef struct {
 } steering_t;
 
 
-extern steering_t sensors_data;
-void test_value_update();
+extern steering_t steering;
 void test_value_update_incremental();
 
 

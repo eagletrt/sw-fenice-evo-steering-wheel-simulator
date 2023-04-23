@@ -43,6 +43,9 @@ static void data_init(void);
  *  STATIC VARIABLES
  **********************/
 
+lv_style_t grid_style;
+lv_style_t label_style;
+lv_style_t box_panels_style;
 
 /**********************
  *      MACROS
@@ -88,7 +91,6 @@ int main(int argc, char **argv)
 
   tab_manager();
 
-  lv_timer_create(test_value_update, 2000, NULL);
   lv_timer_create(test_value_update_incremental, 70, NULL);
 
   while(1) {
@@ -231,6 +233,6 @@ void my_event_cb(lv_indev_drv_t *indev_drv, uint8_t e)
 }
 
 void data_init(void){
-  sensors_data.value_ESTIMATED_VELOCITY = 0;
-  sensors_data.value_POWER = 80;
+  steering.ESTIMATED_VELOCITY = 0;
+  steering.POWER = 80;
 }
