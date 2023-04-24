@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 
   tab_manager();
 
-  lv_timer_create(test_value_update_incremental, 70, NULL);
+  lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
 
   while(1) {
     /* Periodically call the lv_task handler.
@@ -203,6 +203,6 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
 }
 
 void data_init(void){
-  steering.estimated_velocity = 0;
-  steering.power = 80;
+  steering.general_info.estimated_velocity = 0;
+  steering.control.power = 80;
 }

@@ -10,64 +10,68 @@
     type name; \
     lv_obj_t * lb_##name;
 
-#define LV_UPDATE_PROPERTY(name, value) \
-    steering.name = value; \
-    lv_label_set_text_fmt(steering.lb_##name, "%d", steering.name);
+#define LV_UPDATE_LABEL(struct, name, value) \
+    steering.struct.name = value; \
+    lv_label_set_text_fmt(steering.struct.lb_##name, "%d", steering.struct.name);
 
 
 typedef struct {
  
-    /*----primary messages-----*/
-    LV_PROPERTY(uint8_t, ambient_temperature)
-
-    // struct {
+    struct {
         LV_PROPERTY(uint8_t, hv_voltage)
         LV_PROPERTY(uint8_t, hv_current)
         LV_PROPERTY(uint8_t, hv_temp)
         LV_PROPERTY(uint8_t, hv_percent)
-    // } hv;
+    } hv;
 
-    /*--HV system--*/
+    struct {
+        LV_PROPERTY(uint8_t, lv_voltage)
+        LV_PROPERTY(uint8_t, lv_current)
+        LV_PROPERTY(uint8_t, lv_temp)
+        LV_PROPERTY(uint8_t, lv_percent)
+        LV_PROPERTY(uint8_t, car_status)
+    } low_voltage;
+
+    struct {
+        LV_PROPERTY(uint8_t, gps_speed)
+        LV_PROPERTY(uint8_t, lap_count)
+    } secondary_messages;
+
+    struct {
+        LV_PROPERTY(uint8_t, power)
+        LV_PROPERTY(uint8_t, torque)
+        LV_PROPERTY(uint8_t, slip)
+    } control;
     
+    struct {
+        LV_PROPERTY(uint8_t, fl_temp)
+        LV_PROPERTY(uint8_t, fr_temp)
+        LV_PROPERTY(uint8_t, rl_temp)
+        LV_PROPERTY(uint8_t, rr_temp)
+    } tyre_temps;
 
-    /*--LV system--*/
-    LV_PROPERTY(uint8_t, lv_voltage)
-    LV_PROPERTY(uint8_t, lv_current)
-    LV_PROPERTY(uint8_t, lv_temp)
-    LV_PROPERTY(uint8_t, lv_percent)
-    LV_PROPERTY(uint8_t, car_status)
+    struct{
+        LV_PROPERTY(uint8_t, fl_press)
+        LV_PROPERTY(uint8_t, fr_press)
+        LV_PROPERTY(uint8_t, rl_press)
+        LV_PROPERTY(uint8_t, rr_press)
+    } tyre_pressures;
 
-    /*----secondary messages-----*/
-    LV_PROPERTY(uint8_t, gps_speed)
-    LV_PROPERTY(uint8_t, lap_count)
-
-    /*secondary_message_CONTROL_OUTPUT;*/
-    LV_PROPERTY(uint8_t, estimated_velocity)
-    LV_PROPERTY(uint8_t, torque)
-    
-    /*temps tyres*/
-    LV_PROPERTY(uint8_t, fl_temp)
-    LV_PROPERTY(uint8_t, fr_temp)
-    LV_PROPERTY(uint8_t, rl_temp)
-    LV_PROPERTY(uint8_t, rr_temp)
-
-    /*pressure tyres*/
-    LV_PROPERTY(uint8_t, fl_press)
-    LV_PROPERTY(uint8_t, fr_press)
-    LV_PROPERTY(uint8_t, rl_press)
-    LV_PROPERTY(uint8_t, rr_press)
-
-/*----the following are guessed (don't know which messages are in can)----*/
-    LV_PROPERTY(uint8_t, motor_temp)
-    LV_PROPERTY(uint8_t, inverter_temp)
+    /*----the following are guessed (don't know which messages are in can)----*/
+    struct {
+        LV_PROPERTY(uint8_t, motor_temp)
+        LV_PROPERTY(uint8_t, inverter_temp)
+    } motor_inverter;
 
     /*values for lap*/
-    LV_PROPERTY(uint8_t, best_time)
-    LV_PROPERTY(uint8_t, last_time)
-    LV_PROPERTY(uint8_t, delta_time)
-    LV_PROPERTY(uint8_t, slip)
-    LV_PROPERTY(uint8_t, power)
-    LV_PROPERTY(uint8_t, km)
+    struct {
+        LV_PROPERTY(uint8_t, ambient_temperature)
+        LV_PROPERTY(uint8_t, best_time)
+        LV_PROPERTY(uint8_t, last_time)
+        LV_PROPERTY(uint8_t, delta_time)
+        LV_PROPERTY(uint8_t, estimated_velocity)
+        LV_PROPERTY(uint8_t, km)
+    } general_info;
 
     /*parts to elements that can't be accessed otherwise*/
     lv_obj_t *custom_meter;
