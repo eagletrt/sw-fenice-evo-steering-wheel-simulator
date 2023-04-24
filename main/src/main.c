@@ -179,7 +179,6 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
   /*to see witch key was taken as input*/
   printf("data: %c\n", data.key);
 
-#if 1
   switch (data.key)
   {
     case ' ':
@@ -201,10 +200,9 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
     default:
       break;
   }
-  #endif
 }
 
 void data_init(void){
-  steering.ESTIMATED_VELOCITY = 0;
-  steering.POWER = 80;
+  steering.estimated_velocity = 0;
+  steering.power = 80;
 }

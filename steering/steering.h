@@ -14,59 +14,60 @@
     steering.name = value; \
     lv_label_set_text_fmt(steering.lb_##name, "%d", steering.name);
 
+
 typedef struct {
  
     /*----primary messages-----*/
-    LV_PROPERTY(uint8_t, AMBIENT_TEMPERATURE)
+    LV_PROPERTY(uint8_t, ambient_temperature)
 
     // struct {
-        LV_PROPERTY(uint8_t, HV_VOLTAGE)
-        LV_PROPERTY(uint8_t, HV_CURRENT)
-        LV_PROPERTY(uint8_t, HV_TEMP)
-        LV_PROPERTY(uint8_t, HV_PERCENT)
+        LV_PROPERTY(uint8_t, hv_voltage)
+        LV_PROPERTY(uint8_t, hv_current)
+        LV_PROPERTY(uint8_t, hv_temp)
+        LV_PROPERTY(uint8_t, hv_percent)
     // } hv;
 
     /*--HV system--*/
     
 
     /*--LV system--*/
-    LV_PROPERTY(uint8_t, LV_VOLTAGE)
-    LV_PROPERTY(uint8_t, LV_CURRENT)
-    LV_PROPERTY(uint8_t, LV_TEMP)
-    LV_PROPERTY(uint8_t, LV_PERCENT)
-    LV_PROPERTY(uint8_t, CAR_STATUS)
+    LV_PROPERTY(uint8_t, lv_voltage)
+    LV_PROPERTY(uint8_t, lv_current)
+    LV_PROPERTY(uint8_t, lv_temp)
+    LV_PROPERTY(uint8_t, lv_percent)
+    LV_PROPERTY(uint8_t, car_status)
 
     /*----secondary messages-----*/
-    LV_PROPERTY(uint8_t, GPS_SPEED)
-    LV_PROPERTY(uint8_t, LAP_COUNT)
+    LV_PROPERTY(uint8_t, gps_speed)
+    LV_PROPERTY(uint8_t, lap_count)
 
     /*secondary_message_CONTROL_OUTPUT;*/
-    LV_PROPERTY(uint8_t, ESTIMATED_VELOCITY)
-    LV_PROPERTY(uint8_t, TORQUE)
+    LV_PROPERTY(uint8_t, estimated_velocity)
+    LV_PROPERTY(uint8_t, torque)
     
     /*temps tyres*/
-    LV_PROPERTY(uint8_t, FL_TEMP)
-    LV_PROPERTY(uint8_t, FR_TEMP)
-    LV_PROPERTY(uint8_t, RL_TEMP)
-    LV_PROPERTY(uint8_t, RR_TEMP)
+    LV_PROPERTY(uint8_t, fl_temp)
+    LV_PROPERTY(uint8_t, fr_temp)
+    LV_PROPERTY(uint8_t, rl_temp)
+    LV_PROPERTY(uint8_t, rr_temp)
 
     /*pressure tyres*/
-    LV_PROPERTY(uint8_t, FL_PRESS)
-    LV_PROPERTY(uint8_t, FR_PRESS)
-    LV_PROPERTY(uint8_t, RL_PRESS)
-    LV_PROPERTY(uint8_t, RR_PRESS)
+    LV_PROPERTY(uint8_t, fl_press)
+    LV_PROPERTY(uint8_t, fr_press)
+    LV_PROPERTY(uint8_t, rl_press)
+    LV_PROPERTY(uint8_t, rr_press)
 
 /*----the following are guessed (don't know which messages are in can)----*/
-    LV_PROPERTY(uint8_t, MOTOR_TEMP)
-    LV_PROPERTY(uint8_t, INVERTER_TEMP)
+    LV_PROPERTY(uint8_t, motor_temp)
+    LV_PROPERTY(uint8_t, inverter_temp)
 
     /*values for lap*/
-    LV_PROPERTY(uint8_t, BEST_TIME)
-    LV_PROPERTY(uint8_t, LAST_TIME)
-    LV_PROPERTY(uint8_t, DELTA_TIME)
-    LV_PROPERTY(uint8_t, SLIP)
-    LV_PROPERTY(uint8_t, POWER)
-    LV_PROPERTY(uint8_t, KM)
+    LV_PROPERTY(uint8_t, best_time)
+    LV_PROPERTY(uint8_t, last_time)
+    LV_PROPERTY(uint8_t, delta_time)
+    LV_PROPERTY(uint8_t, slip)
+    LV_PROPERTY(uint8_t, power)
+    LV_PROPERTY(uint8_t, km)
 
     /*parts to elements that can't be accessed otherwise*/
     lv_obj_t *custom_meter;
