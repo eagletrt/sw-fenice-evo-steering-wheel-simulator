@@ -3,6 +3,7 @@
 
 #include "lvgl.h"
 
+
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 480
 
@@ -40,9 +41,9 @@ extern lv_style_t box_panels_style;
 
 void init_custom_styles(void);
 
-lv_obj_t *lv_vertical_pair_label(lv_obj_t *parent, const char *up_text, const lv_font_t *up_text_font, const char *bottom_text, const lv_font_t *bottom_text_font);
-lv_obj_t *lv_horizontal_pair_label(lv_obj_t *parent, const char *left_text, const lv_font_t *left_text_font, const char *right_text, const lv_font_t *right_text_font);
-lv_obj_t *lv_triple_label(lv_obj_t *parent, const char *left_text, const lv_font_t *left_text_font , const char *right_text, const lv_font_t *right_text_font, const char *bottom_text, const lv_font_t *bottom_text_font );
+lv_obj_t *lv_vertical_pair_label(lv_obj_t *parent, lv_obj_t **main_l, const char *up_text, const lv_font_t *up_text_font, const char *bottom_text, const lv_font_t *bottom_text_font);
+lv_obj_t *lv_horizontal_pair_label(lv_obj_t *parent, lv_obj_t **main_l , const char *left_text, const lv_font_t *left_text_font, const char *right_text, const lv_font_t *right_text_font);
+lv_obj_t *lv_triple_label(lv_obj_t *parent, lv_obj_t **main_l , const char *left_text, const lv_font_t *left_text_font , const char *right_text, const lv_font_t *right_text_font, const char *bottom_text, const lv_font_t *bottom_text_font );
 
 lv_obj_t *create_notch(lv_obj_t *parent);
 
