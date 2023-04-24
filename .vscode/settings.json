@@ -4,6 +4,14 @@
         "keyboard.h": "c",
         "tab_manager.h": "c",
         "utils.h": "c",
-        "steering.h": "c"
+        "steering.h": "c",
+        "exception": "c",
+        "optional": "c",
+        "functional": "c",
+        "iosfwd": "c",
+        "ranges": "c",
+        "stdexcept": "c",
+        "system_error": "c",
+        "tuple": "c"
     }
 }
