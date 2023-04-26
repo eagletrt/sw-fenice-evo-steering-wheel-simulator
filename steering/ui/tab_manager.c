@@ -10,7 +10,8 @@ lv_group_t * g;
 int tab_num = 0; //change name to tab_position
 
 void tab_manager(void)
-{
+{   
+    srand(time(NULL)); //init time to gen random numbers
     init_custom_styles();
     
 
