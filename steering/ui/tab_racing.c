@@ -37,7 +37,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(bar_panel_lv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
     
     // lv percentage    
-    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_20);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
     lv_obj_set_grid_cell(lv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
   
@@ -69,7 +69,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(bar_panel_hv, LV_GRID_ALIGN_CENTER, 2, 1, LV_GRID_ALIGN_CENTER, 0, 1);
     
     //hv percentage
-    lv_obj_t *hv_perc = lv_horizontal_pair_label(bar_panel_hv, "50", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_18);
+    lv_obj_t *hv_perc = lv_horizontal_pair_label(bar_panel_hv, "50", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_20);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(hv_perc, 1), NULL) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
     lv_obj_set_grid_cell(hv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
 
@@ -194,16 +194,16 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(sep_line, LV_GRID_ALIGN_CENTER, 0,2, LV_GRID_ALIGN_START, 1,1);
 
     
-    lv_obj_t *test = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_t *test = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(test, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
 
-    lv_obj_t *test1 = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_t *test1 = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(test1, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
 
-    lv_obj_t *test2 = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_t *test2 = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(test2, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 1,1);
 
-    lv_obj_t *test3 = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_18);
+    lv_obj_t *test3 = lv_triple_label(right_data_panel, "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(test3, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 2,1);
     
 

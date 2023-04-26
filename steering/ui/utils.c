@@ -4,44 +4,7 @@ lv_style_t grid_style;
 lv_style_t label_style;
 lv_style_t box_panels_style;
 
-void init_custom_styles(void){
 
-    /* GRID_STYLE */
-    lv_style_init(&grid_style);
-    lv_style_set_pad_all(&grid_style, 0);
-    lv_style_set_pad_bottom(&grid_style, 0);
-    lv_style_set_pad_column(&grid_style, 0);
-    lv_style_set_pad_right(&grid_style, 0);
-    lv_style_set_pad_left(&grid_style, 0);
-    lv_style_set_pad_top(&grid_style, 0);
-    lv_style_set_pad_row(&grid_style, 0);
-    lv_style_set_bg_color(&grid_style, lv_color_hex(COLOR_PRIMARY_HEX));
-    lv_style_set_bg_opa(&grid_style, LV_OPA_COVER);
-    lv_style_set_border_opa(&grid_style, LV_OPA_COVER);
-    lv_style_set_outline_width(&grid_style, 0);
-    lv_style_set_border_width(&grid_style, 0);
-    lv_style_set_border_opa(&grid_style, 0); //to remove borders, keeping bc useful
-
-    /* LABEL_STYLE */
-    lv_style_init(&label_style);
-    lv_style_set_base_dir(&label_style, LV_BASE_DIR_LTR);
-    lv_style_set_bg_opa(&label_style, LV_OPA_TRANSP);
-    lv_style_set_text_color(&label_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    lv_style_set_text_align(&label_style, LV_TEXT_ALIGN_CENTER);
-
-    /* SIDE_DATA_PANELS_STYLE */
-    lv_style_init(&box_panels_style);
-    lv_style_set_pad_all(&box_panels_style, 0);
-    lv_style_set_pad_bottom(&box_panels_style, 0);
-    lv_style_set_pad_column(&box_panels_style, 0);
-    lv_style_set_pad_top(&box_panels_style, 0);
-    lv_style_set_pad_row(&box_panels_style, 0);
-    lv_style_set_bg_opa(&box_panels_style, LV_OPA_TRANSP);
-    lv_style_set_border_color(&box_panels_style, lv_color_hex(COLOR_SECONDARY_HEX)); //to remove borders, keeping bc useful
-    lv_style_set_border_width(&box_panels_style, 3);
-    lv_style_set_radius(&box_panels_style, 10);
-
-}
 
 lv_obj_t *lv_vertical_pair_label(lv_obj_t *parent, const char *up_text, const lv_font_t *up_text_font, const char *bottom_text, const lv_font_t *bottom_text_font)
 {
@@ -120,7 +83,7 @@ lv_obj_t *lv_triple_label(lv_obj_t *parent, const char *left_text, const lv_font
     lv_obj_set_size(grid, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_set_grid_dsc_array(grid, grid_col_dsc, grid_row_dsc);
 
-    lv_obj_t *up_l = lv_horizontal_pair_label(grid, left_text , left_text_font, right_text , &lv_font_inter_bold_18);
+    lv_obj_t *up_l = lv_horizontal_pair_label(grid, left_text , left_text_font, right_text , right_text_font);
     lv_obj_set_size(up_l, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_set_grid_cell(up_l, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
 
@@ -142,20 +105,6 @@ lv_obj_t *lv_triple_label(lv_obj_t *parent, const char *left_text, const lv_font
 lv_style_t bubble_small_style;
 lv_style_t bubble_large_style;
 lv_obj_t *create_notch(lv_obj_t *parent){
-    lv_style_init(&bubble_small_style);
-    lv_style_set_width(&bubble_small_style, NOTCH_BAR_WIDTH_S);
-    lv_style_set_height(&bubble_small_style, NOTCH_BAR_HEIGHT_S);
-    lv_style_set_bg_color(&bubble_small_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    lv_style_set_bg_opa(&bubble_small_style, LV_OPA_COVER);
-    lv_style_set_radius(&bubble_small_style, 4);
-
-    lv_style_init(&bubble_large_style);
-    lv_style_set_width(&bubble_large_style, NOTCH_BAR_WIDTH_L);
-    lv_style_set_height(&bubble_large_style, NOTCH_BAR_HEIGHT_L);
-    lv_style_set_bg_color(&bubble_large_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    lv_style_set_bg_opa(&bubble_large_style, LV_OPA_COVER);
-    lv_style_set_radius(&bubble_large_style, 9);
-
 
     lv_obj_t *notch = lv_obj_create(parent);
     lv_obj_remove_style_all(notch);
@@ -249,4 +198,59 @@ lv_obj_t *create_notch(lv_obj_t *parent){
     lv_obj_set_grid_cell(most_right_o, LV_GRID_ALIGN_CENTER, 4, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
 
     return notch;
+}
+
+void init_custom_styles(void){
+
+    /* GRID_STYLE */
+    lv_style_init(&grid_style);
+    lv_style_set_pad_all(&grid_style, 0);
+    lv_style_set_pad_bottom(&grid_style, 0);
+    lv_style_set_pad_column(&grid_style, 0);
+    lv_style_set_pad_right(&grid_style, 0);
+    lv_style_set_pad_left(&grid_style, 0);
+    lv_style_set_pad_top(&grid_style, 0);
+    lv_style_set_pad_row(&grid_style, 0);
+    lv_style_set_bg_color(&grid_style, lv_color_hex(COLOR_PRIMARY_HEX));
+    lv_style_set_bg_opa(&grid_style, LV_OPA_COVER);
+    lv_style_set_border_opa(&grid_style, LV_OPA_COVER);
+    lv_style_set_outline_width(&grid_style, 0);
+    lv_style_set_border_width(&grid_style, 0);
+    lv_style_set_border_opa(&grid_style, 0); //to remove borders, keeping bc useful
+
+    /* LABEL_STYLE */
+    lv_style_init(&label_style);
+    lv_style_set_base_dir(&label_style, LV_BASE_DIR_LTR);
+    lv_style_set_bg_opa(&label_style, LV_OPA_TRANSP);
+    lv_style_set_text_color(&label_style, lv_color_hex(COLOR_TERTIARY_HEX));
+    lv_style_set_text_align(&label_style, LV_TEXT_ALIGN_CENTER);
+
+    /* SIDE_DATA_PANELS_STYLE */
+    lv_style_init(&box_panels_style);
+    lv_style_set_pad_all(&box_panels_style, 0);
+    lv_style_set_pad_bottom(&box_panels_style, 0);
+    lv_style_set_pad_column(&box_panels_style, 0);
+    lv_style_set_pad_top(&box_panels_style, 0);
+    lv_style_set_pad_row(&box_panels_style, 0);
+    lv_style_set_bg_opa(&box_panels_style, LV_OPA_TRANSP);
+    lv_style_set_border_color(&box_panels_style, lv_color_hex(COLOR_SECONDARY_HEX)); //to remove borders, keeping bc useful
+    lv_style_set_border_width(&box_panels_style, 3);
+    lv_style_set_radius(&box_panels_style, 10);
+
+
+    /* NOTCH STYLES */
+    lv_style_init(&bubble_small_style);
+    lv_style_set_width(&bubble_small_style, NOTCH_BAR_WIDTH_S);
+    lv_style_set_height(&bubble_small_style, NOTCH_BAR_HEIGHT_S);
+    lv_style_set_bg_color(&bubble_small_style, lv_color_hex(COLOR_TERTIARY_HEX));
+    lv_style_set_bg_opa(&bubble_small_style, LV_OPA_COVER);
+    lv_style_set_radius(&bubble_small_style, 4);
+
+    lv_style_init(&bubble_large_style);
+    lv_style_set_width(&bubble_large_style, NOTCH_BAR_WIDTH_L);
+    lv_style_set_height(&bubble_large_style, NOTCH_BAR_HEIGHT_L);
+    lv_style_set_bg_color(&bubble_large_style, lv_color_hex(COLOR_TERTIARY_HEX));
+    lv_style_set_bg_opa(&bubble_large_style, LV_OPA_COVER);
+    lv_style_set_radius(&bubble_large_style, 9);
+
 }

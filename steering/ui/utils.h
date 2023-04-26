@@ -27,7 +27,7 @@
 
 
 LV_FONT_DECLARE(lv_font_inter_bold_14);
-LV_FONT_DECLARE(lv_font_inter_bold_18);
+LV_FONT_DECLARE(lv_font_inter_bold_20);
 LV_FONT_DECLARE(lv_font_inter_bold_22);
 LV_FONT_DECLARE(lv_font_inter_bold_30);
 LV_FONT_DECLARE(lv_font_inter_bold_38);

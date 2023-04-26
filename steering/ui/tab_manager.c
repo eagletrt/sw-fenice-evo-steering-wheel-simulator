@@ -12,6 +12,7 @@ int tab_num = 0; //change name to tab_position
 void tab_manager(void)
 {
     init_custom_styles();
+    
 
     scr1  = lv_obj_create(NULL);
     scr2  = lv_obj_create(NULL);
