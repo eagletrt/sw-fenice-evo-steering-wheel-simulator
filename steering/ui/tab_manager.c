@@ -13,7 +13,7 @@ void tab_manager(void)
 {   
     srand(time(NULL)); //init time to gen random numbers
     init_custom_styles();
-    
+
 
     scr1  = lv_obj_create(NULL);
     scr2  = lv_obj_create(NULL);
@@ -29,7 +29,7 @@ void tab_manager(void)
     lv_label_set_text(label3, "Third screen");
 
     tab_racing(scr1);
-    tab_debug(scr2);
+    tab_sensors(scr2);
     tab_calibration(scr3);
     
     lv_scr_load(scr1);
