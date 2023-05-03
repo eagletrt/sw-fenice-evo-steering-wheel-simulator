@@ -15,6 +15,16 @@
 #define NOTCH_BAR_WIDTH_L 90  // large item
 #define NOTCH_BAR_HEIGHT_L 10
 
+#define NUM_TABS 5
+
+typedef enum{
+    TAB_RACING, 
+    TAB_CALIBRATION,
+    TAB_DEBUG, 
+    TAB_CONTROLS,
+    TAB_SENSORS
+} TabIdentification;
+
 
 #define COLOR_PRIMARY_HEX 0x383838 //dark grey backgroud
 #define COLOR_SECONDARY_HEX 0X575757 //light grey (borders)
@@ -28,7 +38,7 @@
 
 
 LV_FONT_DECLARE(lv_font_inter_bold_14);
-LV_FONT_DECLARE(lv_font_inter_bold_18);
+LV_FONT_DECLARE(lv_font_inter_bold_20);
 LV_FONT_DECLARE(lv_font_inter_bold_22);
 LV_FONT_DECLARE(lv_font_inter_bold_30);
 LV_FONT_DECLARE(lv_font_inter_bold_38);
@@ -45,6 +55,6 @@ lv_obj_t *lv_vertical_pair_label(lv_obj_t *parent, lv_obj_t **main_l, const char
 lv_obj_t *lv_horizontal_pair_label(lv_obj_t *parent, lv_obj_t **main_l , const char *left_text, const lv_font_t *left_text_font, const char *right_text, const lv_font_t *right_text_font);
 lv_obj_t *lv_triple_label(lv_obj_t *parent, lv_obj_t **main_l , const char *left_text, const lv_font_t *left_text_font , const char *right_text, const lv_font_t *right_text_font, const char *bottom_text, const lv_font_t *bottom_text_font );
 
-lv_obj_t *create_notch(lv_obj_t *parent);
+lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId);
 
 #endif

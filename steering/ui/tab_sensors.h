@@ -1,5 +1,5 @@
-#ifndef TAB_DEBUG_H
-#define TAB_DEBUG_H
+#ifndef TAB_SENSORS_H
+#define TAB_SENSORS_H
 
 #include "lvgl.h"
 #include "utils.h"
@@ -15,8 +15,8 @@
 #define DATA_RIGHT_WIDTH 185
 #define DATA_CENTER_WIDTH 290
 
-void tab_debug(lv_obj_t *parent);
+void tab_sensors(lv_obj_t *parent);
 
 void init_sensors_styles(void);
 
-#endif // TAB_DEBUG_H
+#endif // TAB_SENSORS_H

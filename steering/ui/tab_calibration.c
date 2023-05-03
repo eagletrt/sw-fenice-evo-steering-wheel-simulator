@@ -73,8 +73,8 @@ void tab_calibration(lv_obj_t *parent){
 
     /*--- inserting TOP NOTCH ---*/
 
-    lv_obj_t *notch = create_notch(main_panel);
-    lv_obj_align(lv_obj_get_child(notch, 0), LV_ALIGN_TOP_MID, 0, 15);
+    lv_obj_t *notch = create_notch(main_panel, TAB_CALIBRATION);
+    lv_obj_align(lv_obj_get_child(notch, 0), LV_ALIGN_TOP_MID, 0, 10);
     lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
 
@@ -152,7 +152,14 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_align(rx_btn_label, LV_ALIGN_CENTER);
 
 
-
+    /*--- inserting CALIBRATION TOOL ---*/
+    lv_obj_t *background_base = lv_obj_create(main_panel);
+    lv_obj_remove_style_all(background_base);
+    lv_obj_set_style_radius(background_base, 6, LV_PART_MAIN);
+    lv_obj_set_style_bg_color(background_base, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(background_base, LV_OPA_COVER, LV_PART_MAIN);
+    lv_obj_set_size(background_base, 740, 65);
+    lv_obj_set_grid_cell(background_base, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 3, 1);
 }
 
 uint8_t curr_focus = 1;

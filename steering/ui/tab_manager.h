@@ -4,7 +4,7 @@
 #include "lvgl.h"
 #include "utils.h"
 #include "tab_racing.h"
-#include "tab_debug.h"
+#include "tab_sensors.h"
 #include "../steering.h"
 #include "tab_calibration.h"
 #include "lv_drivers/indev/keyboard.h"
