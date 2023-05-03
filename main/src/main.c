@@ -79,10 +79,13 @@ int main(int argc, char **argv)
 
   /*Initialize LVGL*/
   lv_init();
+  
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
   data_init();
+  
+  steering_values_init();
 
   tab_manager();
 

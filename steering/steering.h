@@ -75,11 +75,15 @@ typedef struct {
 
     /*parts to elements that can't be accessed otherwise*/
     lv_obj_t *custom_meter;
+    lv_obj_t *indicator_blue;
+    lv_obj_t *indicator_white;
 
 } steering_t;
 
 
 extern steering_t steering;
 void test_value_update_incremental(void);
+
+void steering_values_init();
 
 #endif
