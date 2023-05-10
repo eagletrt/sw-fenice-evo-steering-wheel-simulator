@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 
   tab_manager();
 
-  lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
+  // lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
 
   while(1) {
     /* Periodically call the lv_task handler.
