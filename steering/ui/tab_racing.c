@@ -327,10 +327,10 @@ void lv_custom_meter(lv_obj_t **custom_meter, lv_meter_indicator_t **indicator_b
     lv_meter_set_indicator_end_value(*custom_meter, back, 100);
 
     lv_meter_set_indicator_start_value(*custom_meter, *indicator_white, 1);
-    lv_meter_set_indicator_end_value(*custom_meter, *indicator_white, 10); /*range values 0-100*/
+    lv_meter_set_indicator_end_value(*custom_meter, *indicator_white, 50); /*range values 0-100*/
 
     lv_meter_set_indicator_start_value(*custom_meter, *indicator_blue, 0);
-    lv_meter_set_indicator_end_value(*custom_meter, *indicator_blue, steering.control.power); /*range values 0-100*/
+    lv_meter_set_indicator_end_value(*custom_meter, *indicator_blue, 10); /*range values 0-100*/
 
     // lv_meter_indicator_t * indic3 = lv_meter_add_arc(custom_meter, scale, 10, lv_palette_main(LV_PALETTE_BLUE), 0);
 
