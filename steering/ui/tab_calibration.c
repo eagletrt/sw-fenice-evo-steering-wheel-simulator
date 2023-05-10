@@ -10,6 +10,7 @@ lv_style_t box_style;
 lv_style_t box_label_style;
 lv_style_t buttons_style;
 lv_style_t buttons_label_style;
+lv_style_t calib_tool_bar_style;
 
 void init_calibration_tab_styles(void){
     /* BOX STYLE */
@@ -47,6 +48,13 @@ void init_calibration_tab_styles(void){
     lv_style_set_text_color(&buttons_label_style, lv_color_hex(0x000000));
     lv_style_set_text_font(&buttons_label_style, &lv_font_inter_bold_22);
     lv_style_set_align(&buttons_label_style, LV_ALIGN_CENTER);
+
+    /* CALIB. TOOL BARS */
+    lv_style_init(&calib_tool_bar_style);
+    lv_style_set_height(&calib_tool_bar_style, 55);
+    lv_style_set_width(&calib_tool_bar_style, 2);
+    lv_style_set_bg_color(&calib_tool_bar_style, lv_color_hex(0x000000));
+    lv_style_set_bg_opa(&calib_tool_bar_style, LV_OPA_COVER);
 }
 
 void tab_calibration(lv_obj_t *parent){
@@ -136,10 +144,17 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_add_style(center_btn, &buttons_style, LV_PART_MAIN);
     lv_obj_align(center_btn, LV_ALIGN_TOP_MID, 0, 10);
 
+    lv_obj_t *center_lbl; 
+    lv_obj_t *center_btn_label = lv_horizontal_pair_label(center_btn, &center_lbl, "-30", &lv_font_inter_bold_30, "deg", &lv_font_inter_bold_22);
+    lv_obj_align(lv_obj_get_child( lv_obj_get_child(center_btn_label, 1), 0), LV_ALIGN_CENTER, 3, 0);
+    lv_obj_set_align(center_btn_label, LV_ALIGN_CENTER);
+    /*
     lv_obj_t *center_btn_label = lv_label_create(center_btn);
     lv_obj_add_style(center_btn_label, &buttons_label_style, LV_PART_MAIN);
     lv_label_set_text(center_btn_label, "60 deg");
+    lv_obj_set_style_text_color(center_btn_label, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_MAIN);
     lv_obj_set_align(center_btn_label, LV_ALIGN_CENTER);
+    */
 
     lv_obj_t *rx_btn = lv_obj_create(buttons_container);
     lv_obj_remove_style_all(rx_btn);
@@ -148,7 +163,7 @@ void tab_calibration(lv_obj_t *parent){
 
     lv_obj_t *rx_btn_label = lv_label_create(rx_btn);
     lv_obj_add_style(rx_btn_label, &buttons_label_style, LV_PART_MAIN);
-    lv_label_set_text(rx_btn_label, "Set Max G2");
+    lv_label_set_text(rx_btn_label, "G2 Set Max");
     lv_obj_set_align(rx_btn_label, LV_ALIGN_CENTER);
 
 
@@ -158,8 +173,34 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_style_radius(background_base, 6, LV_PART_MAIN);
     lv_obj_set_style_bg_color(background_base, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(background_base, LV_OPA_COVER, LV_PART_MAIN);
-    lv_obj_set_size(background_base, 740, 65);
+    lv_obj_set_size(background_base, 740, 55);
     lv_obj_set_grid_cell(background_base, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 3, 1);
+
+    lv_obj_t * slider = lv_slider_create(background_base);
+    lv_obj_remove_style_all(slider);
+    lv_obj_set_style_bg_color(slider, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_INDICATOR);
+    lv_obj_set_style_bg_opa(slider, LV_OPA_70, LV_PART_INDICATOR);
+
+    lv_obj_set_size(slider, 744, 55);
+    lv_obj_center(slider);
+    lv_slider_set_mode(slider, LV_BAR_MODE_SYMMETRICAL);
+    lv_slider_set_range(slider, -50, 50);
+    lv_slider_set_value(slider, -20, LV_ANIM_OFF);
+    lv_obj_set_style_radius(slider, 0, LV_PART_INDICATOR);
+
+
+    for(int i=1; i<=12 ; i++){
+        lv_obj_t *calib_bar = lv_obj_create(background_base);
+        lv_obj_remove_style_all(calib_bar);
+        lv_obj_add_style(calib_bar, &calib_tool_bar_style, LV_PART_MAIN);
+        lv_obj_align(calib_bar, LV_ALIGN_CENTER, (-372+(i*62)), 0);
+
+        if(i == 6){
+            lv_obj_set_style_bg_color(calib_bar, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_MAIN);
+            lv_obj_set_width(calib_bar, 3);
+        }
+    }
+
 }
 
 uint8_t curr_focus = 1;
@@ -171,8 +212,8 @@ void shift_box_focus(shift direction){
         curr_focus++;
     }
 
-    printf("%d", curr_focus);    
-    fflush(stdout);
+    //printf("%d", curr_focus);    
+    //fflush(stdout);
 
     switch (curr_focus)
     {
