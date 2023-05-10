@@ -12,6 +12,7 @@
         "ranges": "c",
         "stdexcept": "c",
         "system_error": "c",
-        "tuple": "c"
+        "tuple": "c",
+        "tab_racing.h": "c"
     }
 }
