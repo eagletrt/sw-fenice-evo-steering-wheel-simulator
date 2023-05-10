@@ -16,7 +16,7 @@ void tab_sensors(lv_obj_t * parent){
     lv_label_set_text(label2, "Second screen");
 
 
-    /*---creating main grid---*/
+    /*---creating MAIN GRID ---*/
 
     static lv_coord_t main_panel_cols[] =  {SCREEN_WIDTH, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t main_panel_rows[] = {TOP_BAR_HEIGHT, DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
@@ -35,7 +35,7 @@ void tab_sensors(lv_obj_t * parent){
     /*--- inserting TOP NOTCH ---*/
 
     lv_obj_t *notch = create_notch(main_panel, TAB_SENSORS);
-    lv_obj_align(lv_obj_get_child(notch, 0), LV_ALIGN_TOP_MID, 0, 5);
+    lv_obj_align(lv_obj_get_child(notch, 0), LV_ALIGN_TOP_MID, 0, 10);
     lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
 
 
@@ -60,7 +60,7 @@ void tab_sensors(lv_obj_t * parent){
     lv_obj_set_grid_cell(data_panel, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
 
 
-    /*--- cell 0,0 ---*/
+    /*--- DATA PANEL: cell 0,0 ---*/
     
     static lv_coord_t lxd_panel_cols[] =  {CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t lxd_panel_rows[] = {65, 65, 65, LV_GRID_TEMPLATE_LAST};
@@ -95,6 +95,11 @@ void tab_sensors(lv_obj_t * parent){
 
     lv_obj_set_grid_cell(b_data_panel, LV_GRID_ALIGN_CENTER, 0, 1,
                          LV_GRID_ALIGN_CENTER, 1, 1);
+
+    lv_obj_t *delta = lv_vertical_pair_label(b_data_panel, &steering.general_info.lb_delta_time, "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 0), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change upper label position
+    lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
+    lv_obj_set_grid_cell(delta, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
 
     /*--- cell 0,1*/
 

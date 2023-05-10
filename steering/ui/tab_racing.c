@@ -140,7 +140,7 @@ void tab_racing(lv_obj_t * parent){
                          LV_GRID_ALIGN_CENTER, 0, 1);
 
 
-    /*inserting data into data left panel*/
+    /* inserting data into data left panel */
     lv_obj_t *best_time = lv_vertical_pair_label(left_data_panel, &steering.general_info.lb_best_time, " 1:24:03", &lv_font_inter_bold_38, "BEST TIME", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(best_time, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(best_time, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
@@ -296,7 +296,7 @@ void init_racing_style(void){
 
 }
 
-void lv_custom_meter(lv_obj_t **custom_meter, lv_meter_indicator_t *indicator_blue, lv_meter_indicator_t *indicator_white, uint8_t * max_indicator_value)
+void lv_custom_meter(lv_obj_t **custom_meter, lv_obj_t *indicator_blue, lv_meter_indicator_t *indicator_white, uint8_t * max_indicator_value)
 {
     /*Remove the circle from the middle*/
     lv_obj_remove_style(*custom_meter, NULL, LV_PART_MAIN);
@@ -328,8 +328,8 @@ void lv_custom_meter(lv_obj_t **custom_meter, lv_meter_indicator_t *indicator_bl
     lv_meter_set_indicator_start_value(*custom_meter, indicator_white, 1);
     lv_meter_set_indicator_end_value(*custom_meter, indicator_white, *max_indicator_value); /*range values 0-100*/
 
-    lv_meter_set_indicator_start_value(*custom_meter, indicator_blue, 0);
-    lv_meter_set_indicator_end_value(*custom_meter, indicator_blue, 40); /*range values 0-100*/
+    lv_meter_set_indicator_start_value(*custom_meter, (lv_meter_indicator_t *)indicator_blue, 0);
+    lv_meter_set_indicator_end_value(*custom_meter, (lv_meter_indicator_t *)indicator_blue, 40); /*range values 0-100*/
 
     // lv_meter_indicator_t * indic3 = lv_meter_add_arc(custom_meter, scale, 10, lv_palette_main(LV_PALETTE_BLUE), 0);
 
