@@ -178,6 +178,9 @@ void tab_racing(lv_obj_t * parent){
                          LV_GRID_ALIGN_CENTER, 0, 1);
 
 
+    // TODO: this leads to segfault!!!
+
+
     /*inserting data into data right panel*/
     lv_obj_t *trq = lv_vertical_pair_label(right_data_panel, &steering.control.lb_torque, "30", &lv_font_inter_bold_38, "TRQ", &lv_font_inter_bold_22);
     //lv_obj_t *trq = lv_test_label(right_data_panel, &steering.lb_TORQUE ,"30", &lv_font_inter_bold_38, "TRQ", &lv_font_inter_bold_22);
@@ -185,14 +188,17 @@ void tab_racing(lv_obj_t * parent){
 
     lv_obj_t *slip = lv_vertical_pair_label(right_data_panel, &steering.control.lb_slip, "20", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(slip, LV_GRID_ALIGN_CENTER, 1,1, LV_GRID_ALIGN_CENTER, 0,1);
+   
 
     //adding separation line for right data panel
-    lv_obj_t* sep_line = lv_bar_create(right_data_panel);
+    lv_obj_t* sep_line = lv_obj_create(right_data_panel);
     lv_obj_remove_style_all(sep_line);
-    lv_obj_add_style(sep_line, &box_panels_style, 0);
+    lv_obj_set_style_bg_color(sep_line, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(sep_line, LV_OPA_COVER, LV_PART_MAIN);
     lv_obj_set_size(sep_line, 185, 3);
     lv_obj_set_grid_cell(sep_line, LV_GRID_ALIGN_CENTER, 0,2, LV_GRID_ALIGN_START, 1,1);
 
+    // END segfault
     
     lv_obj_t *test = lv_triple_label(right_data_panel, &steering.motor_inverter.lb_inverter_temp, "60", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(test, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
