@@ -89,14 +89,14 @@ int main(int argc, char **argv)
 
   tab_manager();
 
-  // lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
+  lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
 
   while(1) {
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
     lv_timer_handler();
     usleep(5 * 1000);
-    //test_value_update();
+  
   }
 
   return 0;
