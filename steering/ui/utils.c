@@ -111,7 +111,7 @@ lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
 
     lv_obj_t *notch = lv_obj_create(parent);
     lv_obj_remove_style_all(notch);
-    lv_obj_set_size(notch, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    lv_obj_set_size(notch, 600, 100);
 
     static lv_coord_t notch_cols[] =  {NOTCH_WIDTH/6, NOTCH_WIDTH/6, NOTCH_WIDTH/3, NOTCH_WIDTH/6, NOTCH_WIDTH/6, LV_GRID_TEMPLATE_LAST};
     static lv_coord_t notch_rows[] = {NOTCH_HEIGHT, LV_GRID_TEMPLATE_LAST};
@@ -123,7 +123,6 @@ lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
     lv_obj_set_style_base_dir(notch_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(notch_panel, notch_cols, notch_rows);
 
-
     // center item
     lv_obj_t *center = lv_bar_create(notch_panel);
     lv_obj_add_style(center, &bubble_large_style, LV_PART_MAIN);
@@ -131,12 +130,13 @@ lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
 
     lv_obj_t *center_o = lv_obj_create(notch_panel);
     lv_obj_remove_style_all(center_o);
-    lv_obj_set_size(center_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    //lv_obj_set_size(center_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_t * center_l = lv_label_create(center_o);
     lv_obj_add_style(center_l, &label_style, LV_PART_MAIN);
     lv_label_set_text(center_l, notch_labels[(TabId++)%NUM_TABS]);
     lv_obj_set_style_text_font(center_l, &lv_font_inter_bold_22, LV_PART_MAIN);
     lv_obj_align(center_l, LV_ALIGN_TOP_MID, 0, NOTCH_BAR_HEIGHT_L + 5);
+    lv_obj_set_size(center_l, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_set_grid_cell(center_o, LV_GRID_ALIGN_CENTER, 2, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
 
 
@@ -148,7 +148,7 @@ lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
 
     lv_obj_t *right_o = lv_obj_create(notch_panel);
     lv_obj_remove_style_all(right_o);
-    lv_obj_set_size(right_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    //lv_obj_set_size(right_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_t * right_l = lv_label_create(right_o);
     lv_obj_add_style(right_l, &label_style, LV_PART_MAIN);
     lv_label_set_text(right_l, notch_labels[(TabId++)%NUM_TABS]);
@@ -164,7 +164,7 @@ lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
 
     lv_obj_t *most_right_o = lv_obj_create(notch_panel);
     lv_obj_remove_style_all(most_right_o);
-    lv_obj_set_size(most_right_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    //lv_obj_set_size(most_right_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_t * most_right_l = lv_label_create(most_right_o);
     lv_obj_add_style(most_right_l, &label_style, LV_PART_MAIN);
     lv_label_set_text(most_right_l, notch_labels[(TabId++)%NUM_TABS]);
@@ -180,7 +180,7 @@ lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
 
     lv_obj_t *most_left_o = lv_obj_create(notch_panel);
     lv_obj_remove_style_all(most_left_o);
-    lv_obj_set_size(most_left_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    //lv_obj_set_size(most_left_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_t * most_left_l = lv_label_create(most_left_o);
     lv_obj_add_style(most_left_l, &label_style, LV_PART_MAIN);
     lv_label_set_text(most_left_l, notch_labels[(TabId++)%NUM_TABS]);
@@ -195,15 +195,13 @@ lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
 
     lv_obj_t *left_o = lv_obj_create(notch_panel);
     lv_obj_remove_style_all(left_o);
-    lv_obj_set_size(left_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    //lv_obj_set_size(left_o, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     lv_obj_t * left_l = lv_label_create(left_o);
     lv_obj_add_style(left_l, &label_style, LV_PART_MAIN);
     lv_label_set_text(left_l, notch_labels[(TabId++)%NUM_TABS]);
     lv_obj_set_style_text_font(left_l, &lv_font_inter_bold_14, LV_PART_MAIN);
     lv_obj_align(left_l, LV_ALIGN_TOP_MID, 0, NOTCH_BAR_HEIGHT_S + 5);
     lv_obj_set_grid_cell(left_o, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
-
-
 
     return notch;
 }

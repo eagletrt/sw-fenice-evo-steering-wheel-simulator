@@ -145,7 +145,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_align(center_btn, LV_ALIGN_TOP_MID, 0, 10);
 
     lv_obj_t *center_lbl; 
-    lv_obj_t *center_btn_label = lv_horizontal_pair_label(center_btn, &center_lbl, "-30", &lv_font_inter_bold_30, "deg", &lv_font_inter_bold_22);
+    lv_obj_t *center_btn_label = lv_horizontal_pair_label(center_btn, &center_lbl, "30", &lv_font_inter_bold_30, "deg", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child( lv_obj_get_child(center_btn_label, 1), 0), LV_ALIGN_CENTER, 3, 0);
     lv_obj_set_align(center_btn_label, LV_ALIGN_CENTER);
     /*
@@ -185,7 +185,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_center(slider);
     lv_slider_set_mode(slider, LV_BAR_MODE_SYMMETRICAL);
     lv_slider_set_range(slider, -50, 50);
-    lv_slider_set_value(slider, -20, LV_ANIM_OFF);
+    lv_slider_set_value(slider, 15, LV_ANIM_OFF);
     lv_obj_set_style_radius(slider, 0, LV_PART_INDICATOR);
 
 
