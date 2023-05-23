@@ -22,20 +22,38 @@
 #include "steering/ui/tab_calibration.h"
 #include "steering/steering.h"
 
+
+/*canlib libraries*/
+#include "can/lib/primary/c/ids.h"
+#include "can/lib/secondary/c/ids.h"
+
+#include "can/lib/primary/c/network.h"
+#include "can/lib/secondary/c/network.h"
+
+#include "can.h"
+#include "queue.h"
+
 /*********************
  *      DEFINES
  *********************/
 
+#define primary_NETWORK_IMPLEMENTATION
+#define secondary_NETWORK_IMPLEMENTATION
+
 /**********************
  *      TYPEDEFS
  **********************/
+
+typedef struct thread_data_t {
+  can_t *can;
+  int can_id;
+} thread_data_t;
 
 /**********************
  *  STATIC PROTOTYPES
  **********************/
 static void hal_init(void);
 static int tick_thread(void *data);
-
 static void data_init(void);
 
 /**********************
@@ -64,6 +82,20 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e);
  *      VARIABLES
  **********************/
 
+thread_data_t thread_data_1, thread_data_0;
+
+can_t can_primary;
+can_t can_secondary;
+
+SDL_mutex* mtx; //LOCK-> SDL_mutexP() , UNLOCK->SDL_mutexV()
+queue_t queue;
+
+const int NETWORK_PRIMARY = 0;
+const int NETWORK_SECONDARY = 1;
+
+SDL_Thread* thread_id_0;
+SDL_Thread* thread_id_1;
+
 /**********************
  *  STATIC PROTOTYPES
  **********************/
@@ -71,6 +103,20 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e);
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
+
+void canread(thread_data_t *thread_data) {
+  queue_element_t msg;
+  int res;
+  while (1) {
+    can_receive(&msg.frame, thread_data->can);
+    msg.can_network = thread_data->can_id;
+    msg.timestamp = SDL_GetTicks();
+
+    SDL_mutexP(mtx);
+    enqueue(msg, &queue);
+    SDL_mutexV(mtx);
+  }
+}
 
 int main(int argc, char **argv)
 {
@@ -91,12 +137,49 @@ int main(int argc, char **argv)
 
   lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
 
+  /*----init structures and values to read from can----*/
+
+  mtx = SDL_CreateMutex();
+  queue_init(&queue);
+  can_init("vcan1", &can_primary);
+  can_init("vcan0", &can_secondary);
+  
+  queue_element_t q_element;
+  uint16_t readMessage = 0; // 0 = no message, 1 = message read
+
+  if(can_open_socket(&can_primary) < 0){
+    printf("[ERR] could not open can_primary\n");
+    return -1;
+  }
+
+  if(can_open_socket(&can_secondary) < 0){
+    printf("[ERR] could not open can_secondary\n");
+    return -1;
+  }
+
+  thread_data_0.can = &can_primary;
+  thread_data_0.can_id = NETWORK_PRIMARY;
+  thread_data_1.can = &can_secondary;
+  thread_data_1.can_id = NETWORK_SECONDARY;
+
+  thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
+  //thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
+
   while(1) {
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
     lv_timer_handler();
+
+
+    SDL_mutexP(mtx);
+    if(queue_first(&queue, &q_element)){
+      dequeue(&queue);
+      printf("[CAN] message received with ID: %d at time: %d\n", q_element.frame.can_id, q_element.timestamp);
+    }
+    SDL_mutexV(mtx);
+    
     usleep(5 * 1000);
-  
+
   }
 
   return 0;
