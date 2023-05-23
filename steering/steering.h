@@ -6,26 +6,24 @@
 #include "lvgl/lvgl.h"
 #include <time.h>
 
-#define LV_PROPERTY(type, name) \
-    type name; \
-    lv_obj_t * lb_##name; 
-
-#define LV_PROPERTY(type, name) \
-    type name; \
-    lv_obj_t * lb_##name; 
-   // uint8_t num_lb; 
-
-#define LV_UPDATE_LABEL(struct, name, value) \
-    steering.struct.name = value; \
-    lv_label_set_text_fmt(steering.struct.lb_##name, "%d", steering.struct.name);
-
+#define NUM_TABS 5
 
 /*
-    Preparo di default le label (passo il num di lb che mi servono) e le metto in un array,
-    ad ogni LV_UPDATE aggiorno tutte le label e per assegnare alla schermata la sua label
-    si usa un enum(RACING->0, SENSORS->1, ecc) -> problemi : memoria e indici (se ho 2 label,
-    una in racing e una in controls(index 2 per esempio) non pesco la label giusta) 
+    THE LABELS ARE ASSIGNED TO EACH TAB WITH TabIdentification structure in utils.h,
+     HOPEFULLY THERE WILL BE NO CONFLICT ON THE SAME LABEL
 */
+
+#define LV_PROPERTY(type, name) \
+    type name; \
+    lv_obj_t * lb_##name[NUM_TABS];
+
+#define LV_UPDATE_LABEL(struct, name, value) \
+    steering.struct.name = value; \ 
+    for(int i=0 ; i<NUM_TABS ; i++){ \
+        if(steering.struct.lb_##name[i] != NULL) \
+            lv_label_set_text_fmt(steering.struct.lb_##name[i], "%d", steering.struct.name); \
+    }
+
 
 typedef struct {
  

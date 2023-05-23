@@ -25,6 +25,8 @@ typedef enum{
     TAB_SENSORS
 } TabIdentification;
 
+//extern TabIdentification TabId;
+
 
 #define COLOR_PRIMARY_HEX 0x383838 //dark grey backgroud
 #define COLOR_SECONDARY_HEX 0X575757 //light grey (borders)

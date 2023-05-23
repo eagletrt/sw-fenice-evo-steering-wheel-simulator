@@ -96,10 +96,12 @@ void tab_sensors(lv_obj_t * parent){
     lv_obj_set_grid_cell(b_data_panel, LV_GRID_ALIGN_CENTER, 0, 1,
                          LV_GRID_ALIGN_CENTER, 1, 1);
 
-    lv_obj_t *delta = lv_vertical_pair_label(b_data_panel, &steering.general_info.lb_delta_time, "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
+
+    lv_obj_t *delta = lv_vertical_pair_label(b_data_panel, &steering.general_info.lb_delta_time[TAB_SENSORS], "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 0), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change upper label position
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(delta, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
+
 
     /*--- cell 0,1*/
 
