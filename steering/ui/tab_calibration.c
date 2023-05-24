@@ -4,13 +4,16 @@ lv_obj_t *lx_box;
 lv_obj_t *center_box;
 lv_obj_t *rx_box;
 
-lv_obj_t *new_screen;
-
 lv_style_t box_style;
 lv_style_t box_label_style;
 lv_style_t buttons_style;
 lv_style_t buttons_label_style;
 lv_style_t calib_tool_bar_style;
+
+lv_obj_t *slider;
+lv_obj_t *bar_start;
+
+lv_obj_t *scr_calib;
 
 void init_calibration_tab_styles(void){
     /* BOX STYLE */
@@ -60,8 +63,7 @@ void init_calibration_tab_styles(void){
 void tab_calibration(lv_obj_t *parent){
     init_calibration_tab_styles();
 
-    new_screen = lv_obj_create(NULL);
-
+    scr_calib = parent;
 
     /*---creating main grid---*/
 
@@ -175,7 +177,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_size(background_base, 740, 55);
     lv_obj_set_grid_cell(background_base, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 3, 1);
 
-    lv_obj_t * slider = lv_slider_create(background_base);
+    slider = lv_slider_create(background_base);
     lv_obj_remove_style_all(slider);
     lv_obj_set_style_bg_color(slider, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_INDICATOR);
     lv_obj_set_style_bg_opa(slider, LV_OPA_70, LV_PART_INDICATOR);
@@ -195,8 +197,13 @@ void tab_calibration(lv_obj_t *parent){
         lv_obj_align(calib_bar, LV_ALIGN_CENTER, (-372+(i*62)), 0);
 
         if(i == 6){
-            lv_obj_set_style_bg_color(calib_bar, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_MAIN);
-            lv_obj_set_width(calib_bar, 3);
+            bar_start = lv_obj_create(background_base);
+            lv_obj_remove_style_all(bar_start);
+            lv_obj_add_style(bar_start, &calib_tool_bar_style, LV_PART_MAIN);
+            lv_obj_align(bar_start, LV_ALIGN_CENTER, (-372+(i*62)), 0);
+            
+            lv_obj_set_style_bg_color(bar_start, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_MAIN);
+            lv_obj_set_width(bar_start, 3);
         }
     }
 
@@ -205,34 +212,57 @@ void tab_calibration(lv_obj_t *parent){
 uint8_t curr_focus = 1;
 void shift_box_focus(shift direction){
     
-    if(direction == LEFT && curr_focus > 0){
-        curr_focus--;
-    }else if(direction == RIGHT && curr_focus < 2){
-        curr_focus++;
-    }
+    if(lv_disp_get_scr_act(NULL) == scr_calib){
 
-    //printf("%d", curr_focus);    
-    //fflush(stdout);
+        if(direction == LEFT && curr_focus > 0){
+            curr_focus--;
+        }else if(direction == RIGHT && curr_focus < 2 ){
+            curr_focus++;
+        }
 
-    switch (curr_focus)
-    {
-    case 0:
-        lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
-        break;
+        //printf("%d", curr_focus);    
+        //fflush(stdout);
 
-    case 1:
-        lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
-        break;
+        switch (curr_focus)
+        {
+        case 0:
+            lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+            lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-    case 2:
-        lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+            lv_slider_set_mode(slider, LV_BAR_MODE_RANGE);
+            lv_slider_set_range(slider, 0, 100);
+            lv_slider_set_value(slider, 15, LV_ANIM_OFF);
 
-        break;
-    default:
-        break;
+            lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
+
+            break;
+
+        case 1:
+            lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+            lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+            lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+
+            lv_slider_set_mode(slider, LV_BAR_MODE_SYMMETRICAL);
+            lv_slider_set_range(slider, -50, 50); // se range 45 e max value 180 -> set_value( 0.25 * gradi_inclinazione )
+            lv_slider_set_value(slider, 15, LV_ANIM_OFF);
+
+            lv_obj_align(bar_start, LV_ALIGN_CENTER, 0, 0);
+
+            break;
+
+        case 2:
+            lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+            lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+
+            lv_slider_set_mode(slider, LV_BAR_MODE_RANGE);
+            lv_slider_set_range(slider, 0, 100);
+            lv_slider_set_value(slider, 15, LV_ANIM_OFF);
+
+            lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
+
+            break;
+        default:
+            break;
+        }
     }
 }

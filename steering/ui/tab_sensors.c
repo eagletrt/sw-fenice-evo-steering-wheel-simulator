@@ -75,7 +75,7 @@ void tab_sensors(lv_obj_t * parent){
     lv_obj_center(left_data_panel);
     lv_obj_set_style_base_dir(left_data_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(left_data_panel, lxd_panel_cols, lxd_panel_rows);
-
+    
     lv_obj_set_grid_cell(left_data_panel, LV_GRID_ALIGN_CENTER, 0, 1,
                          LV_GRID_ALIGN_CENTER, 0, 1);
 

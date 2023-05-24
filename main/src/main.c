@@ -175,6 +175,7 @@ int main(int argc, char **argv)
     if(queue_first(&queue, &q_element)){
       dequeue(&queue);
       printf("[CAN] message received with ID: %d at time: %d\n", q_element.frame.can_id, q_element.timestamp);
+      
     }
     SDL_mutexV(mtx);
     
