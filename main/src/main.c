@@ -24,6 +24,9 @@
 
 
 /*canlib libraries*/
+#define primary_NETWORK_IMPLEMENTATION
+#define secondary_NETWORK_IMPLEMENTATION
+
 #include "can/lib/primary/c/ids.h"
 #include "can/lib/secondary/c/ids.h"
 
@@ -33,12 +36,13 @@
 #include "can.h"
 #include "queue.h"
 
+#include "can_data.h"
+
 /*********************
  *      DEFINES
  *********************/
 
-#define primary_NETWORK_IMPLEMENTATION
-#define secondary_NETWORK_IMPLEMENTATION
+
 
 /**********************
  *      TYPEDEFS
@@ -106,14 +110,12 @@ SDL_Thread* thread_id_1;
 
 #ifdef SIMULATOR_CAN
 void canread(thread_data_t *thread_data) {
-  queue_element_t msg;
+  struct can_frame frame;
+  int res;
   while (1) {
-    can_receive(&msg.frame, thread_data->can);
-    msg.can_network = thread_data->can_id;
-    msg.timestamp = SDL_GetTicks();
-
+    can_receive(&frame, thread_data->can);
     SDL_mutexP(mtx);
-    enqueue(msg, &queue);
+    can_handle_primary(frame);
     SDL_mutexV(mtx);
   }
 }
@@ -136,15 +138,15 @@ int main(int argc, char **argv)
 
   tab_manager();
 
-  lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
+  //lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
 
   /*----init structures and values to read from can----*/
 
   #ifdef SIMULATOR_CAN
   mtx = SDL_CreateMutex();
   queue_init(&queue);
-  can_init("vcan1", &can_primary);
-  can_init("vcan0", &can_secondary);
+  can_init("vcan0", &can_primary);
+  can_init("vcan1", &can_secondary);
   
   queue_element_t q_element;
   uint16_t readMessage = 0; // 0 = no message, 1 = message read
@@ -171,20 +173,13 @@ int main(int argc, char **argv)
   
 
   while(1) {
+
+    SDL_mutexP(mtx);
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
     lv_timer_handler();
-
-    #ifdef SIMULATOR_CAN
-    SDL_mutexP(mtx);
-    if(queue_first(&queue, &q_element)){
-      dequeue(&queue);
-      printf("[CAN] message received with ID: %d at time: %d\n", q_element.frame.can_id, q_element.timestamp);
-      
-    }
-    SDL_mutexV(mtx);
-    #endif
     
+    SDL_mutexV(mtx);    
     usleep(5 * 1000);
 
   }
