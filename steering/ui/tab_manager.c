@@ -25,9 +25,6 @@ void tab_manager(void)
     lv_group_add_obj(g, scr2);
     lv_group_add_obj(g, scr3);
 
-    lv_obj_t * label3 = lv_label_create(scr3);
-    lv_label_set_text(label3, "Third screen");
-
     tab_racing(scr1);
     tab_sensors(scr2);
     tab_calibration(scr3);

@@ -3,16 +3,26 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "lvgl/lvgl.h"
+#include "lvgl.h"
 #include <time.h>
+
+#define NUM_TABS 5
+
+/*
+    THE LABELS ARE ASSIGNED TO EACH TAB WITH TabIdentification structure in utils.h,
+     HOPEFULLY THERE WILL BE NO CONFLICT ON THE SAME LABEL
+*/
 
 #define LV_PROPERTY(type, name) \
     type name; \
-    lv_obj_t * lb_##name;
+    lv_obj_t * lb_##name[NUM_TABS];
 
 #define LV_UPDATE_LABEL(struct, name, value) \
-    steering.struct.name = value; \
-    lv_label_set_text_fmt(steering.struct.lb_##name, "%d", steering.struct.name);
+    steering.struct.name = value; \ 
+    for(int i=0 ; i<NUM_TABS ; i++){ \
+        if(steering.struct.lb_##name[i] != NULL) \
+            lv_label_set_text_fmt(steering.struct.lb_##name[i], "%d", steering.struct.name); \
+    }
 
 
 typedef struct {

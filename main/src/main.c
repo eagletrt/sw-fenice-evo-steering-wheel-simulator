@@ -182,7 +182,8 @@ int main(int argc, char **argv)
     /*
     if(queue_first(&queue, &q_element)){
       dequeue(&queue);
-      printf("[CAN] message received with ID: %d at time: %ld\n", q_element.frame.can_id, q_element.timestamp);
+      printf("[CAN] message received with ID: %d at time: %d\n", q_element.frame.can_id, q_element.timestamp);
+      
     }
     */
     
@@ -273,27 +274,28 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
   /*to see witch key was taken as input*/
   printf("data: %c\n", data.key);
 
-  switch (data.key)
-  {
-    case ' ':
-      change_tab(FORWARD);
-      break;
+    switch (data.key)
+    {
+      case ' ':
+        change_tab(FORWARD);
+        break;
 
-    case 'b':
-      change_tab(BACKWARD);
-      break;
+      case 'b':
+        change_tab(BACKWARD);
+        break;
 
-    case 'l':
-      shift_box_focus(LEFT);
-      break;
+      case 'l':
+        shift_box_focus(LEFT);
+        break;
 
-    case 'r':
-      shift_box_focus(RIGHT);
-      break;
+      case 'r':
+        shift_box_focus(RIGHT);
+        break;
 
-    default:
-      break;
-  }
+      default:
+        break;
+    }
+
 }
 
 void data_init(void){
