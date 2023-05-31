@@ -29,7 +29,7 @@ typedef enum{
 
 
 #define COLOR_PRIMARY_HEX 0x000000 // black background
-#define COLOR_SECONDARY_HEX 0XD3D3D3 //light blue
+#define COLOR_SECONDARY_HEX 0xF2F3F5 //0XD3D3D3 //light grey
 #define COLOR_TERTIARY_HEX 0xF2F3F5 //white
 #define COLOR_YELLOW_STATUS_HEX 0xFFFA14
 #define COLOR_BLUE_STATUS_HEX 0x466189
