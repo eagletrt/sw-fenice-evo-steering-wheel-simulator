@@ -3,7 +3,8 @@
 	url = https://github.com/lvgl/lv_drivers.git
 [submodule "lvgl"]
 	path = lvgl
-	url = https://github.com/lvgl/lvgl.git
+	url = git@github.com:eagletrt/lvgl.git
+	branch = release/8.1
 [submodule "can"]
 	path = can
 	url = git@github.com:eagletrt/can.git
