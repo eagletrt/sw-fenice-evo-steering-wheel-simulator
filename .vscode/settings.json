@@ -15,6 +15,7 @@
         "tuple": "c",
         "tab_racing.h": "c",
         "sdl.h": "c",
-        "condition_variable": "c"
+        "condition_variable": "c",
+        "network.h": "c"
     }
 }
