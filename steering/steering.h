@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "lvgl/lvgl.h"
+#include "lvgl.h"
 #include <time.h>
 
 #define NUM_TABS 5
