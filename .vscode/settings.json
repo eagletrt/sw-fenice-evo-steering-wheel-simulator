@@ -16,6 +16,7 @@
         "tab_racing.h": "c",
         "sdl.h": "c",
         "condition_variable": "c",
-        "network.h": "c"
+        "network.h": "c",
+        "can_data.h": "c"
     }
 }

@@ -12,4 +12,4 @@ go to project main folder and run following commands:
 canplayer vcan0=primary vcan1=secondary -I candump.log -l i
 
 ```
-
+in a new tab launch the simulatore of the ui with "./run.sh"

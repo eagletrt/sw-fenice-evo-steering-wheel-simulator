@@ -20,6 +20,15 @@
             lv_label_set_text_fmt(steering.struct.lb_##name[i], "%d", steering.struct.name); \
     }
 
+#define LV_PIPPO(struct, name, value) \
+    steering.struct.name = value; \
+    update_##name(value);
+
+
+
+#define LV_UPDATE_VALUE(struct, name, value) \
+    steering.struct.name = value;
+
 
 typedef struct {
  
@@ -73,7 +82,8 @@ typedef struct {
         LV_PROPERTY(uint8_t, best_time)
         LV_PROPERTY(uint8_t, last_time)
         LV_PROPERTY(uint8_t, delta_time)
-        LV_PROPERTY(uint8_t, estimated_velocity)
+        //LV_PROPERTY(uint8_t, estimated_velocity)
+        uint8_t estimated_velocity;
         LV_PROPERTY(uint8_t, km)
     } general_info;
 

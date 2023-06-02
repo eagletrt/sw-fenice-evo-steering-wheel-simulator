@@ -227,6 +227,8 @@ void tab_racing(lv_obj_t * parent){
     // speedometer
     lv_obj_t *speed = lv_vertical_pair_label(data_panel, &steering.general_info.lb_estimated_velocity[TAB_RACING], "169", &lv_font_inter_bold_70, "km/h", &lv_font_inter_bold_22);
     lv_obj_set_grid_cell(speed, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+
+    steering.low_voltage.lb_car_status[TAB_RACING] = steering.general_info.lb_estimated_velocity[TAB_RACING];
     
 
     lv_obj_t *meter_container = lv_obj_create(data_panel);
