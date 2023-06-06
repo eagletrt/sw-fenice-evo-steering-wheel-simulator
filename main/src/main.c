@@ -104,9 +104,9 @@ SDL_Thread* thread_id_1;
  *   GLOBAL FUNCTIONS
  **********************/
 
+#ifdef SIMULATOR_CAN
 void canread(thread_data_t *thread_data) {
   queue_element_t msg;
-  int res;
   while (1) {
     can_receive(&msg.frame, thread_data->can);
     msg.can_network = thread_data->can_id;
@@ -117,6 +117,7 @@ void canread(thread_data_t *thread_data) {
     SDL_mutexV(mtx);
   }
 }
+#endif
 
 int main(int argc, char **argv)
 {
@@ -139,6 +140,7 @@ int main(int argc, char **argv)
 
   /*----init structures and values to read from can----*/
 
+  #ifdef SIMULATOR_CAN
   mtx = SDL_CreateMutex();
   queue_init(&queue);
   can_init("vcan1", &can_primary);
@@ -161,16 +163,19 @@ int main(int argc, char **argv)
   thread_data_0.can_id = NETWORK_PRIMARY;
   thread_data_1.can = &can_secondary;
   thread_data_1.can_id = NETWORK_SECONDARY;
-
+  
   thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
-  //thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
+  thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
+  #endif
+
+  
 
   while(1) {
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
     lv_timer_handler();
 
-
+    #ifdef SIMULATOR_CAN
     SDL_mutexP(mtx);
     if(queue_first(&queue, &q_element)){
       dequeue(&queue);
@@ -178,6 +183,7 @@ int main(int argc, char **argv)
       
     }
     SDL_mutexV(mtx);
+    #endif
     
     usleep(5 * 1000);
 

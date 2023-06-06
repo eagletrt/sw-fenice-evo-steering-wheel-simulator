@@ -3,7 +3,6 @@
 steering_t steering;
 
 void test_value_update_incremental(void){
-    LV_UPDATE_LABEL(general_info, delta_time, ++steering.general_info.delta_time);
     
     /*
     LV_UPDATE_LABEL(general_info, estimated_velocity, ++steering.general_info.estimated_velocity);
@@ -14,7 +13,7 @@ void test_value_update_incremental(void){
     */   
 }
 
-void steering_values_init(){
+void steering_values_init(void){
     steering.general_info.delta_time = 1;
 
     steering.general_info.estimated_velocity = 1;

@@ -18,7 +18,7 @@
     lv_obj_t * lb_##name[NUM_TABS];
 
 #define LV_UPDATE_LABEL(struct, name, value) \
-    steering.struct.name = value; \ 
+    steering.struct.name = value; \
     for(int i=0 ; i<NUM_TABS ; i++){ \
         if(steering.struct.lb_##name[i] != NULL) \
             lv_label_set_text_fmt(steering.struct.lb_##name[i], "%d", steering.struct.name); \
@@ -97,6 +97,6 @@ typedef struct {
 extern steering_t steering;
 void test_value_update_incremental(void);
 
-void steering_values_init();
+void steering_values_init(void);
 
 #endif
