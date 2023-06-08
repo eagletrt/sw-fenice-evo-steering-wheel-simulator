@@ -5,13 +5,9 @@
 #include <unistd.h>
 #include "lvgl.h"
 #include <time.h>
+#include "primary/primary_network.h"
 
 #define NUM_TABS 5
-
-/*
-    THE LABELS ARE ASSIGNED TO EACH TAB WITH TabIdentification structure in utils.h,
-     HOPEFULLY THERE WILL BE NO CONFLICT ON THE SAME LABEL
-*/
 
 #define LV_PROPERTY(type, name) \
     type name; \
@@ -67,13 +63,11 @@ typedef struct {
         LV_PROPERTY(uint8_t, rr_press)
     } tyre_pressures;
 
-    /*----the following are guessed (don't know which messages are in can)----*/
     struct {
         LV_PROPERTY(uint8_t, motor_temp)
         LV_PROPERTY(uint8_t, inverter_temp)
     } motor_inverter;
 
-    /*values for lap*/
     struct {
         LV_PROPERTY(uint8_t, ambient_temperature)
         LV_PROPERTY(uint8_t, best_time)
@@ -83,20 +77,15 @@ typedef struct {
         LV_PROPERTY(uint8_t, km)
     } general_info;
 
-    /*parts to elements that can't be accessed otherwise*/
     lv_obj_t *custom_meter;
     lv_meter_indicator_t *indicator_blue;
     lv_meter_indicator_t *indicator_white;
-
-    //lv_obj_t *indicator_blue;
-    //lv_obj_t *indicator_white;
 
 } steering_t;
 
 
 extern steering_t steering;
-void test_value_update_incremental(void);
 
-void steering_values_init(void);
+void car_status_update(primary_car_status_t *car_status);
 
 #endif

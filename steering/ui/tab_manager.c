@@ -33,9 +33,9 @@ void tab_manager(void)
 
 }
 
-void change_tab(scroll direction){
+void change_tab(bool forward){
     
-    if(direction == FORWARD){
+    if(forward){
         tab_num++;
         tab_num = tab_num%N_SCREENS;
     }else{

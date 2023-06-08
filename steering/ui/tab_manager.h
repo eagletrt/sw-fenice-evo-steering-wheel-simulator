@@ -14,13 +14,8 @@
 #define N_SCREENS 3
 extern lv_group_t * g;
 
-typedef enum{
- FORWARD,
- BACKWARD
-}scroll;
-
 void tab_manager(void);
-void change_tab(scroll direction);
+void change_tab(bool forward);
 
 
 #endif
