@@ -118,7 +118,8 @@ void canread(thread_data_t *thread_data) {
     //msg.timestamp = SDL_GetTicks();
 
     SDL_mutexP(mtx);
-    can_handle_primary(frame);
+    //can_handle_primary(frame);
+    can_handle_secondary(frame);
     SDL_mutexV(mtx);
   }
 }
@@ -167,8 +168,8 @@ int main(int argc, char **argv)
   thread_data_1.can = &can_secondary;
   thread_data_1.can_id = NETWORK_SECONDARY;
 
-  thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
-  //thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
+  //thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
+  thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
 
   while(1) {
 

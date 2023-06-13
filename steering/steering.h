@@ -8,6 +8,12 @@
 
 #define NUM_TABS 5
 
+typedef enum{
+    BSE,
+    STEER,
+    APPS
+} CalibrationBox;
+
 /*
     THE LABELS ARE ASSIGNED TO EACH TAB WITH TabIdentification structure in utils.h,
      HOPEFULLY THERE WILL BE NO CONFLICT ON THE SAME LABEL
@@ -67,6 +73,11 @@ typedef struct {
         LV_PROPERTY(uint8_t, rr_press)
     } tyre_pressures;
 
+    struct {
+        LV_PROPERTY(uint8_t, radiators_speed);
+        LV_PROPERTY(uint8_t, pumps_speed);
+    } cooling_status;
+
     /*----the following are guessed (don't know which messages are in can)----*/
     struct {
         LV_PROPERTY(uint8_t, motor_temp)
@@ -87,9 +98,12 @@ typedef struct {
     lv_obj_t *custom_meter;
     lv_meter_indicator_t *indicator_blue;
     lv_meter_indicator_t *indicator_white;
-
     //lv_obj_t *indicator_blue;
     //lv_obj_t *indicator_white;
+
+    /* calibration tab*/
+    CalibrationBox curr_focus;
+    lv_obj_t *slider; 
 
 } steering_t;
 

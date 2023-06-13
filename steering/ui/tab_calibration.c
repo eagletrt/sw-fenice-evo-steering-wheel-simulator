@@ -10,7 +10,6 @@ lv_style_t buttons_style;
 lv_style_t buttons_label_style;
 lv_style_t calib_tool_bar_style;
 
-lv_obj_t *slider;
 lv_obj_t *bar_start;
 
 lv_obj_t *scr_calib;
@@ -177,17 +176,17 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_size(background_base, 740, 55);
     lv_obj_set_grid_cell(background_base, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 3, 1);
 
-    slider = lv_slider_create(background_base);
-    lv_obj_remove_style_all(slider);
-    lv_obj_set_style_bg_color(slider, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_INDICATOR);
-    lv_obj_set_style_bg_opa(slider, LV_OPA_70, LV_PART_INDICATOR);
+    steering.slider = lv_slider_create(background_base);
+    lv_obj_remove_style_all(steering.slider);
+    lv_obj_set_style_bg_color(steering.slider, lv_color_hex(0x000000), LV_PART_INDICATOR);
+    lv_obj_set_style_bg_opa(steering.slider, LV_OPA_70, LV_PART_INDICATOR);
 
-    lv_obj_set_size(slider, 744, 55);
-    lv_obj_center(slider);
-    lv_slider_set_mode(slider, LV_BAR_MODE_SYMMETRICAL);
-    lv_slider_set_range(slider, -50, 50); // se range 45 e max value 180 -> set_value( 0.25 * gradi_inclinazione )
-    lv_slider_set_value(slider, 15, LV_ANIM_OFF);
-    lv_obj_set_style_radius(slider, 0, LV_PART_INDICATOR);
+    lv_obj_set_size(steering.slider, 744, 55);
+    lv_obj_center(steering.slider);
+    lv_slider_set_mode(steering.slider, LV_BAR_MODE_SYMMETRICAL);
+    lv_slider_set_range(steering.slider, -80, 80); // se range 45 e max value 180 -> set_value( 0.25 * gradi_inclinazione )
+    lv_slider_set_value(steering.slider, 15, LV_ANIM_OFF);
+    lv_obj_set_style_radius(steering.slider, 0, LV_PART_INDICATOR);
 
 
     for(int i=1; i<=12 ; i++){
@@ -207,56 +206,54 @@ void tab_calibration(lv_obj_t *parent){
         }
     }
 
+    steering.curr_focus = 1;
 }
 
-uint8_t curr_focus = 1;
+
 void shift_box_focus(shift direction){
     
     if(lv_disp_get_scr_act(NULL) == scr_calib){
 
-        if(direction == LEFT && curr_focus > 0){
-            curr_focus--;
-        }else if(direction == RIGHT && curr_focus < 2 ){
-            curr_focus++;
+        if(direction == LEFT && steering.curr_focus > 0){
+            steering.curr_focus--;
+        }else if(direction == RIGHT && steering.curr_focus < 2 ){
+            steering.curr_focus++;
         }
 
         //printf("%d", curr_focus);    
         //fflush(stdout);
 
-        switch (curr_focus)
+        switch (steering.curr_focus)
         {
-        case 0:
+        case BSE:
             lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
             lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-            lv_slider_set_mode(slider, LV_BAR_MODE_RANGE);
-            lv_slider_set_range(slider, 0, 100);
-            lv_slider_set_value(slider, 15, LV_ANIM_OFF);
+            lv_slider_set_mode(steering.slider, LV_BAR_MODE_RANGE);
+            lv_slider_set_range(steering.slider, 0, 100);
 
             lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
 
             break;
 
-        case 1:
+        case STEER:
             lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
             lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
             lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-            lv_slider_set_mode(slider, LV_BAR_MODE_SYMMETRICAL);
-            lv_slider_set_range(slider, -50, 50); // se range 45 e max value 180 -> set_value( 0.25 * gradi_inclinazione )
-            lv_slider_set_value(slider, 15, LV_ANIM_OFF);
+            lv_slider_set_mode(steering.slider, LV_BAR_MODE_SYMMETRICAL);
+            lv_slider_set_range(steering.slider, -80, 80); // se range 45 e max value 180 -> set_value( 0.25 * gradi_inclinazione )
 
             lv_obj_align(bar_start, LV_ALIGN_CENTER, 0, 0);
 
             break;
 
-        case 2:
+        case APPS:
             lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
             lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-            lv_slider_set_mode(slider, LV_BAR_MODE_RANGE);
-            lv_slider_set_range(slider, 0, 100);
-            lv_slider_set_value(slider, 15, LV_ANIM_OFF);
+            lv_slider_set_mode(steering.slider, LV_BAR_MODE_RANGE);
+            lv_slider_set_range(steering.slider, 0, 100);
 
             lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
 

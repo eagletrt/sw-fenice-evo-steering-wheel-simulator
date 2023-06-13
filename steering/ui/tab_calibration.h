@@ -4,6 +4,8 @@
 #include "lvgl.h"
 #include "utils.h"
 #include <stdio.h>
+#include "../steering.h"
+
 
 #define CALIBR_TAB_TOP_BAR_HEIGHT 65
 #define CALIBR_TAB_TOP_BAR_WIDTH SCREEN_WIDTH
