@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "tab_racing.h"
 #include "tab_sensors.h"
+#include "tab_track_test.h"
 #include "../steering.h"
 #include "tab_calibration.h"
 #ifndef STM32H723xx

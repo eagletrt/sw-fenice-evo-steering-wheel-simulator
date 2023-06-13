@@ -153,12 +153,10 @@ int main(int argc, char **argv)
 
   if(can_open_socket(&can_primary) < 0){
     printf("[ERR] could not open can_primary\n");
-    return -1;
   }
 
   if(can_open_socket(&can_secondary) < 0){
     printf("[ERR] could not open can_secondary\n");
-    return -1;
   }
 
   thread_data_0.can = &can_primary;

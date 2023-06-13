@@ -150,4 +150,4 @@ void update_lv_temp(uint8_t val){
     LV_UPDATE_LABEL(low_voltage, lv_temp, val);
 }
 
-void update_car_status(uint8_t val)
+void update_car_status(uint8_t val);

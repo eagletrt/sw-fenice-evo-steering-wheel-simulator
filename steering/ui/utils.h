@@ -22,7 +22,8 @@ typedef enum{
     TAB_CALIBRATION,
     TAB_DEBUG, 
     TAB_CONTROLS,
-    TAB_SENSORS
+    TAB_SENSORS,
+    TAB_TRACK_TEST
 } TabIdentification;
 
 //extern TabIdentification TabId;

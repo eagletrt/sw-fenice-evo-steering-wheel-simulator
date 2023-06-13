@@ -69,7 +69,7 @@ lv_obj_t *lv_horizontal_pair_label(lv_obj_t *parent, lv_obj_t **main_l , const c
     lv_label_set_text(rx_l, right_text);
     lv_obj_align(rx_l, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_text_font(rx_l, right_text_font, LV_STATE_DEFAULT);
-    lv_obj_set_grid_cell(rx_o, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
+    lv_obj_set_grid_cell(rx_o, LV_GRID_ALIGN_START, 1, 1, LV_GRID_ALIGN_START, 0, 1);
 
     return grid;
 }

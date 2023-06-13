@@ -82,8 +82,8 @@ typedef struct {
         LV_PROPERTY(uint8_t, best_time)
         LV_PROPERTY(uint8_t, last_time)
         LV_PROPERTY(uint8_t, delta_time)
-        //LV_PROPERTY(uint8_t, estimated_velocity)
-        uint8_t estimated_velocity;
+        LV_PROPERTY(uint8_t, estimated_velocity)
+        //uint8_t estimated_velocity;
         LV_PROPERTY(uint8_t, km)
     } general_info;
 
