@@ -34,6 +34,7 @@ void can_handle_primary(struct can_frame frame);
 void update_lv_temp(uint8_t val);
 
 
+void can_handle_secondary(struct can_frame frame);
 
 
 

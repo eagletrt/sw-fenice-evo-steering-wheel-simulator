@@ -115,7 +115,8 @@ void canread(thread_data_t *thread_data) {
   while (1) {
     can_receive(&frame, thread_data->can);
     SDL_mutexP(mtx);
-    can_handle_primary(frame);
+    //can_handle_primary(frame);
+    can_handle_secondary(frame);
     SDL_mutexV(mtx);
   }
 }
@@ -163,12 +164,9 @@ int main(int argc, char **argv)
   thread_data_0.can_id = NETWORK_PRIMARY;
   thread_data_1.can = &can_secondary;
   thread_data_1.can_id = NETWORK_SECONDARY;
-  
-  thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
-  thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
-  #endif
 
-  
+  //thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
+  thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
 
   while(1) {
 

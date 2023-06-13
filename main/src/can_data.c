@@ -151,3 +151,36 @@ void update_lv_temp(uint8_t val){
 }
 
 void update_car_status(uint8_t val);
+void can_handle_secondary(struct can_frame frame){
+    int length = frame.can_dlc;
+    uint8_t *raw = malloc(length);
+    memcpy(raw, frame.data, length * sizeof(uint8_t));
+
+    switch(frame.can_id)
+    {
+        case secondary_ID_STEERING_ANGLE:{
+            DESERIALIZE(secondary, STEERING_ANGLE);
+
+            if(steering.curr_focus == STEER)
+                lv_slider_set_value(steering.slider, (int)data.angle, LV_ANIM_OFF);
+            
+            break;
+        }
+        case secondary_ID_PEDALS_OUTPUT:{
+            DESERIALIZE_CONVERSION(secondary, PEDALS_OUTPUT);
+
+            if(steering.curr_focus == APPS)
+                lv_slider_set_value(steering.slider, (int)conversion.apps, LV_ANIM_OFF);
+            else if(steering.curr_focus == BSE)
+                lv_slider_set_value(steering.slider, (int)conversion.bse_front, LV_ANIM_OFF);
+            
+            break;
+        }
+        case secondary_ID_GPS_SPEED:{
+            DESERIALIZE(secondary, GPS_SPEED);
+
+            break;
+        }
+    }
+
+}
