@@ -135,7 +135,7 @@ int main(int argc, char **argv)
   hal_init();
   data_init();
   
-  steering_values_init();
+  // steering_values_init();
 
   tab_manager();
 
@@ -148,6 +148,7 @@ int main(int argc, char **argv)
   queue_init(&queue);
   can_init("vcan0", &can_primary);
   can_init("vcan1", &can_secondary);
+
   
   queue_element_t q_element;
   uint16_t readMessage = 0; // 0 = no message, 1 = message read
@@ -170,6 +171,7 @@ int main(int argc, char **argv)
 
   //thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
   thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
+    #endif
 
 
   while(1) {
@@ -270,11 +272,11 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
     switch (data.key)
     {
       case ' ':
-        change_tab(FORWARD);
+        change_tab(true);
         break;
 
       case 'b':
-        change_tab(BACKWARD);
+        change_tab(false);
         break;
 
       case 'l':

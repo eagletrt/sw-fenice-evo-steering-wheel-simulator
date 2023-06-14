@@ -12,9 +12,8 @@
 #define ROW_PADDING 20
 #define COLUMN_PADDING 20
 
-lv_style_t box_debug_style;
 void tab_debug_HvFeedbacks(lv_obj_t *parent);
-void init_debug_styles();
+void init_debug_styles(void);
 
 
 #endif // TAB_DEBUG_HVFEEDBACKS_H

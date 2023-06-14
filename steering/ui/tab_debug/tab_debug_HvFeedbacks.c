@@ -4,7 +4,9 @@
 #define CELL_HEIGHT 50
 #define CELL_WIDTH  350
 
-void init_debug_styles(){
+lv_style_t box_debug_style;
+
+void init_debug_styles(void){
 
     /*setting box_debug_style*/
     lv_style_init(&box_debug_style);

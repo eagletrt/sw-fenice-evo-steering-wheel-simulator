@@ -5,7 +5,12 @@
 #include <unistd.h>
 #include "lvgl.h"
 #include <time.h>
+#ifdef STM32H723xx
 #include "primary/primary_network.h"
+#else
+#include "can/lib/primary/c/network.h"
+#include "can/lib/secondary/c/network.h"
+#endif
 
 #define NUM_TABS 5
 
@@ -120,7 +125,5 @@ typedef struct {
 
 
 extern steering_t steering;
-
-void car_status_update(primary_car_status_t *car_status);
 
 #endif

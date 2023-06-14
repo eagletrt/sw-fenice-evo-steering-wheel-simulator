@@ -4,12 +4,8 @@
 #define CELL_HEIGHT 200
 #define CELL_WIDTH  350
 
-void init_tab_track_styles(void){
-
-}
 
 void tab_track_test(lv_obj_t * parent){
-    init_sensors_styles();
 
 
     /*---creating MAIN GRID ---*/
