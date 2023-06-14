@@ -45,6 +45,7 @@ typedef struct {
  
     struct {
         LV_PROPERTY(uint8_t, hv_voltage)
+        LV_PROPERTY(uint8_t, hv_delta_volt)
         LV_PROPERTY(uint8_t, hv_current)
         LV_PROPERTY(uint8_t, hv_temp)
         LV_PROPERTY(uint8_t, hv_percent)
@@ -52,6 +53,7 @@ typedef struct {
 
     struct {
         LV_PROPERTY(uint8_t, lv_voltage)
+        LV_PROPERTY(uint8_t, lv_delta_volt)
         LV_PROPERTY(uint8_t, lv_current)
         LV_PROPERTY(uint8_t, lv_temp)
         LV_PROPERTY(uint8_t, lv_percent)

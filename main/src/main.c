@@ -152,12 +152,15 @@ int main(int argc, char **argv)
   queue_element_t q_element;
   uint16_t readMessage = 0; // 0 = no message, 1 = message read
 
+
   if(can_open_socket(&can_primary) < 0){
     printf("[ERR] could not open can_primary\n");
+//    return -1;
   }
 
   if(can_open_socket(&can_secondary) < 0){
     printf("[ERR] could not open can_secondary\n");
+//    return -1;
   }
 
   thread_data_0.can = &can_primary;
@@ -167,6 +170,7 @@ int main(int argc, char **argv)
 
   //thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
   thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
+
 
   while(1) {
 
