@@ -4,7 +4,6 @@
 lv_obj_t * scr1;
 lv_obj_t * scr2;
 lv_obj_t * scr3;
-lv_obj_t * steer_calib_tab;
 lv_obj_t * scr4;
 lv_group_t * g;
 
@@ -18,8 +17,6 @@ void tab_manager(void)
     scr1  = lv_obj_create(NULL);
     scr2  = lv_obj_create(NULL);
     scr3  = lv_obj_create(NULL);
-
-    steer_calib_tab = lv_obj_create(NULL);
     scr4 = lv_obj_create(NULL);
     
     lv_group_add_obj(g, scr1);
@@ -29,8 +26,10 @@ void tab_manager(void)
     tab_racing(scr1);
     tab_sensors(scr2);
     tab_calibration(scr3);
-    tab_track_test(scr4);
-    
+    //tab_track_test(scr4);
+
+    tab_debug_HvFeedbacks(scr4);
+
     lv_scr_load(scr4);
 
 }
@@ -42,8 +41,8 @@ void change_tab(bool forward){
         tab_num = tab_num%N_SCREENS;
     }else{
         tab_num--;
-        if(tab_num == -1){
-            tab_num = 2;
+        if(tab_num < 0){
+            tab_num = (N_SCREENS-1);
         }
     }
         
@@ -59,6 +58,10 @@ void change_tab(bool forward){
 
     case 2:
         lv_scr_load(scr3); 
+        break;
+
+    case 3:
+        lv_scr_load(scr4); 
         break;
     default:
         break;
