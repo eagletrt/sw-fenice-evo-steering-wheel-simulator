@@ -31,7 +31,7 @@ typedef enum{
 #define COLOR_PRIMARY_HEX 0x000000 // black background
 #define COLOR_SECONDARY_HEX 0xF2F3F5 //0XD3D3D3 //light grey -> changed to white
 #define COLOR_TERTIARY_HEX 0xF2F3F5 //white
-#define COLOR_YELLOW_STATUS_HEX 0xE78A00 //0xFFFA14 -> changed to orange
+#define COLOR_YELLOW_STATUS_HEX 0xFFFA14
 #define COLOR_BLUE_STATUS_HEX 0x0000FF
 #define COLOR_GREEN_STATUS_HEX 0x39D103
 #define COLOR_ORANGE_STATUS_HEX 0xE78A00

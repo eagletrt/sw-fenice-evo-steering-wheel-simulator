@@ -20,5 +20,7 @@
 void tab_debug(lv_obj_t *parent);
 void init_debug_styles(void);
 
+lv_obj_t* cell_create(lv_obj_t* parent, const char* text, uint8_t pos_row, uint8_t pos_col, lv_style_t* style );
+
 
 #endif // TAB_DEBUG_HVFEEDBACKS_H

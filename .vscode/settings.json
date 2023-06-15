@@ -20,5 +20,6 @@
         "can_data.h": "c",
         "tab_debug_hvfeedbacks.h": "c",
         "tab_debug.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/home/fed/Eagle/sw-fenice-evo-steering-wheel-simulator/lv_drivers"
 }
