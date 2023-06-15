@@ -19,7 +19,7 @@ void init_debug_styles(void){
     lv_style_set_border_color(&box_debug_style, lv_color_hex(COLOR_YELLOW_STATUS_HEX)); //to remove borders, keeping bc useful
     lv_style_set_border_width(&box_debug_style, 3);
     lv_style_set_bg_color(&box_debug_style, lv_color_hex(COLOR_YELLOW_STATUS_HEX));
-    lv_style_set_radius(&box_debug_style, 0);
+    lv_style_set_radius(&box_debug_style, 10);
 }
 
 void tab_debug_HvFeedbacks(lv_obj_t * parent){
