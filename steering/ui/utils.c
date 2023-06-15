@@ -106,7 +106,7 @@ lv_obj_t *lv_triple_label(lv_obj_t *parent, lv_obj_t **main_l , const char *left
 lv_style_t bubble_small_style;
 lv_style_t bubble_large_style;
 
-char *notch_labels[NUM_TABS] = {"RACE", "CALIBRATE", "DEBUG", "CTRLS", "SENSORS"};
+char *notch_labels[NUM_TABS] = {"RACE", "CALIBRATE", "DEBUG", "TEST", "SENSORS"};
 lv_obj_t *create_notch(lv_obj_t *parent, TabIdentification TabId){
 
     lv_obj_t *notch = lv_obj_create(parent);

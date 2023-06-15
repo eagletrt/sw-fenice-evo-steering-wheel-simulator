@@ -17,6 +17,8 @@
         "sdl.h": "c",
         "condition_variable": "c",
         "network.h": "c",
-        "can_data.h": "c"
+        "can_data.h": "c",
+        "tab_debug_hvfeedbacks.h": "c",
+        "tab_debug.h": "c"
     }
 }
