@@ -25,11 +25,6 @@
 #define BUTTON_WIDTH BOX_WIDTH
 #define BUTTON_HEIGHT 45
 
-typedef enum{
- LEFT,
- RIGHT
-}shift;
-
 void tab_calibration(lv_obj_t *parent);
 
 void shift_box_focus(shift direction);

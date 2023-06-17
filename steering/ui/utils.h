@@ -25,6 +25,11 @@ typedef enum{
     TAB_SENSORS
 } TabIdentification;
 
+typedef enum{
+ LEFT,
+ RIGHT
+}shift;
+
 //extern TabIdentification TabId;
 
 

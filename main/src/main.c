@@ -279,10 +279,12 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
 
       case 'l':
         shift_box_focus(LEFT);
+        change_errors_view(LEFT);
         break;
 
       case 'r':
         shift_box_focus(RIGHT);
+        change_errors_view(RIGHT);
         break;
 
       default:
