@@ -5,7 +5,7 @@ lv_obj_t *center_box;
 lv_obj_t *rx_box;
 
 lv_style_t box_style;
-lv_style_t box_label_style;
+lv_style_t box_debug_label_style;
 lv_style_t buttons_style;
 lv_style_t buttons_label_style;
 lv_style_t calib_tool_bar_style;
@@ -24,14 +24,14 @@ void init_calibration_tab_styles(void){
     lv_style_set_radius(&box_style, 14);
 
     /* BOX LABEL STYLE */
-    lv_style_init(&box_label_style);
-    lv_style_set_base_dir(&box_label_style, LV_BASE_DIR_LTR);
-    lv_style_set_bg_opa(&box_label_style, LV_OPA_TRANSP);
-    lv_style_set_text_color(&box_label_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    lv_style_set_text_align(&box_label_style, LV_TEXT_ALIGN_CENTER);
-    lv_style_set_text_color(&box_label_style, lv_color_hex(0x000000));
-    lv_style_set_text_font(&box_label_style, &lv_font_inter_bold_30);
-    lv_style_set_align(&box_label_style, LV_ALIGN_CENTER);
+    lv_style_init(&box_debug_label_style);
+    lv_style_set_base_dir(&box_debug_label_style, LV_BASE_DIR_LTR);
+    lv_style_set_bg_opa(&box_debug_label_style, LV_OPA_TRANSP);
+    lv_style_set_text_color(&box_debug_label_style, lv_color_hex(COLOR_TERTIARY_HEX));
+    lv_style_set_text_align(&box_debug_label_style, LV_TEXT_ALIGN_CENTER);
+    lv_style_set_text_color(&box_debug_label_style, lv_color_hex(0x000000));
+    lv_style_set_text_font(&box_debug_label_style, &lv_font_inter_bold_30);
+    lv_style_set_align(&box_debug_label_style, LV_ALIGN_CENTER);
 
     /* BUTTON STYLE*/
     lv_style_init(&buttons_style);
@@ -99,7 +99,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_align(lx_box, LV_ALIGN_TOP_LEFT, BOX_SIDE_PADDING, 10);
 
     lv_obj_t *lx_box_label = lv_label_create(lx_box);
-    lv_obj_add_style(lx_box_label, &box_label_style, LV_PART_MAIN);
+    lv_obj_add_style(lx_box_label, &box_debug_label_style, LV_PART_MAIN);
     lv_label_set_text(lx_box_label, "BSE");
 
 
@@ -110,7 +110,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_align(center_box, LV_ALIGN_TOP_MID, 0, 10);
 
     lv_obj_t *center_box_label = lv_label_create(center_box);
-    lv_obj_add_style(center_box_label, &box_label_style, LV_PART_MAIN);
+    lv_obj_add_style(center_box_label, &box_debug_label_style, LV_PART_MAIN);
     lv_label_set_text(center_box_label, "STEER");
 
     rx_box = lv_obj_create(box_container);
@@ -119,7 +119,7 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_align(rx_box, LV_ALIGN_TOP_RIGHT, -BOX_SIDE_PADDING, 10);
 
     lv_obj_t *rx_box_label = lv_label_create(rx_box);
-    lv_obj_add_style(rx_box_label, &box_label_style, LV_PART_MAIN);
+    lv_obj_add_style(rx_box_label, &box_debug_label_style, LV_PART_MAIN);
     lv_label_set_text(rx_box_label, "APPS");
 
 

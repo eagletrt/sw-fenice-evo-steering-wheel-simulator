@@ -4,7 +4,7 @@
 lv_style_t box_debug_style_yellow;
 lv_style_t box_debug_style_green;
 lv_style_t box_debug_style_red;
-lv_style_t box_label_style;
+lv_style_t box_debug_label_style;
 
 lv_obj_t *scr_debug;
 
@@ -25,7 +25,7 @@ lv_obj_t* cell_create(lv_obj_t* parent, const char* text, uint8_t pos_col, uint8
     lv_obj_set_grid_cell(cell, LV_GRID_ALIGN_CENTER, pos_col, 1, LV_GRID_ALIGN_CENTER, pos_row, 1);
 
     lv_obj_t *label= lv_label_create(cell);
-    lv_obj_add_style(label, &box_label_style, LV_PART_MAIN);
+    lv_obj_add_style(label, &box_debug_label_style, LV_PART_MAIN);
     lv_label_set_text(label, text);
     lv_obj_set_style_text_font(label, &lv_font_inter_bold_14, LV_STATE_DEFAULT);
 
@@ -75,7 +75,7 @@ void init_debug_styles(void){
     lv_style_set_radius(&box_debug_style_red, 10);
 
     /*setting label style*/
-    lv_style_set_text_color(&box_label_style, lv_color_hex(COLOR_PRIMARY_HEX));
+    lv_style_set_text_color(&box_debug_label_style, lv_color_hex(COLOR_PRIMARY_HEX));
 }
 
 
