@@ -75,7 +75,13 @@ void init_debug_styles(void){
     lv_style_set_radius(&box_debug_style_red, 10);
 
     /*setting label style*/
+    lv_style_init(&box_debug_label_style);
+    lv_style_set_base_dir(&box_debug_label_style, LV_BASE_DIR_LTR);
+    lv_style_set_bg_opa(&box_debug_label_style, LV_OPA_TRANSP);
     lv_style_set_text_color(&box_debug_label_style, lv_color_hex(COLOR_PRIMARY_HEX));
+    lv_style_set_text_align(&box_debug_label_style, LV_TEXT_ALIGN_CENTER);
+    lv_style_set_text_font(&box_debug_label_style, &lv_font_inter_bold_30);
+    lv_style_set_align(&box_debug_label_style, LV_ALIGN_CENTER);
 }
 
 
