@@ -5,7 +5,7 @@
 #include "utils.h"
 #include "../steering.h"
 
-#define CENTRAL_PANEL_WIDTH 660
+#define TAB_SENSORS_CENTRAL_PANEL_WIDTH 660
 #define BOTTOM_BAR_HEIGHT 120
 #define TOP_BAR_HEIGHT 55
 #define DATA_PANEL_HEIGHT 425

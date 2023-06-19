@@ -1,12 +1,6 @@
 #include "tab_debug.h"
 #include <stdio.h>
 
-#define CELL_HEIGHT 40
-#define CELL_WIDTH  180
-
-#define CENTRAL_PANEL_WIDTH 780
-#define DATA_PANEL_HEIGHT 425
-
 lv_style_t box_debug_style_yellow;
 lv_style_t box_debug_style_green;
 lv_style_t box_debug_style_red;
@@ -23,7 +17,7 @@ lv_obj_t* cell_create(lv_obj_t* parent, const char* text, uint8_t pos_col, uint8
     lv_obj_t * cell= lv_obj_create(parent);
     lv_obj_remove_style_all(cell);
     lv_obj_clear_flag(cell, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(cell, CELL_WIDTH, CELL_HEIGHT);
+    lv_obj_set_size(cell, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_HEIGHT);
 
     lv_obj_add_style(cell, style, 0);
     lv_obj_center(cell);
@@ -94,7 +88,7 @@ void tab_debug(lv_obj_t * parent){
     /*---creating MAIN GRID ---*/
 
     static lv_coord_t main_panel_cols[] =  {SCREEN_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t main_panel_rows[] = {TOP_BAR_HEIGHT, DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t main_panel_rows[] = {TAB_DEBUG_TOP_BAR_HEIGHT, TAB_DEBUG_DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * main_panel = lv_obj_create(parent);
     lv_obj_add_style(main_panel, &grid_style, 0);
@@ -116,14 +110,14 @@ void tab_debug(lv_obj_t * parent){
     /*--- creating HV FEEDBACKS PANEL ---*/
 
 
-    static lv_coord_t hvFeedbacks_panel_cols[] =  {CELL_WIDTH, CELL_WIDTH, CELL_WIDTH, CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t hvFeedbacks_panel_rows[] = {DATA_TITLE_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t hvFeedbacks_panel_cols[] =  {TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t hvFeedbacks_panel_rows[] = {TAB_DEBUG_DATA_TITLE_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     hv_feedbacks_panel = lv_obj_create(main_panel);
     lv_obj_remove_style_all(hv_feedbacks_panel);
     lv_obj_set_layout(hv_feedbacks_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(hv_feedbacks_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(hv_feedbacks_panel, CENTRAL_PANEL_WIDTH, DATA_PANEL_HEIGHT); 
+    lv_obj_set_size(hv_feedbacks_panel, TAB_DEBUG_DATA_PANEL_WIDTH, TAB_DEBUG_DATA_PANEL_HEIGHT); 
 
     lv_obj_add_style(hv_feedbacks_panel, &grid_style, 0);
     lv_obj_align(hv_feedbacks_panel, LV_ALIGN_CENTER, 0, 0);
@@ -131,8 +125,8 @@ void tab_debug(lv_obj_t * parent){
     lv_obj_set_style_opa(hv_feedbacks_panel, LV_OPA_COVER, LV_PART_MAIN);
     lv_obj_set_grid_dsc_array(hv_feedbacks_panel, hvFeedbacks_panel_cols, hvFeedbacks_panel_rows);
 
-    lv_obj_set_style_pad_row(hv_feedbacks_panel, ROW_PADDING, 0);
-    lv_obj_set_style_pad_column(hv_feedbacks_panel, COLUMN_PADDING, 0);
+    lv_obj_set_style_pad_row(hv_feedbacks_panel, TAB_DEBUG_ROW_PADDING, 0);
+    lv_obj_set_style_pad_column(hv_feedbacks_panel, TAB_DEBUG_COLUMN_PADDING, 0);
     
     lv_obj_set_grid_cell(hv_feedbacks_panel, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
 
@@ -181,22 +175,22 @@ void tab_debug(lv_obj_t * parent){
 
     /*--- creating HV ERRORS PANEL ---*/
 
-    static lv_coord_t hvErrors_panel_cols[] =  {CELL_WIDTH, CELL_WIDTH, CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t hvErrors_panel_rows[] = {DATA_TITLE_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t hvErrors_panel_cols[] =  {TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t hvErrors_panel_rows[] = {TAB_DEBUG_DATA_TITLE_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     hv_errors_panel = lv_obj_create(main_panel);
     lv_obj_remove_style_all(hv_errors_panel);
     lv_obj_set_layout(hv_errors_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(hv_errors_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(hv_errors_panel, CELL_WIDTH*3+COLUMN_PADDING*2, DATA_PANEL_HEIGHT); 
+    lv_obj_set_size(hv_errors_panel, TAB_DEBUG_CELL_WIDTH*3+TAB_DEBUG_COLUMN_PADDING*2, TAB_DEBUG_DATA_PANEL_HEIGHT); 
 
     lv_obj_add_style(hv_errors_panel, &grid_style, 0);
     lv_obj_align(hv_errors_panel, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_base_dir(hv_errors_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(hv_errors_panel, hvErrors_panel_cols, hvErrors_panel_rows);
 
-    lv_obj_set_style_pad_row(hv_errors_panel, ROW_PADDING, 0);
-    lv_obj_set_style_pad_column(hv_errors_panel, COLUMN_PADDING, 0);
+    lv_obj_set_style_pad_row(hv_errors_panel, TAB_DEBUG_ROW_PADDING, 0);
+    lv_obj_set_style_pad_column(hv_errors_panel, TAB_DEBUG_COLUMN_PADDING, 0);
     
     lv_obj_set_style_opa(hv_errors_panel, LV_OPA_0, LV_PART_MAIN);
 
@@ -241,22 +235,22 @@ void tab_debug(lv_obj_t * parent){
 
     /*--- creating DAS ERRORS PANEL ---*/
 
-    static lv_coord_t dasErrors_panel_cols[] =  {CELL_WIDTH, CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t dasErrors_panel_rows[] = {DATA_TITLE_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t dasErrors_panel_cols[] =  {TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t dasErrors_panel_rows[] = {TAB_DEBUG_DATA_TITLE_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     das_errors_panel = lv_obj_create(main_panel);
     lv_obj_remove_style_all(das_errors_panel);
     lv_obj_set_layout(das_errors_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(das_errors_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(das_errors_panel, CELL_WIDTH*2+COLUMN_PADDING*1, DATA_PANEL_HEIGHT); 
+    lv_obj_set_size(das_errors_panel, TAB_DEBUG_CELL_WIDTH*2+TAB_DEBUG_COLUMN_PADDING*1, TAB_DEBUG_DATA_PANEL_HEIGHT); 
 
     lv_obj_add_style(das_errors_panel, &grid_style, 0);
     lv_obj_align(das_errors_panel, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_base_dir(das_errors_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(das_errors_panel, dasErrors_panel_cols, dasErrors_panel_rows);
 
-    lv_obj_set_style_pad_row(das_errors_panel, ROW_PADDING, 0);
-    lv_obj_set_style_pad_column(das_errors_panel, COLUMN_PADDING, 0);
+    lv_obj_set_style_pad_row(das_errors_panel, TAB_DEBUG_ROW_PADDING, 0);
+    lv_obj_set_style_pad_column(das_errors_panel, TAB_DEBUG_COLUMN_PADDING, 0);
     
     lv_obj_set_style_opa(das_errors_panel, LV_OPA_0, LV_PART_MAIN);
     lv_obj_set_grid_cell(das_errors_panel, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
@@ -296,22 +290,22 @@ void tab_debug(lv_obj_t * parent){
     /*--- creating LV ERRORS PANEL ---*/
 
 
-    static lv_coord_t lvErrors_panel_cols[] =  {CELL_WIDTH, CELL_WIDTH, CELL_WIDTH, CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t lvErrors_panel_rows[] = {DATA_TITLE_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t lvErrors_panel_cols[] =  {TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t lvErrors_panel_rows[] = {TAB_DEBUG_DATA_TITLE_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_errors_panel = lv_obj_create(main_panel);
     lv_obj_remove_style_all(lv_errors_panel);
     lv_obj_set_layout(lv_errors_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(lv_errors_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(lv_errors_panel, CELL_WIDTH*4+COLUMN_PADDING*3, DATA_PANEL_HEIGHT); 
+    lv_obj_set_size(lv_errors_panel, TAB_DEBUG_CELL_WIDTH*4+TAB_DEBUG_COLUMN_PADDING*3, TAB_DEBUG_DATA_PANEL_HEIGHT); 
 
     lv_obj_add_style(lv_errors_panel, &grid_style, 0);
     lv_obj_align(lv_errors_panel, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_style_base_dir(lv_errors_panel, LV_BASE_DIR_LTR, 0);
     lv_obj_set_grid_dsc_array(lv_errors_panel, lvErrors_panel_cols, lvErrors_panel_rows);
 
-    lv_obj_set_style_pad_row(lv_errors_panel, ROW_PADDING, 0);
-    lv_obj_set_style_pad_column(lv_errors_panel, COLUMN_PADDING, 0);
+    lv_obj_set_style_pad_row(lv_errors_panel, TAB_DEBUG_ROW_PADDING, 0);
+    lv_obj_set_style_pad_column(lv_errors_panel, TAB_DEBUG_COLUMN_PADDING, 0);
     lv_obj_set_style_opa(lv_errors_panel, LV_OPA_0, LV_PART_MAIN);
     
     lv_obj_set_grid_cell(lv_errors_panel, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 1, 1);
