@@ -6,12 +6,7 @@
 #include <unistd.h>
 #include "lvgl.h"
 #include <time.h>
-#ifdef STM32H723xx
-#include "primary/primary_network.h"
-#else
-#include "can/lib/primary/c/network.h"
-#include "can/lib/secondary/c/network.h"
-#endif
+#include "can/lib/primary/primary_network.h"
 
 #define NUM_TABS 5
 
@@ -66,7 +61,7 @@ typedef struct {
         LV_PROPERTY(primary_ts_status_t, ts_status);
         LV_PROPERTY(uint8_t, version_component);
         LV_PROPERTY(uint32_t, version_cancicd);
-        LV_PROPERTY(uint32_t, lv_percent);
+        LV_PROPERTY(uint32_t, hv_percent);
     } hv;
 
     struct {

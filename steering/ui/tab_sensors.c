@@ -294,45 +294,45 @@ void tab_sensors(lv_obj_t * parent){
 
     /* 1st row */
 
-    lv_obj_t *inv_temp_lb = lv_triple_label(right_data_panel, &steering.motor_inverter.lb_inverter_temp[TAB_SENSORS], "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
+    lv_obj_t *inv_temp_lb = lv_triple_label(right_data_panel, &steering.inverters.lb_left_inverter_temp[TAB_SENSORS], "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(inv_temp_lb, LV_GRID_ALIGN_CENTER, 0, 1,
                          LV_GRID_ALIGN_CENTER, 0, 1);
 
     
     /* 2nd row HV */
 
-    lv_obj_t *hv_temp_lb = lv_triple_label(right_data_panel, &steering.hv.lb_hv_temp[TAB_SENSORS], "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_20);
+    lv_obj_t *hv_temp_lb = lv_triple_label(right_data_panel, &steering.hv.lb_average_temperature[TAB_SENSORS], "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(hv_temp_lb, LV_GRID_ALIGN_CENTER, 0, 1,
                          LV_GRID_ALIGN_CENTER, 1, 1);
 
-    lv_obj_t *hv_volt_lb = lv_triple_label(right_data_panel, &steering.hv.lb_hv_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_20);
+    lv_obj_t *hv_volt_lb = lv_triple_label(right_data_panel, &steering.hv.lb_max_cell_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(hv_volt_lb, LV_GRID_ALIGN_CENTER, 1, 1,
                          LV_GRID_ALIGN_CENTER, 1, 1);
 
-    lv_obj_t *hv_curr_lb = lv_triple_label(right_data_panel, &steering.hv.lb_hv_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " A", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_20);
+    lv_obj_t *hv_curr_lb = lv_triple_label(right_data_panel, &steering.hv.lb_current[TAB_SENSORS], "X", &lv_font_inter_bold_38, " A", &lv_font_inter_bold_22, "HV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(hv_curr_lb, LV_GRID_ALIGN_CENTER, 2, 1,
                          LV_GRID_ALIGN_CENTER, 1, 1);
 
-    lv_obj_t *hv_deltaV_lb = lv_triple_label(right_data_panel, &steering.hv.lb_hv_delta_volt[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "HV DELTA", &lv_font_inter_bold_20);
+    lv_obj_t *hv_deltaV_lb = lv_triple_label(right_data_panel, &steering.hv.lb_min_cell_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "HV DELTA", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(hv_deltaV_lb, LV_GRID_ALIGN_CENTER, 3, 1,
                          LV_GRID_ALIGN_CENTER, 1, 1);
     
 
     /* 3rd row LV */
 
-    lv_obj_t *lv_temp_lb = lv_triple_label(right_data_panel, &steering.low_voltage.lb_lv_temp[TAB_SENSORS], "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_20);
+    lv_obj_t *lv_temp_lb = lv_triple_label(right_data_panel, &steering.lv.lb_battery_temperature[TAB_SENSORS], "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(lv_temp_lb, LV_GRID_ALIGN_CENTER, 0, 1,
                          LV_GRID_ALIGN_CENTER, 2, 1);
 
-    lv_obj_t *lv_volt_lb = lv_triple_label(right_data_panel, &steering.low_voltage.lb_lv_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_20);
+    lv_obj_t *lv_volt_lb = lv_triple_label(right_data_panel, &steering.lv.lb_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(lv_volt_lb, LV_GRID_ALIGN_CENTER, 1, 1,
                          LV_GRID_ALIGN_CENTER, 2, 1);
 
-    lv_obj_t *lv_curr_lb = lv_triple_label(right_data_panel, &steering.low_voltage.lb_lv_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " A", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_20);
+    lv_obj_t *lv_curr_lb = lv_triple_label(right_data_panel, &steering.lv.lb_current[TAB_SENSORS], "X", &lv_font_inter_bold_38, " A", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(lv_curr_lb, LV_GRID_ALIGN_CENTER, 2, 1,
                          LV_GRID_ALIGN_CENTER, 2, 1);
 
-    lv_obj_t *lv_deltaV_lb = lv_triple_label(right_data_panel, &steering.low_voltage.lb_lv_delta_volt[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "LV DELTA", &lv_font_inter_bold_20);
+    lv_obj_t *lv_deltaV_lb = lv_triple_label(right_data_panel, &steering.lv.lb_voltage[TAB_SENSORS], "X", &lv_font_inter_bold_38, " V", &lv_font_inter_bold_22, "LV DELTA", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(lv_deltaV_lb, LV_GRID_ALIGN_CENTER, 3, 1,
                          LV_GRID_ALIGN_CENTER, 2, 1);
 

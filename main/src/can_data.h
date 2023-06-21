@@ -17,11 +17,11 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-#include "can/lib/primary/c/ids.h"
-#include "can/lib/secondary/c/ids.h"
+//#include "can/lib/primary/c/ids.h"
+//#include "can/lib/secondary/c/ids.h"
 
-#include "can/lib/primary/c/network.h"
-#include "can/lib/secondary/c/network.h"
+#include "can/lib/primary/primary_network.h"
+#include "can/lib/secondary/secondary_network.h"
 
 #include "can.h"
 #include "queue.h"

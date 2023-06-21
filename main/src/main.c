@@ -27,11 +27,7 @@
 #define primary_NETWORK_IMPLEMENTATION
 #define secondary_NETWORK_IMPLEMENTATION
 
-#include "can/lib/primary/c/ids.h"
-#include "can/lib/secondary/c/ids.h"
 
-#include "can/lib/primary/c/network.h"
-#include "can/lib/secondary/c/network.h"
 
 #include "can.h"
 #include "queue.h"
@@ -294,6 +290,6 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
 }
 
 void data_init(void){
-  steering.general_info.estimated_velocity = 0;
+  steering.steering.estimated_velocity = 0;
   steering.control.power = 80;
 }

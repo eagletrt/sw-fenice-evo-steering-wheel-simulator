@@ -32,7 +32,7 @@ steering_t steering = {
     .hv.ts_status = primary_ts_status_ts_status_OFF,
     .hv.version_component = 0,
     .hv.version_cancicd = 0,
-    .hv.lv_percent = 0,
+    .hv.hv_percent = 0,
 
     .inverters.right_temperature = 0.0f,
     .inverters.left_temperature = 0.0f,

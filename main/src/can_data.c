@@ -21,8 +21,9 @@ void can_handle_primary(struct can_frame frame){
     // printf("%d\n", frame.can_id);
 
     switch (frame.can_id)
-    {
-        case primary_ID_SPEED: {
+    {   
+        /*
+        case PRIMARY_: {
             
             // DESERIALIZE_CONVERSION(primary, SPEED);
             // steering.general_info.estimated_velocity = conversion.encoder_l;
@@ -41,7 +42,7 @@ void can_handle_primary(struct can_frame frame){
             break;
         }
 
-        case primary_ID_DAS_VERSION: {
+        case PRIMARY_ID_DAS_VERSION: {
             // DESERIALIZE(primary, DAS_VERSION);
             // to be defined
             break;
@@ -141,13 +142,13 @@ void can_handle_primary(struct can_frame frame){
             break;
         }
         default:
-            break;
+            break;*/
     }
 }
 
 
 void update_lv_temp(uint8_t val){
-    LV_UPDATE_LABEL(low_voltage, lv_temp, val);
+    //LV_UPDATE_LABEL(low_voltage, lv_temp, val);
 }
 
 void update_car_status(uint8_t val);
@@ -156,6 +157,7 @@ void can_handle_secondary(struct can_frame frame){
     uint8_t *raw = malloc(length);
     memcpy(raw, frame.data, length * sizeof(uint8_t));
 
+    /*
     switch(frame.can_id)
     {
         case secondary_ID_STEERING_ANGLE:{
@@ -181,6 +183,6 @@ void can_handle_secondary(struct can_frame frame){
 
             break;
         }
-    }
+    }*/
 
 }
