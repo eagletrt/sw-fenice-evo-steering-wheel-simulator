@@ -11,7 +11,7 @@ void tab_track_test(lv_obj_t * parent){
     /*---creating MAIN GRID ---*/
 
     static lv_coord_t main_panel_cols[] =  {SCREEN_WIDTH, LV_GRID_TEMPLATE_LAST};
-    static lv_coord_t main_panel_rows[] = {TOP_BAR_HEIGHT, DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+    static lv_coord_t main_panel_rows[] = {TOP_BAR_HEIGHT, TAB_TRACK_DATA_PANEL_HEIGHT, LV_GRID_TEMPLATE_LAST};
 
     lv_obj_t * main_panel = lv_obj_create(parent);
     lv_obj_set_layout(main_panel, LV_LAYOUT_GRID);
@@ -39,7 +39,7 @@ void tab_track_test(lv_obj_t * parent){
     lv_obj_t * data_panel = lv_obj_create(main_panel);
     lv_obj_set_layout(data_panel, LV_LAYOUT_GRID);
     lv_obj_clear_flag(data_panel, LV_OBJ_FLAG_SCROLLABLE);
-    lv_obj_set_size(data_panel, SCREEN_WIDTH-80, DATA_PANEL_HEIGHT); //non andrebbe tolto il 20 per farlo simmetrico(forse qualche errore)
+    lv_obj_set_size(data_panel, SCREEN_WIDTH-80, TAB_TRACK_DATA_PANEL_HEIGHT); //non andrebbe tolto il 20 per farlo simmetrico(forse qualche errore)
 
     lv_obj_add_style(data_panel, &grid_style, 0);
     lv_obj_center(data_panel);
