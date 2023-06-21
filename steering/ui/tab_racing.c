@@ -36,7 +36,7 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_grid_cell(bar_panel_lv, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START, 0, 1);
     
     // lv percentage    
-    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, &steering.low_voltage.lb_lv_percent[TAB_RACING], "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_20);
+    lv_obj_t *lv_perc = lv_horizontal_pair_label(bar_panel_lv, &steering.lv.lb_lv_percent[TAB_RACING], "80", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_20);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), 0) , LV_ALIGN_CENTER, 0, 5);  // change "%" position
     lv_obj_set_grid_cell(lv_perc, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER, 0, 1);
   
@@ -141,15 +141,15 @@ void tab_racing(lv_obj_t * parent){
 
 
     /* inserting data into data left panel */
-    lv_obj_t *best_time = lv_vertical_pair_label(left_data_panel, &steering.general_info.lb_best_time[TAB_RACING], " 1:24:03", &lv_font_inter_bold_38, "BEST TIME", &lv_font_inter_bold_22);
+    lv_obj_t *best_time = lv_vertical_pair_label(left_data_panel, &steering.steering.lb_best_time[TAB_RACING], " 1:24:03", &lv_font_inter_bold_38, "BEST TIME", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(best_time, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(best_time, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 0,1);
 
-    lv_obj_t *last_time = lv_vertical_pair_label(left_data_panel, &steering.general_info.lb_last_time[TAB_RACING], " 1:25:33", &lv_font_inter_bold_38, "LAST TIME", &lv_font_inter_bold_22);
+    lv_obj_t *last_time = lv_vertical_pair_label(left_data_panel, &steering.steering.lb_last_time[TAB_RACING], " 1:25:33", &lv_font_inter_bold_38, "LAST TIME", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(last_time, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(last_time, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
     
-    lv_obj_t *delta = lv_vertical_pair_label(left_data_panel, &steering.general_info.lb_delta_time[TAB_RACING], "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
+    lv_obj_t *delta = lv_vertical_pair_label(left_data_panel, &steering.steering.lb_delta_time[TAB_RACING], "3.2", &lv_font_inter_bold_60, "DELTA", &lv_font_inter_bold_22);
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 0), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change upper label position
     lv_obj_align(lv_obj_get_child(lv_obj_get_child(delta, 1), 0) , LV_ALIGN_LEFT_MID, 10, 0);  // change bottom label position
     lv_obj_set_grid_cell(delta, LV_GRID_ALIGN_START, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
@@ -198,11 +198,10 @@ void tab_racing(lv_obj_t * parent){
     lv_obj_set_size(sep_line, 185, 3);
     lv_obj_set_grid_cell(sep_line, LV_GRID_ALIGN_CENTER, 0,2, LV_GRID_ALIGN_START, 1,1);
 
-    // END segfault
-    lv_obj_t *test = lv_triple_label(right_data_panel, &steering.motor_inverter.lb_inverter_temp[TAB_RACING], "60", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
+    lv_obj_t *test = lv_triple_label(right_data_panel, &steering.inverters.lb_inverter_temp[TAB_RACING], "60", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(test, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 1,1);
 
-    lv_obj_t *test1 = lv_triple_label(right_data_panel, &steering.motor_inverter.lb_motor_temp[TAB_RACING], "30", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR", &lv_font_inter_bold_20);
+    lv_obj_t *test1 = lv_triple_label(right_data_panel, &steering.inverters.lb_motor_temp[TAB_RACING], "30", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR", &lv_font_inter_bold_20);
     lv_obj_set_grid_cell(test1, LV_GRID_ALIGN_CENTER, 0,1, LV_GRID_ALIGN_CENTER, 2,1);
 
     lv_obj_t *test2 = lv_triple_label(right_data_panel, &steering.low_voltage.lb_lv_temp[TAB_RACING], "20", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "LV", &lv_font_inter_bold_20);

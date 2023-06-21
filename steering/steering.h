@@ -66,6 +66,7 @@ typedef struct {
         LV_PROPERTY(primary_ts_status_t, ts_status);
         LV_PROPERTY(uint8_t, version_component);
         LV_PROPERTY(uint32_t, version_cancicd);
+        LV_PROPERTY(uint32_t, lv_percent);
     } hv;
 
     struct {
@@ -94,7 +95,8 @@ typedef struct {
         LV_PROPERTY(uint8_t, version_component);
         LV_PROPERTY(uint32_t, version_cancicd);
         LV_PROPERTY(uint32_t, errors);
-    } low_voltage;
+        LV_PROPERTY(uint32_t, lv_percent);
+    } lv;
 
     struct {
         LV_PROPERTY(float, temperature);
