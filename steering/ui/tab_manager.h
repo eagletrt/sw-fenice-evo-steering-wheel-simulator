@@ -18,6 +18,8 @@ extern lv_group_t *g;
 
 void tab_manager(void);
 void change_tab(bool);
+void load_current_tab(void);
+void restore_previous_screen(lv_timer_t *timer);
 void display_notification(char *);
 
 #endif
