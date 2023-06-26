@@ -10,24 +10,22 @@
 #define _DEFAULT_SOURCE /* needed for usleep() */
 #include <stdlib.h>
 #include <unistd.h>
-#define SDL_MAIN_HANDLED /*To fix SDL's "undefined reference to WinMain" issue*/
-#include <SDL2/SDL.h>
-#include "lvgl/lvgl.h"
-#include "lvgl/examples/lv_examples.h"
+#define SDL_MAIN_HANDLED /*To fix SDL's "undefined reference to WinMain"       \
+                            issue*/
 #include "lv_drivers/display/monitor.h"
-#include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/keyboard.h"
+#include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/mousewheel.h"
-#include "steering/ui/tab_manager.h"
-#include "steering/ui/tab_calibration.h"
+#include "lvgl/examples/lv_examples.h"
+#include "lvgl/lvgl.h"
 #include "steering/steering.h"
-
+#include "steering/ui/tab_calibration.h"
+#include "steering/ui/tab_manager.h"
+#include <SDL2/SDL.h>
 
 /*canlib libraries*/
 #define primary_NETWORK_IMPLEMENTATION
 #define secondary_NETWORK_IMPLEMENTATION
-
-
 
 #include "can.h"
 #include "queue.h"
@@ -38,7 +36,6 @@
  *      DEFINES
  *********************/
 #define SIMULATOR_CAN 1
-
 
 /**********************
  *      TYPEDEFS
@@ -87,14 +84,14 @@ thread_data_t thread_data_1, thread_data_0;
 can_t can_primary;
 can_t can_secondary;
 
-SDL_mutex* mtx; //LOCK-> SDL_mutexP() , UNLOCK->SDL_mutexV()
+SDL_mutex *mtx; // LOCK-> SDL_mutexP() , UNLOCK->SDL_mutexV()
 queue_t queue;
 
 const int NETWORK_PRIMARY = 0;
 const int NETWORK_SECONDARY = 1;
 
-SDL_Thread* thread_id_0;
-SDL_Thread* thread_id_1;
+SDL_Thread *thread_id_0;
+SDL_Thread *thread_id_1;
 
 /**********************
  *  STATIC PROTOTYPES
@@ -111,50 +108,46 @@ void canread(thread_data_t *thread_data) {
   while (1) {
     can_receive(&frame, thread_data->can);
     SDL_mutexP(mtx);
-    //can_handle_primary(frame);
+    // can_handle_primary(frame);
     can_handle_secondary(frame);
     SDL_mutexV(mtx);
   }
 }
 #endif
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   (void)argc; /*Unused*/
   (void)argv; /*Unused*/
 
   /*Initialize LVGL*/
   lv_init();
-  
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
   data_init();
-  
+
   // steering_values_init();
 
   tab_manager();
 
-  //lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
+  // lv_timer_create((lv_timer_cb_t) test_value_update_incremental, 70, NULL);
 
   /*----init structures and values to read from can----*/
 
-  #ifdef SIMULATOR_CAN
+#ifdef SIMULATOR_CAN
   mtx = SDL_CreateMutex();
   queue_init(&queue);
   can_init("vcan0", &can_primary);
   can_init("vcan1", &can_secondary);
 
-  
   queue_element_t q_element;
   uint16_t readMessage = 0; // 0 = no message, 1 = message read
 
-
-  if(can_open_socket(&can_primary) < 0){
+  if (can_open_socket(&can_primary) < 0) {
     printf("[ERR] could not open can_primary\n");
   }
 
-  if(can_open_socket(&can_secondary) < 0){
+  if (can_open_socket(&can_secondary) < 0) {
     printf("[ERR] could not open can_secondary\n");
   }
 
@@ -163,21 +156,19 @@ int main(int argc, char **argv)
   thread_data_1.can = &can_secondary;
   thread_data_1.can_id = NETWORK_SECONDARY;
 
-  //thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0); 
-  thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1); 
-  #endif
+  // thread_id_0 = SDL_CreateThread(canread, "thread_0", &thread_data_0);
+  thread_id_1 = SDL_CreateThread(canread, "thread_1", &thread_data_1);
+#endif
 
-
-  while(1) {
+  while (1) {
 
     SDL_mutexP(mtx);
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
     lv_timer_handler();
-    
-    SDL_mutexV(mtx);    
-    usleep(5 * 1000);
 
+    SDL_mutexV(mtx);
+    usleep(5 * 1000);
   }
 
   return 0;
@@ -191,9 +182,9 @@ int main(int argc, char **argv)
  * Initialize the Hardware Abstraction Layer (HAL) for the LVGL graphics
  * library
  */
-static void hal_init(void)
-{
-  /* Use the 'monitor' driver which creates window on PC's monitor to simulate a display*/
+static void hal_init(void) {
+  /* Use the 'monitor' driver which creates window on PC's monitor to simulate a
+   * display*/
   monitor_init();
   /* Tick init.
    * You have to call 'lv_tick_inc()' in periodically to inform LittelvGL about
@@ -216,9 +207,11 @@ static void hal_init(void)
   disp_drv.antialiasing = 1;
   disp_drv.dpi = 10;
 
-  lv_disp_t * disp = lv_disp_drv_register(&disp_drv);
+  lv_disp_t *disp = lv_disp_drv_register(&disp_drv);
 
-  lv_theme_t * th = lv_theme_default_init(disp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), LV_THEME_DEFAULT_DARK, LV_FONT_DEFAULT);
+  lv_theme_t *th = lv_theme_default_init(
+      disp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
+      LV_THEME_DEFAULT_DARK, LV_FONT_DEFAULT);
   lv_disp_set_theme(disp, th);
 
   g = lv_group_create();
@@ -242,7 +235,7 @@ static void hal_init(void)
 static int tick_thread(void *data) {
   (void)data;
 
-  while(1) {
+  while (1) {
     SDL_Delay(5);
     lv_tick_inc(5); /*Tell LittelvGL that 5 milliseconds were elapsed*/
   }
@@ -250,55 +243,50 @@ static int tick_thread(void *data) {
   return 0;
 }
 
-
 /*
  ** Handles keyboard events
  * used for testing
  */
-void foo(lv_indev_drv_t *indev_drv, uint8_t e)
-{ 
+void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
   lv_indev_data_t data;
   keyboard_read(indev_drv, &data);
-  
+
   /*to see witch key was taken as input*/
   printf("data: %c\n", data.key);
 
-    switch (data.key)
-    {
-      case ' ':
-        change_tab(true);
-        break;
+  switch (data.key) {
+  case ' ':
+    change_tab(true);
+    break;
 
-      case 'b':
-        change_tab(false);
-        break;
+  case 'b':
+    change_tab(false);
+    break;
 
-      case 'l':
-        shift_box_focus(LEFT);
-        change_errors_view(LEFT);
-        break;
+  case 'l':
+    shift_box_focus(LEFT);
+    change_errors_view(LEFT);
+    break;
 
-      case 'r':
-        shift_box_focus(RIGHT);
-        change_errors_view(RIGHT);
-        break;
+  case 'r':
+    shift_box_focus(RIGHT);
+    change_errors_view(RIGHT);
+    break;
 
-      case 'm':
-        ;
-        lv_timer_t *notification_timer = lv_timer_create(notification_screen, 2000, "1000");
-        lv_timer_set_repeat_count(notification_timer, 2);
+  case 'm':;
+    lv_timer_t *notification_timer =
+        lv_timer_create(notification_screen, 2000, "1000");
+    lv_timer_set_repeat_count(notification_timer, 2);
 
-        lv_timer_ready(notification_timer);
-        break;
+    lv_timer_ready(notification_timer);
+    break;
 
-      default:
-        break;
-
-    }
-
+  default:
+    break;
+  }
 }
 
-void data_init(void){
+void data_init(void) {
   steering.steering.estimated_velocity = 0;
   steering.control.power = 80;
 }
