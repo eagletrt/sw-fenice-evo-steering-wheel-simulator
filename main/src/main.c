@@ -264,21 +264,17 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
     break;
 
   case 'l':
-    shift_box_focus(LEFT);
-    change_errors_view(LEFT);
+    shift_box_focus(true);
+    change_errors_view(true);
     break;
 
   case 'r':
-    shift_box_focus(RIGHT);
-    change_errors_view(RIGHT);
+    shift_box_focus(false);
+    change_errors_view(false);
     break;
 
-  case 'm':;
-    lv_timer_t *notification_timer =
-        lv_timer_create(notification_screen, 2000, "1000");
-    lv_timer_set_repeat_count(notification_timer, 2);
-
-    lv_timer_ready(notification_timer);
+  case 'm':
+    // noification screen
     break;
 
   default:
