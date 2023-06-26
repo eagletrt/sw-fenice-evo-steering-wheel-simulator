@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include "lvgl.h"
 #include <time.h>
-#include "can/lib/primary/primary_network.h"
+#include "primary/primary_network.h"
 
 #define NUM_TABS 5
 
