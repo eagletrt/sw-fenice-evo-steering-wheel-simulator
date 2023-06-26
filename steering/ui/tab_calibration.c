@@ -12,6 +12,9 @@ lv_style_t calib_tool_bar_style;
 
 lv_obj_t *bar_start;
 
+lv_obj_t *set_min_btn;
+lv_obj_t *set_max_btn;
+
 lv_obj_t *scr_calib;
 
 void init_calibration_tab_styles(void){
@@ -128,17 +131,17 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_remove_style_all(buttons_container);
     lv_obj_set_grid_cell(buttons_container, LV_GRID_ALIGN_STRETCH, 0, 1, LV_GRID_ALIGN_STRETCH, 2, 1);
 
-    lv_obj_t *lx_btn = lv_obj_create(buttons_container);
+    set_min_btn = lv_obj_create(buttons_container);
 
-    lv_obj_set_size(lx_btn, BUTTON_WIDTH, BUTTON_HEIGHT);
-    lv_obj_remove_style_all(lx_btn);
-    lv_obj_add_style(lx_btn, &buttons_style, LV_PART_MAIN);
-    lv_obj_align(lx_btn, LV_ALIGN_TOP_LEFT, BOX_SIDE_PADDING, 10);
+    lv_obj_set_size(set_min_btn, BUTTON_WIDTH, BUTTON_HEIGHT);
+    lv_obj_remove_style_all(set_min_btn);
+    lv_obj_add_style(set_min_btn, &buttons_style, LV_PART_MAIN);
+    lv_obj_align(set_min_btn, LV_ALIGN_TOP_LEFT, BOX_SIDE_PADDING, 10);
 
-    lv_obj_t *lx_btn_label = lv_label_create(lx_btn);
-    lv_obj_add_style(lx_btn_label, &buttons_label_style, LV_PART_MAIN);
-    lv_label_set_text(lx_btn_label, "G1 Set Min");
-    lv_obj_set_align(lx_btn_label, LV_ALIGN_CENTER);
+    lv_obj_t *set_min_btn_label = lv_label_create(set_min_btn);
+    lv_obj_add_style(set_min_btn_label, &buttons_label_style, LV_PART_MAIN);
+    lv_label_set_text(set_min_btn_label, "G1 Set Min");
+    lv_obj_set_align(set_min_btn_label, LV_ALIGN_CENTER);
 
     lv_obj_t *center_btn = lv_obj_create(buttons_container);
     lv_obj_remove_style_all(center_btn);
@@ -156,15 +159,15 @@ void tab_calibration(lv_obj_t *parent){
     lv_obj_set_align(center_btn_label, LV_ALIGN_CENTER);
     */
 
-    lv_obj_t *rx_btn = lv_obj_create(buttons_container);
-    lv_obj_remove_style_all(rx_btn);
-    lv_obj_add_style(rx_btn, &buttons_style, LV_PART_MAIN);    
-    lv_obj_align(rx_btn, LV_ALIGN_TOP_RIGHT, -BOX_SIDE_PADDING, 10);
+    set_max_btn = lv_obj_create(buttons_container);
+    lv_obj_remove_style_all(set_max_btn);
+    lv_obj_add_style(set_max_btn, &buttons_style, LV_PART_MAIN);    
+    lv_obj_align(set_max_btn, LV_ALIGN_TOP_RIGHT, -BOX_SIDE_PADDING, 10);
 
-    lv_obj_t *rx_btn_label = lv_label_create(rx_btn);
-    lv_obj_add_style(rx_btn_label, &buttons_label_style, LV_PART_MAIN);
-    lv_label_set_text(rx_btn_label, "G2 Set Max");
-    lv_obj_set_align(rx_btn_label, LV_ALIGN_CENTER);
+    lv_obj_t *set_max_btn_label = lv_label_create(set_max_btn);
+    lv_obj_add_style(set_max_btn_label, &buttons_label_style, LV_PART_MAIN);
+    lv_label_set_text(set_max_btn_label, "G2 Set Max");
+    lv_obj_set_align(set_max_btn_label, LV_ALIGN_CENTER);
 
 
     /*--- inserting CALIBRATION TOOL ---*/
@@ -209,10 +212,75 @@ void tab_calibration(lv_obj_t *parent){
     steering.curr_focus = 1;
 }
 
+void calibration_tool_set_min_max(bool setting_max_value){
+    if(lv_disp_get_scr_act(NULL) == scr_calib){
+
+        bool esito;
+
+        switch(steering.curr_focus)
+        {        
+        case BSE:
+            if(setting_max_value){
+                // calibrate max BSE 
+
+            }else{
+                // calibrate min BSE
+            }
+
+            esito = true;  // did it work?!
+
+            break;
+
+        case STEER:
+            if(setting_max_value){
+                // calibrate max STEER
+
+            }else{
+                // calibrate min STEER
+            }
+
+            esito = true;
+
+            break;
+
+        case APPS:
+            
+            if(setting_max_value){
+                // calibrate max APPS
+
+            }else{
+                // calibrate min APPS
+            }
+
+            esito = true;
+
+            break;
+        default:
+            break;
+        }
+
+        if(esito){
+            if(setting_max_value)
+                lv_obj_set_style_bg_color(set_max_btn, lv_color_hex(COLOR_GREEN_STATUS_HEX), LV_PART_MAIN);
+            else
+                lv_obj_set_style_bg_color(set_min_btn, lv_color_hex(COLOR_GREEN_STATUS_HEX), LV_PART_MAIN);
+        }else{
+            if(setting_max_value)
+                lv_obj_set_style_bg_color(set_max_btn, lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+            else
+                lv_obj_set_style_bg_color(set_min_btn, lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+        }
+
+
+    }
+}
+
 
 void shift_box_focus(shift direction){
     
     if(lv_disp_get_scr_act(NULL) == scr_calib){
+
+        CalibrationBox previous_focus = steering.curr_focus;
 
         if(direction == LEFT && steering.curr_focus > 0){
             steering.curr_focus--;
@@ -220,46 +288,61 @@ void shift_box_focus(shift direction){
             steering.curr_focus++;
         }
 
-        //printf("%d", curr_focus);    
-        //fflush(stdout);
+        /* look if the focus is changed or not */
+        if(previous_focus != steering.curr_focus){
+            switch (steering.curr_focus)
+            {
+            case BSE:
+                // clean the buttons set min/max
+                lv_obj_set_style_bg_color(set_min_btn, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+                lv_obj_set_style_bg_color(set_max_btn, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-        switch (steering.curr_focus)
-        {
-        case BSE:
-            lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
-            lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+                // color the box focused
+                lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+                lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-            lv_slider_set_mode(steering.slider, LV_BAR_MODE_RANGE);
-            lv_slider_set_range(steering.slider, 0, 100);
+                lv_slider_set_mode(steering.slider, LV_BAR_MODE_RANGE);
+                lv_slider_set_range(steering.slider, 0, 100);
 
-            lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
+                lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
 
-            break;
+                break;
 
-        case STEER:
-            lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
-            lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
-            lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+            case STEER:
+                // clean the buttons set min/max
+                lv_obj_set_style_bg_color(set_min_btn, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+                lv_obj_set_style_bg_color(set_max_btn, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-            lv_slider_set_mode(steering.slider, LV_BAR_MODE_SYMMETRICAL);
-            lv_slider_set_range(steering.slider, -80, 80); // se range 45 e max value 180 -> set_value( 0.25 * gradi_inclinazione )
+                // color the box focused
+                lv_obj_set_style_bg_color(lx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+                lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+                lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-            lv_obj_align(bar_start, LV_ALIGN_CENTER, 0, 0);
+                lv_slider_set_mode(steering.slider, LV_BAR_MODE_SYMMETRICAL);
+                lv_slider_set_range(steering.slider, -80, 80); // se range 45 e max value 180 -> set_value( 0.25 * gradi_inclinazione )
 
-            break;
+                lv_obj_align(bar_start, LV_ALIGN_CENTER, 0, 0);
 
-        case APPS:
-            lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
-            lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+                break;
 
-            lv_slider_set_mode(steering.slider, LV_BAR_MODE_RANGE);
-            lv_slider_set_range(steering.slider, 0, 100);
+            case APPS:
+                // clean the buttons set min/max
+                lv_obj_set_style_bg_color(set_min_btn, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+                lv_obj_set_style_bg_color(set_max_btn, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
+        
+                // color the box focused
+                lv_obj_set_style_bg_color(rx_box, lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+                lv_obj_set_style_bg_color(center_box, lv_color_hex(COLOR_SECONDARY_HEX), LV_PART_MAIN);
 
-            lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
+                lv_slider_set_mode(steering.slider, LV_BAR_MODE_RANGE);
+                lv_slider_set_range(steering.slider, 0, 100);
 
-            break;
-        default:
-            break;
+                lv_obj_align(bar_start, LV_ALIGN_LEFT_MID, 0, 0);
+
+                break;
+            default:
+                break;
+            }
         }
     }
 }

@@ -283,6 +283,16 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
         change_errors_view(RIGHT);
         break;
 
+      case 'o':
+        calibration_tool_set_min_max(false); // setting min value
+
+        break;
+
+      case 'p':
+        calibration_tool_set_min_max(true); // setting max value
+
+        break;
+
       case 'm':
         ;
         lv_timer_t *notification_timer = lv_timer_create(notification_screen, 2000, "1000");
