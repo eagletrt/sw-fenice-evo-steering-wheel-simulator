@@ -18,6 +18,6 @@ extern lv_group_t * g;
 
 void tab_manager(void);
 void change_tab(bool forward);
-
+void notification_screen(lv_timer_t * timer);
 
 #endif

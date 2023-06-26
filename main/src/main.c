@@ -283,8 +283,17 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e)
         change_errors_view(RIGHT);
         break;
 
+      case 'm':
+        ;
+        lv_timer_t *notification_timer = lv_timer_create(notification_screen, 2000, "1000");
+        lv_timer_set_repeat_count(notification_timer, 2);
+
+        lv_timer_ready(notification_timer);
+        break;
+
       default:
         break;
+
     }
 
 }
