@@ -68,6 +68,7 @@ steering_t steering = {
     .steering.delta_time = 0,
     .steering.estimated_velocity = 0,
 
+    .telemetry.status = false,
     .telemetry.latitude = 0.0f,
     .telemetry.longitude = 0.0f,
     .telemetry.gps_speed = 0,

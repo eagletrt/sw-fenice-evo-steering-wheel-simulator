@@ -102,6 +102,7 @@ typedef struct {
   } steering;
 
   struct {
+    LV_PROPERTY(bool, status);
     LV_PROPERTY(float, latitude);
     LV_PROPERTY(float, longitude);
     LV_PROPERTY(uint16_t, gps_speed);
