@@ -1,11 +1,10 @@
 #ifndef TAB_CALIBRATION_H
 #define TAB_CALIBRATION_H
 
+#include "../steering.h"
 #include "lvgl.h"
 #include "utils.h"
 #include <stdio.h>
-#include "../steering.h"
-
 
 #define CALIBR_TAB_TOP_BAR_HEIGHT 65
 #define CALIBR_TAB_TOP_BAR_WIDTH SCREEN_WIDTH
@@ -15,7 +14,6 @@
 #define CALIBR_TAB_BUTTONS_BAR_WIDTH SCREEN_WIDTH
 #define CALIBR_TAB_TOOL_HEIGHT 130
 #define CALIBR_TAB_TOOL_WIDTH SCREEN_WIDTH
-
 
 #define BOX_SIDE_PADDING 40
 
@@ -27,7 +25,7 @@
 
 void tab_calibration(lv_obj_t *parent);
 
-void shift_box_focus(shift direction);
+void shift_box_focus(bool move_right);
 void calibration_tool_set_min_max(bool setting_max_value);
 
 void init_calibration_tab_styles(void);

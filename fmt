@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Usage: ./tools/fmt
+
+# -------------
+# Logic
+# -------------
+
+BUILD_DIR=./build
+IGNORE=./can
+LVGL=./lvgl
+STEERING=./lv_drivers
+
+CLANG_FORMAT=clang-format
+
+echo "[*] Formatting c files"
+find . -path $BUILD_DIR -prune -false -o -path $LVGL -prune -false -o -path $IGNORE -prune -false -o -path $STEERING -prune -false -o -type f \
+  -name "*.c" -exec sh -c "$CLANG_FORMAT -i \$1" _ {} \;
+echo "[*] Formatting h   files"
+find . -path $BUILD_DIR -prune -false -o -path $LVGL -prune -false -o  -path $IGNORE -prune -false -o -path $STEERING -prune -false -o -type f \
+  -name "*.h" -exec sh -c "$CLANG_FORMAT -i \$1" _ {} \;

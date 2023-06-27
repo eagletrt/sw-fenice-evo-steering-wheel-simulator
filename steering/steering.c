@@ -16,7 +16,6 @@ steering_t steering = {
     .das.version_cancicd = 0,
     .das.errors = 0,
 
-
     .hv.pack_voltage = 0,
     .hv.bus_voltage = 0,
     .hv.max_cell_voltage = 0,
@@ -89,13 +88,11 @@ steering_t steering = {
     .tyre_pressures.fr_press = 0,
     .tyre_pressures.rl_press = 0,
     .tyre_pressures.rr_press = 0,
-    
+
     .cooling_status.radiators_speed = 0,
     .cooling_status.pumps_speed = 0,
 
     .timestamp = 0,
 };
 
-void car_status_update(primary_car_status_t* data) {
-
-}
+void car_status_update(primary_car_status_t *data) {}

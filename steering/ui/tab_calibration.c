@@ -17,49 +17,50 @@ lv_obj_t *set_max_btn;
 
 lv_obj_t *scr_calib;
 
-void init_calibration_tab_styles(void){
-    /* BOX STYLE */
-    lv_style_init(&box_style);
-    lv_style_set_width(&box_style, BOX_WIDTH);
-    lv_style_set_height(&box_style, BOX_HEIGHT);
-    lv_style_set_bg_color(&box_style, lv_color_hex(COLOR_SECONDARY_HEX));
-    lv_style_set_bg_opa(&box_style, LV_OPA_COVER);
-    lv_style_set_radius(&box_style, 14);
+void init_calibration_tab_styles(void) {
+  /* BOX STYLE */
+  lv_style_init(&box_style);
+  lv_style_set_width(&box_style, BOX_WIDTH);
+  lv_style_set_height(&box_style, BOX_HEIGHT);
+  lv_style_set_bg_color(&box_style, lv_color_hex(COLOR_SECONDARY_HEX));
+  lv_style_set_bg_opa(&box_style, LV_OPA_COVER);
+  lv_style_set_radius(&box_style, 14);
 
-    /* BOX LABEL STYLE */
-    lv_style_init(&box_label_style);
-    lv_style_set_base_dir(&box_label_style, LV_BASE_DIR_LTR);
-    lv_style_set_bg_opa(&box_label_style, LV_OPA_TRANSP);
-    lv_style_set_text_color(&box_label_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    lv_style_set_text_align(&box_label_style, LV_TEXT_ALIGN_CENTER);
-    lv_style_set_text_color(&box_label_style, lv_color_hex(0x000000));
-    lv_style_set_text_font(&box_label_style, &lv_font_inter_bold_30);
-    lv_style_set_align(&box_label_style, LV_ALIGN_CENTER);
+  /* BOX LABEL STYLE */
+  lv_style_init(&box_label_style);
+  lv_style_set_base_dir(&box_label_style, LV_BASE_DIR_LTR);
+  lv_style_set_bg_opa(&box_label_style, LV_OPA_TRANSP);
+  lv_style_set_text_color(&box_label_style, lv_color_hex(COLOR_TERTIARY_HEX));
+  lv_style_set_text_align(&box_label_style, LV_TEXT_ALIGN_CENTER);
+  lv_style_set_text_color(&box_label_style, lv_color_hex(0x000000));
+  lv_style_set_text_font(&box_label_style, &lv_font_inter_bold_30);
+  lv_style_set_align(&box_label_style, LV_ALIGN_CENTER);
 
-    /* BUTTON STYLE*/
-    lv_style_init(&buttons_style);
-    lv_style_set_width(&buttons_style, BUTTON_WIDTH);
-    lv_style_set_height(&buttons_style, BUTTON_HEIGHT);
-    lv_style_set_radius(&buttons_style, 14);
-    lv_style_set_bg_color(&buttons_style, lv_color_hex(COLOR_SECONDARY_HEX));
-    lv_style_set_bg_opa(&buttons_style, LV_OPA_COVER);
+  /* BUTTON STYLE*/
+  lv_style_init(&buttons_style);
+  lv_style_set_width(&buttons_style, BUTTON_WIDTH);
+  lv_style_set_height(&buttons_style, BUTTON_HEIGHT);
+  lv_style_set_radius(&buttons_style, 14);
+  lv_style_set_bg_color(&buttons_style, lv_color_hex(COLOR_SECONDARY_HEX));
+  lv_style_set_bg_opa(&buttons_style, LV_OPA_COVER);
 
-    /* BUTTON LABEL STYLE */
-    lv_style_init(&buttons_label_style);
-    lv_style_set_base_dir(&buttons_label_style, LV_BASE_DIR_LTR);
-    lv_style_set_bg_opa(&buttons_label_style, LV_OPA_TRANSP);
-    lv_style_set_text_color(&buttons_label_style, lv_color_hex(COLOR_TERTIARY_HEX));
-    lv_style_set_text_align(&buttons_label_style, LV_TEXT_ALIGN_CENTER);
-    lv_style_set_text_color(&buttons_label_style, lv_color_hex(0x000000));
-    lv_style_set_text_font(&buttons_label_style, &lv_font_inter_bold_22);
-    lv_style_set_align(&buttons_label_style, LV_ALIGN_CENTER);
+  /* BUTTON LABEL STYLE */
+  lv_style_init(&buttons_label_style);
+  lv_style_set_base_dir(&buttons_label_style, LV_BASE_DIR_LTR);
+  lv_style_set_bg_opa(&buttons_label_style, LV_OPA_TRANSP);
+  lv_style_set_text_color(&buttons_label_style,
+                          lv_color_hex(COLOR_TERTIARY_HEX));
+  lv_style_set_text_align(&buttons_label_style, LV_TEXT_ALIGN_CENTER);
+  lv_style_set_text_color(&buttons_label_style, lv_color_hex(0x000000));
+  lv_style_set_text_font(&buttons_label_style, &lv_font_inter_bold_22);
+  lv_style_set_align(&buttons_label_style, LV_ALIGN_CENTER);
 
-    /* CALIB. TOOL BARS */
-    lv_style_init(&calib_tool_bar_style);
-    lv_style_set_height(&calib_tool_bar_style, 55);
-    lv_style_set_width(&calib_tool_bar_style, 2);
-    lv_style_set_bg_color(&calib_tool_bar_style, lv_color_hex(0x000000));
-    lv_style_set_bg_opa(&calib_tool_bar_style, LV_OPA_COVER);
+  /* CALIB. TOOL BARS */
+  lv_style_init(&calib_tool_bar_style);
+  lv_style_set_height(&calib_tool_bar_style, 55);
+  lv_style_set_width(&calib_tool_bar_style, 2);
+  lv_style_set_bg_color(&calib_tool_bar_style, lv_color_hex(0x000000));
+  lv_style_set_bg_opa(&calib_tool_bar_style, LV_OPA_COVER);
 }
 
 void tab_calibration(lv_obj_t *parent){
@@ -276,15 +277,15 @@ void calibration_tool_set_min_max(bool setting_max_value){
 }
 
 
-void shift_box_focus(shift direction){
+void shift_box_focus(bool move_right){
     
     if(lv_disp_get_scr_act(NULL) == scr_calib){
 
         CalibrationBox previous_focus = steering.curr_focus;
 
-        if(direction == LEFT && steering.curr_focus > 0){
+        if(move_right == false && steering.curr_focus > 0){
             steering.curr_focus--;
-        }else if(direction == RIGHT && steering.curr_focus < 2 ){
+        }else if(move_right == true && steering.curr_focus < 2 ){
             steering.curr_focus++;
         }
 
@@ -345,4 +346,5 @@ void shift_box_focus(shift direction){
             }
         }
     }
+  
 }

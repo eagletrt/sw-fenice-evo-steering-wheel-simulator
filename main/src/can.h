@@ -4,37 +4,32 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <unistd.h>
-#include <net/if.h>
-#include <sys/socket.h>
-#include <sys/ioctl.h>
 #include <errno.h>
 #include <inttypes.h>
-
+#include <net/if.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
 // CAN libraries (can_utils)
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-
-typedef struct can_t
-{
-  int sock;              // socket fd
-  const char *device;    // name of device
+typedef struct can_t {
+  int sock;                    // socket fd
+  const char *device;          // name of device
   struct sockaddr_can address; // address of device
 
   uint64_t bytes_exchanged;
 
   int opened;
-}can_t;
-
+} can_t;
 
 /**
  * Sets device string (can0, vcan0)
  * Sets address pointer
  */
 void can_init(const char *device, can_t *can);
-
 
 /**
  * Returns if the socket is opened
@@ -62,7 +57,7 @@ const char *can_get_device(can_t *can);
 
 /**
  * @brief Get the Bytes Sent and received
- * 
+ *
  */
 uint64_t can_get_bytes_exchanged(can_t *can);
 
