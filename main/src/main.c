@@ -284,7 +284,7 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
     break;
 
   case 'm':;
-    display_notification("90 GRADI");
+    display_notification("90 GRADI", 1000);
 
     break;
 
