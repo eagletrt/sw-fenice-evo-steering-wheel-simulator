@@ -35,8 +35,6 @@ void tab_manager(void) {
   tab_track_test(tab_track_test_ptr);
   tab_notification_screen_create(notif_screen);
 
-  notification_timer = lv_timer_create(restore_previous_screen, 5000, NULL);
-  
   lv_scr_load(tab_racing_ptr);
   current_tab = TAB_RACING;
 }
@@ -75,8 +73,10 @@ void change_tab(bool forward) {
 
 void restore_previous_screen(lv_timer_t *timer) { load_current_tab(); }
 
-void display_notification(char *label_content) {                       
-  lv_label_set_text(steering.notification_screen_label, label_content); 
+void display_notification(const char *label_content) {
+  notification_timer = lv_timer_create(restore_previous_screen, 2000, NULL);
+  lv_timer_set_repeat_count(notification_timer, 1);
+  lv_label_set_text(steering.notification_screen_label, label_content);
   lv_scr_load(notif_screen);
   lv_timer_reset(notification_timer);
 }
