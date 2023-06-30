@@ -96,4 +96,67 @@ steering_t steering = {
     .timestamp = 0,
 };
 
-void car_status_update(primary_car_status_t *data) {}
+void car_status_update(primary_car_status_t *data) {
+  steering.das.car_status = *data;
+  switch (data->car_status) {
+  case primary_car_status_car_status_INIT:
+  case primary_car_status_car_status_ENABLE_INV_UPDATES:
+  case primary_car_status_car_status_CHECK_INV_SETTINGS:
+  case primary_car_status_car_status_IDLE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "IDLE");
+    break;
+  }
+  case primary_car_status_car_status_START_TS_PRECHARGE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
+    break;
+  }
+  case primary_car_status_car_status_WAIT_TS_PRECHARGE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
+    break;
+  }
+  case primary_car_status_car_status_WAIT_DRIVER: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
+    break;
+  }
+  case primary_car_status_car_status_ENABLE_INV_DRIVE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
+    break;
+  }
+  case primary_car_status_car_status_DRIVE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "DRIVE");
+    break;
+  }
+  case primary_car_status_car_status_DISABLE_INV_DRIVE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "DRIVE");
+    break;
+  }
+  case primary_car_status_car_status_START_TS_DISCHARGE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSDIS");
+    break;
+  }
+  case primary_car_status_car_status_WAIT_TS_DISCHARGE: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSDIS");
+    break;
+  }
+  case primary_car_status_car_status_FATAL_ERROR: {
+    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "FATAL");
+    break;
+  }
+  }
+}
+
+void hv_errors_update(primary_hv_errors_t *data) {}
+
+void lv_errors_update(primary_lv_errors_t *data) {}
+
+void hv_feedback_update(primary_hv_feedbacks_status_t *data) {}

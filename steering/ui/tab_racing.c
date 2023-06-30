@@ -289,9 +289,10 @@ void tab_racing(lv_obj_t *parent) {
   // lv_obj_align(power, LV_ALIGN_CENTER, 0,0);
 
   // speedometer
-  lv_obj_t *speed = lv_vertical_pair_label(
+  lv_obj_t *speed = lv_vertical_pair_two_labels(
       data_panel, &steering.das.lb_speed[TAB_RACING], "169",
-      &lv_font_inter_bold_70, "km/h", &lv_font_inter_bold_22);
+      &lv_font_inter_bold_60, &steering.das.bottom_lb_speed, "km/h",
+      &lv_font_inter_bold_22);
   lv_obj_set_grid_cell(speed, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER,
                        0, 1);
 
@@ -319,8 +320,9 @@ void tab_racing(lv_obj_t *parent) {
   lv_obj_set_style_pad_bottom(lap_counter, 5, 0);
   lv_obj_set_style_pad_left(lap_counter, 40, 0);
 
+  // ???
   lv_obj_t *km_counter = lv_vertical_pair_label(
-      data_panel, &steering.telemetry.lb_version_component[TAB_RACING], "1.12",
+      data_panel, &steering.telemetry.lb_lap_count[TAB_RACING], "0",
       &lv_font_inter_bold_38, "KM", &lv_font_inter_bold_22);
   lv_obj_set_grid_cell(km_counter, LV_GRID_ALIGN_END, 1, 1, LV_GRID_ALIGN_END,
                        0, 1);
