@@ -26,7 +26,6 @@
 void tab_calibration(lv_obj_t *parent);
 
 void shift_box_focus(bool move_right);
-void calibration_tool_set_min_max(bool setting_max_value);
 
 void init_calibration_tab_styles(void);
 

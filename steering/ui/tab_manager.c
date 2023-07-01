@@ -11,6 +11,8 @@ lv_group_t *g;
 
 tab_t current_tab;
 
+bool steering_initialized = false;
+
 void tab_manager(void) {
   init_custom_styles();
 
@@ -35,10 +37,15 @@ void tab_manager(void) {
   tab_track_test(tab_track_test_ptr);
   tab_notification_screen_create(notif_screen);
 
+<<<<<<< HEAD
   notification_timer = lv_timer_create(restore_previous_screen, 3000, NULL);
   
+=======
+>>>>>>> 0ab604eec7a125860827f766d601743f181b5abe
   lv_scr_load(tab_racing_ptr);
   current_tab = TAB_RACING;
+
+  steering_initialized = true;
 }
 
 void load_current_tab(void) {
@@ -75,8 +82,11 @@ void change_tab(bool forward) {
 
 void restore_previous_screen(lv_timer_t *timer) { load_current_tab(); }
 
-void display_notification(char *label_content) {                       
-  lv_label_set_text(steering.notification_screen_label, label_content); 
+void display_notification(const char *label_content, uint32_t timeout_ms) {
+  notification_timer =
+      lv_timer_create(restore_previous_screen, timeout_ms, NULL);
+  lv_timer_set_repeat_count(notification_timer, 1);
+  lv_label_set_text(steering.notification_screen_label, label_content);
   lv_scr_load(notif_screen);
   lv_timer_reset(notification_timer);
 }
