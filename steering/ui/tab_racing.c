@@ -4,6 +4,8 @@ lv_style_t bar_hv_style;
 lv_style_t bar_lv_style;
 lv_style_t bar_back_style;
 
+lv_obj_t *bottom_bar;
+
 void tab_racing(lv_obj_t *parent) {
   init_racing_style();
 
@@ -96,7 +98,7 @@ void tab_racing(lv_obj_t *parent) {
   lv_obj_add_style(label_hv, &label_style, LV_PART_MAIN);
   lv_obj_set_style_text_font(label_hv, &lv_font_inter_bold_30,
                              LV_STATE_DEFAULT);
-  lv_label_set_text(label_hv, "LV");
+  lv_label_set_text(label_hv, "HV");
   lv_obj_set_grid_cell(label_hv, LV_GRID_ALIGN_CENTER, 0, 1,
                        LV_GRID_ALIGN_CENTER, 2, 1);
 
@@ -259,15 +261,15 @@ void tab_racing(lv_obj_t *parent) {
       right_data_panel, &steering.inverters.lb_left_motor_temp[TAB_RACING],
       "30", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR",
       &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(test1, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER,
-                       2, 1);
+  lv_obj_set_grid_cell(test1, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER,
+                       1, 1);
 
   lv_obj_t *test2 = lv_triple_label(
       right_data_panel, &steering.lv.lb_battery_temperature[TAB_RACING], "20",
       &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "LV",
       &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(test2, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER,
-                       1, 1);
+  lv_obj_set_grid_cell(test2, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER,
+                       2, 1);
 
   lv_obj_t *test3 = lv_triple_label(
       right_data_panel, &steering.hv.lb_average_temperature[TAB_RACING], "12",
@@ -278,16 +280,25 @@ void tab_racing(lv_obj_t *parent) {
 
   // DATA CENTER
 
+  // NOTCH
+
+  lv_obj_t *notch = create_notch(central_panel, TAB_RACING);
+  lv_obj_align(lv_obj_get_child(notch, 0), LV_ALIGN_TOP_MID, 0, 10);
+  lv_obj_set_grid_cell(notch, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START,
+                       0, 2);
+
   // power
   lv_obj_t *power =
-      lv_triple_label(central_panel, &steering.control.lb_power[TAB_RACING],
-                      "60", &lv_font_inter_bold_38, "%", &lv_font_inter_bold_22,
-                      "POWER", &lv_font_inter_bold_14);
-  // lv_obj_align(lv_obj_get_child(power, NULL), LV_GRID_ALIGN_CENTER, 0, -30);
+      lv_horizontal_pair_label(central_panel, &steering.control.lb_power[TAB_RACING],
+                      "60", &lv_font_inter_bold_38, " POWER", &lv_font_inter_bold_22);
+
+  lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1); // center the label "POWER"
+
   lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START,
                        0, 2);
-  lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
-  lv_obj_set_style_pad_top(power, 53, 0);
+  //lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  //lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
+  lv_obj_set_style_pad_top(power, 70, 0);
 
   // lv_obj_align(power, LV_ALIGN_CENTER, 0,0);
 
@@ -337,7 +348,7 @@ void tab_racing(lv_obj_t *parent) {
                        LV_GRID_ALIGN_STRETCH, 1, 1);
 
   // BOTTOM BAR
-  lv_obj_t *bottom_bar = lv_bar_create(central_panel);
+  bottom_bar = lv_bar_create(central_panel);
   lv_obj_remove_style_all(bottom_bar);
   // lv_obj_add_style(bottom_bar, &bar_lv_style, LV_PART_INDICATOR);
   lv_obj_add_style(bottom_bar, &bar_back_style, LV_PART_MAIN);
@@ -456,4 +467,16 @@ void custom_side_bar(lv_obj_t *bar) {
   lv_obj_add_style(rect4, &grid_style, LV_PART_MAIN);
   lv_obj_set_size(rect4, 100, 5);
   lv_obj_align(rect4, LV_ALIGN_CENTER, 0, -108);
+}
+
+
+void racing_error_notification(char *msg){
+    lv_obj_t *label_err = lv_label_create(bottom_bar);
+    lv_obj_remove_style_all(label_err);
+    lv_obj_add_style(label_err, &label_style, LV_PART_MAIN);
+    lv_obj_align(label_err, LV_ALIGN_CENTER, 0, 0);
+    lv_label_set_text(label_err, msg);
+    lv_obj_set_style_text_color(label_err, lv_color_hex(COLOR_PRIMARY_HEX), LV_PART_MAIN);
+    lv_obj_set_style_text_font(label_err, &lv_font_inter_bold_30, LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(label_err, LV_OPA_COVER, LV_PART_MAIN);
 }

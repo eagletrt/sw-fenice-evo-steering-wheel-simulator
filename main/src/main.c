@@ -283,7 +283,10 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
 
   case 'm':;
     display_notification("90 GRADI", 1000);
+    break;
 
+  case 'd':
+    racing_error_notification("NO");
     break;
 
   default:

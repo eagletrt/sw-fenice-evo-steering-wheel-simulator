@@ -24,4 +24,6 @@ void lv_custom_meter(lv_obj_t **custom_meter,
                      lv_meter_indicator_t **indicator_white);
 void custom_side_bar(lv_obj_t *bar);
 
+void racing_error_notification(char *msg);
+
 #endif // TAB_RACING_H

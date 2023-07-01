@@ -34,6 +34,7 @@ typedef enum {
 #define COLOR_GREEN_STATUS_HEX 0x39D103
 #define COLOR_ORANGE_STATUS_HEX 0xE78A00
 #define COLOR_RED_STATUS_HEX 0xCE0000
+#define COLOR_CAR_HEX 0X78797A
 
 LV_FONT_DECLARE(lv_font_inter_bold_14);
 LV_FONT_DECLARE(lv_font_inter_bold_20);
