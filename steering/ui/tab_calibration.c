@@ -17,6 +17,8 @@ lv_obj_t *set_max_btn;
 
 lv_obj_t *scr_calib;
 
+extern tab_t current_tab;
+
 void init_calibration_tab_styles(void) {
   /* BOX STYLE */
   lv_style_init(&box_style);
@@ -225,7 +227,7 @@ void tab_calibration(lv_obj_t *parent) {
 
 void shift_box_focus(bool move_right) {
 
-  if (lv_disp_get_scr_act(NULL) == scr_calib) {
+  if (current_tab == TAB_CALIBRATION) {
 
     calibration_box_t previous_focus = steering.curr_focus;
 
