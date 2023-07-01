@@ -35,7 +35,7 @@ void tab_manager(void) {
   tab_track_test(tab_track_test_ptr);
   tab_notification_screen_create(notif_screen);
 
-  notification_timer = lv_timer_create(restore_previous_screen, 5000, NULL);
+  notification_timer = lv_timer_create(restore_previous_screen, 3000, NULL);
   
   lv_scr_load(tab_racing_ptr);
   current_tab = TAB_RACING;
