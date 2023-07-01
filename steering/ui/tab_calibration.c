@@ -197,6 +197,20 @@ void tab_calibration(lv_obj_t *parent) {
   lv_obj_set_size(background_base, 740, 55);
   lv_obj_set_grid_cell(background_base, LV_GRID_ALIGN_CENTER, 0, 1,
                        LV_GRID_ALIGN_CENTER, 3, 1);
+    lv_obj_t *center_lbl; 
+    lv_obj_t *center_btn_label = lv_horizontal_pair_label(center_btn, &center_lbl, "15", &lv_font_inter_bold_30, " deg", &lv_font_inter_bold_22);
+    lv_obj_set_align(center_btn_label, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(lv_obj_get_child(center_btn_label, 0), lv_color_hex(COLOR_PRIMARY_HEX), LV_PART_MAIN);
+    lv_obj_set_style_text_color(lv_obj_get_child(lv_obj_get_child(center_btn_label, 1), 0), lv_color_hex(COLOR_PRIMARY_HEX), LV_PART_MAIN);
+    lv_obj_set_grid_cell(lv_obj_get_child(center_btn_label, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1); // center the label "POWER"
+
+    /*
+    lv_obj_t *center_btn_label = lv_label_create(center_btn);
+    lv_obj_add_style(center_btn_label, &buttons_label_style, LV_PART_MAIN);
+    lv_label_set_text(center_btn_label, "60 deg");
+    lv_obj_set_style_text_color(center_btn_label, lv_color_hex(COLOR_TERTIARY_HEX), LV_PART_MAIN);
+    lv_obj_set_align(center_btn_label, LV_ALIGN_CENTER);
+    */
 
   steering.slider = lv_slider_create(background_base);
   lv_obj_remove_style_all(steering.slider);

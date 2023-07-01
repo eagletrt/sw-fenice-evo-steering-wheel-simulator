@@ -284,6 +284,7 @@ void tab_racing(lv_obj_t *parent) {
                        0, 2);
 
   // power
+<<<<<<< HEAD
   lv_obj_t *power = lv_horizontal_pair_label(
       central_panel, &steering.control.lb_power[TAB_RACING], "60",
       &lv_font_inter_bold_38, " POWER", &lv_font_inter_bold_22);
@@ -296,6 +297,18 @@ void tab_racing(lv_obj_t *parent) {
   // lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1,
   // 1, LV_GRID_ALIGN_CENTER, 0, 1);
   // lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
+=======
+  lv_obj_t *power =
+      lv_horizontal_pair_label(central_panel, &steering.control.lb_power[TAB_RACING],
+                      "60", &lv_font_inter_bold_38, " POWER", &lv_font_inter_bold_22);
+
+  lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1); // center the label "POWER"
+
+  lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START,
+                       0, 2);
+  //lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  //lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
+>>>>>>> 7a7e645 (fix UI)
   lv_obj_set_style_pad_top(power, 70, 0);
 
   // lv_obj_align(power, LV_ALIGN_CENTER, 0,0);
