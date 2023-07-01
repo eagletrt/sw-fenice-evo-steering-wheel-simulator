@@ -11,6 +11,8 @@ lv_group_t *g;
 
 tab_t current_tab;
 
+bool steering_initialized = false;
+
 void tab_manager(void) {
   init_custom_styles();
 
@@ -37,6 +39,8 @@ void tab_manager(void) {
 
   lv_scr_load(tab_racing_ptr);
   current_tab = TAB_RACING;
+
+  steering_initialized = true;
 }
 
 void load_current_tab(void) {

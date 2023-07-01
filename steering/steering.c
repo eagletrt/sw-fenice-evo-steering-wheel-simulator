@@ -1,5 +1,7 @@
 #include "steering.h"
 
+extern bool steering_initialized;
+
 steering_t steering = {
     .das.car_status = primary_car_status_car_status_IDLE,
     .das.inverter_left = primary_car_status_inverter_l_OFF,
@@ -96,8 +98,16 @@ steering_t steering = {
     .timestamp = 0,
 };
 
+#define CHECK_STEER_INIT                                                       \
+  if (!steering_initialized)                                                   \
+    return;
+
 void car_status_update(primary_car_status_t *data) {
-  steering.das.car_status = *data;
+  uint8_t old = steering.das.car_status;
+  CHECK_STEER_INIT;
+  if (data->car_status == old)
+    return;
+  steering.das.car_status = data->car_status;
   switch (data->car_status) {
   case primary_car_status_car_status_INIT:
   case primary_car_status_car_status_ENABLE_INV_UPDATES:
@@ -107,24 +117,15 @@ void car_status_update(primary_car_status_t *data) {
     STEER_UPDATE_LABEL(steering.das.lb_speed, "IDLE");
     break;
   }
-  case primary_car_status_car_status_START_TS_PRECHARGE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
-    break;
-  }
+  case primary_car_status_car_status_START_TS_PRECHARGE:
   case primary_car_status_car_status_WAIT_TS_PRECHARGE: {
     lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "PRCHG");
     break;
   }
   case primary_car_status_car_status_WAIT_DRIVER: {
     lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
-    break;
-  }
-  case primary_car_status_car_status_ENABLE_INV_DRIVE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSON");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "SETUP");
     break;
   }
   case primary_car_status_car_status_DRIVE: {
@@ -132,19 +133,11 @@ void car_status_update(primary_car_status_t *data) {
     STEER_UPDATE_LABEL(steering.das.lb_speed, "DRIVE");
     break;
   }
-  case primary_car_status_car_status_DISABLE_INV_DRIVE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "DRIVE");
-    break;
-  }
-  case primary_car_status_car_status_START_TS_DISCHARGE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSDIS");
-    break;
-  }
+  case primary_car_status_car_status_DISABLE_INV_DRIVE:
+  case primary_car_status_car_status_START_TS_DISCHARGE:
   case primary_car_status_car_status_WAIT_TS_DISCHARGE: {
     lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSDIS");
+    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSOFF");
     break;
   }
   case primary_car_status_car_status_FATAL_ERROR: {
@@ -152,11 +145,47 @@ void car_status_update(primary_car_status_t *data) {
     STEER_UPDATE_LABEL(steering.das.lb_speed, "FATAL");
     break;
   }
+  default:
+    break;
   }
 }
 
-void hv_errors_update(primary_hv_errors_t *data) {}
+void hv_errors_update(primary_hv_errors_t *data) {
+  // primary_hv_errors_t old = steering.hv.errors;
+  CHECK_STEER_INIT;
+  steering.hv.errors = *data;
+}
 
 void lv_errors_update(primary_lv_errors_t *data) {}
 
 void hv_feedback_update(primary_hv_feedbacks_status_t *data) {}
+
+void hv_temp_update(primary_hv_temp_t *data) {
+  uint8_t old_max_t = steering.hv.max_temperature;
+  uint8_t old_min_t = steering.hv.min_temperature;
+  uint8_t old_avg_t = steering.hv.average_temperature;
+  CHECK_STEER_INIT;
+  if (old_max_t == data->max_temp && old_min_t == data->min_temp &&
+      old_avg_t == data->average_temp)
+    return;
+  steering.hv.max_temperature = data->max_temp;
+  steering.hv.min_temperature = data->min_temp;
+  steering.hv.average_temperature = data->average_temp;
+  char buffer[64];
+  snprintf(buffer, sizeof(buffer), "%d", data->max_temp);
+  STEER_UPDATE_LABEL(steering.hv.lb_max_temperature, buffer);
+  snprintf(buffer, sizeof(buffer), "%d", data->min_temp);
+  STEER_UPDATE_LABEL(steering.hv.lb_min_temperature, buffer);
+  snprintf(buffer, sizeof(buffer), "%d", data->average_temp);
+  STEER_UPDATE_LABEL(steering.hv.lb_average_temperature, buffer);
+}
+
+void lv_total_voltage_update(primary_lv_total_voltage_t *data) {}
+
+void lv_cells_voltage_update(primary_lv_cells_voltage_t *data) {}
+
+void lv_currents_update(primary_lv_currents_t *data) {}
+
+void lv_cells_temp_update(primary_lv_cells_temp_t *data) {}
+
+void tlm_status_update(primary_tlm_status_t *data) {}

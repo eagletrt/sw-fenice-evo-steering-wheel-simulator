@@ -9,7 +9,7 @@
 #include <time.h>
 #include <unistd.h>
 
-typedef enum { BSE, STEER, APPS } CalibrationBox;
+typedef enum { BSE, STEER, APPS } calibration_box_t;
 
 #define STEER_PROPERTY(type, name)                                             \
   type name;                                                                   \
@@ -19,16 +19,15 @@ typedef enum { BSE, STEER, APPS } CalibrationBox;
   device##_##name##_t name;                                                    \
   lv_obj_t *lb_##name[NUM_TABS];
 
-#define STEER_UPDATE_LABEL(name, value)                                \
+#define STEER_UPDATE_LABEL(name, value)                                        \
   for (int i = 0; i < NUM_TABS; i++) {                                         \
-    if (name[i] != NULL)                                  \
-      lv_label_set_text_fmt(name[i], "%s",                \
-                            value);                             \
+    if (name[i] != NULL)                                                       \
+      lv_label_set_text_fmt(name[i], "%s", value);                             \
   }
 
 typedef struct {
   struct {
-    STEER_PROPERTY(primary_car_status_t, car_status);
+    STEER_PROPERTY(uint8_t, car_status);
     STEER_PROPERTY(uint8_t, inverter_left);
     STEER_PROPERTY(uint8_t, inverter_right);
     STEER_PROPERTY(int32_t, left_speed_rads);
@@ -55,7 +54,7 @@ typedef struct {
     STEER_PROPERTY(float, average_temperature);
     STEER_PROPERTY(float, max_temperature);
     STEER_PROPERTY(float, min_temperature);
-    STEER_PROPERTY(uint32_t, errors);
+    STEER_PROPERTY(primary_hv_errors_t, errors);
     STEER_PROPERTY(uint32_t, feedbacks);
     STEER_PROPERTY(uint16_t, warnings);
     STEER_PROPERTY(primary_ts_status_t, ts_status);
@@ -145,7 +144,7 @@ typedef struct {
   lv_meter_indicator_t *indicator_blue;
   lv_meter_indicator_t *indicator_white;
 
-  CalibrationBox curr_focus;
+  calibration_box_t curr_focus;
   lv_obj_t *slider;
 
   uint32_t timestamp;
@@ -158,5 +157,11 @@ void car_status_update(primary_car_status_t *data);
 void hv_errors_update(primary_hv_errors_t *data);
 void lv_errors_update(primary_lv_errors_t *data);
 void hv_feedback_update(primary_hv_feedbacks_status_t *data);
+void hv_temp_update(primary_hv_temp_t *data);
+void lv_total_voltage_update(primary_lv_total_voltage_t *data);
+void lv_cells_voltage_update(primary_lv_cells_voltage_t *data);
+void lv_currents_update(primary_lv_currents_t *data);
+void lv_cells_temp_update(primary_lv_cells_temp_t *data);
+void tlm_status_update(primary_tlm_status_t *data);
 
 #endif
