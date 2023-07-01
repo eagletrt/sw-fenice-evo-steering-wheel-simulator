@@ -281,17 +281,13 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
     sim_calibration_tool_set_min_max(true); // setting max value
     break;
 
-  case 'm':;
+  case 'm':
     display_notification("90 GRADI", 1000);
     break;
 
   case 'd':
     racing_error_notification("NO");
     break;
-
-      case 'd':
-        racing_error_notification("NO");
-        break;
 
   default:
     break;
