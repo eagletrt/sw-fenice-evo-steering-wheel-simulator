@@ -42,12 +42,9 @@ void tab_racing(lv_obj_t *parent) {
   lv_obj_set_grid_cell(bar_panel_lv, LV_GRID_ALIGN_CENTER, 0, 1,
                        LV_GRID_ALIGN_START, 0, 1);
 
-  char init_buffer[64];
-
-  snprintf(init_buffer, sizeof(init_buffer), "%u", steering.lv.lv_percent);
   // lv percentage
   lv_obj_t *lv_perc = lv_horizontal_pair_label(
-      bar_panel_lv, &steering.lv.lb_lv_percent[TAB_RACING], init_buffer,
+      bar_panel_lv, &steering.lv.lb_lv_percent[TAB_RACING], "0",
       &lv_font_inter_bold_38, "%", &lv_font_inter_bold_20);
   lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), 0),
                LV_ALIGN_CENTER, 0, 5); // change "%" position
@@ -176,7 +173,7 @@ void tab_racing(lv_obj_t *parent) {
 
   /* inserting data into data left panel */
   lv_obj_t *best_time = lv_vertical_pair_label(
-      left_data_panel, &steering.steering.lb_best_time[TAB_RACING], " 00:00:00",
+      left_data_panel, &steering.steering.lb_best_time[TAB_RACING], " 00:00",
       &lv_font_inter_bold_38, "BEST TIME", &lv_font_inter_bold_22);
   lv_obj_align(lv_obj_get_child(lv_obj_get_child(best_time, 1), 0),
                LV_ALIGN_LEFT_MID, 10, 0); // change bottom label position
@@ -184,7 +181,7 @@ void tab_racing(lv_obj_t *parent) {
                        LV_GRID_ALIGN_CENTER, 0, 1);
 
   lv_obj_t *last_time = lv_vertical_pair_label(
-      left_data_panel, &steering.steering.lb_last_time[TAB_RACING], "00:00:00",
+      left_data_panel, &steering.steering.lb_last_time[TAB_RACING], "00:00",
       &lv_font_inter_bold_38, "LAST TIME", &lv_font_inter_bold_22);
   lv_obj_align(lv_obj_get_child(lv_obj_get_child(last_time, 1), 0),
                LV_ALIGN_LEFT_MID, 10, 0); // change bottom label position
@@ -288,16 +285,18 @@ void tab_racing(lv_obj_t *parent) {
                        0, 2);
 
   // power
-  lv_obj_t *power =
-      lv_horizontal_pair_label(central_panel, &steering.control.lb_power[TAB_RACING],
-                      "60", &lv_font_inter_bold_38, " POWER", &lv_font_inter_bold_22);
+  lv_obj_t *power = lv_horizontal_pair_label(
+      central_panel, &steering.control.lb_power[TAB_RACING], "60",
+      &lv_font_inter_bold_38, " POWER", &lv_font_inter_bold_22);
 
-  lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1); // center the label "POWER"
+  lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1,
+                       LV_GRID_ALIGN_CENTER, 0, 1); // center the label "POWER"
 
   lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START,
                        0, 2);
-  //lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
-  //lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
+  // lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1,
+  // 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  // lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
   lv_obj_set_style_pad_top(power, 70, 0);
 
   // lv_obj_align(power, LV_ALIGN_CENTER, 0,0);
@@ -419,13 +418,12 @@ void lv_custom_meter(lv_obj_t **custom_meter,
   lv_meter_set_indicator_end_value(*custom_meter, back, 100);
 
   lv_meter_set_indicator_start_value(*custom_meter, *indicator_white, 1);
-  lv_meter_set_indicator_end_value(
-      *custom_meter, *indicator_white,
-      steering.control.power); /*range values 0-100*/
+  lv_meter_set_indicator_end_value(*custom_meter, *indicator_white,
+                                   100); /*range values 0-100*/
 
   lv_meter_set_indicator_start_value(*custom_meter, *indicator_blue, 0);
   lv_meter_set_indicator_end_value(*custom_meter, *indicator_blue,
-                                   50); /*range values 0-100*/
+                                   100); /*range values 0-100*/
 
   lv_meter_set_indicator_value(*custom_meter, *indicator_white, 0);
   lv_meter_set_indicator_value(*custom_meter, *indicator_blue, 0);
@@ -445,7 +443,7 @@ void custom_side_bar(lv_obj_t *bar) {
   lv_obj_set_size(bar, 66, 360);
   lv_obj_center(bar);
   lv_bar_set_range(bar, 0, 100);
-  lv_bar_set_value(bar, 80, LV_ANIM_OFF);
+  lv_bar_set_value(bar, 0, LV_ANIM_OFF);
 
   /* adding levels for side bars */
   lv_obj_t *rect1 = lv_bar_create(bar);
@@ -469,14 +467,14 @@ void custom_side_bar(lv_obj_t *bar) {
   lv_obj_align(rect4, LV_ALIGN_CENTER, 0, -108);
 }
 
-
-void racing_error_notification(char *msg){
-    lv_obj_t *label_err = lv_label_create(bottom_bar);
-    lv_obj_remove_style_all(label_err);
-    lv_obj_add_style(label_err, &label_style, LV_PART_MAIN);
-    lv_obj_align(label_err, LV_ALIGN_CENTER, 0, 0);
-    lv_label_set_text(label_err, msg);
-    lv_obj_set_style_text_color(label_err, lv_color_hex(COLOR_PRIMARY_HEX), LV_PART_MAIN);
-    lv_obj_set_style_text_font(label_err, &lv_font_inter_bold_30, LV_PART_MAIN);
-    lv_obj_set_style_bg_opa(label_err, LV_OPA_COVER, LV_PART_MAIN);
+void racing_error_notification(char *msg) {
+  lv_obj_t *label_err = lv_label_create(bottom_bar);
+  lv_obj_remove_style_all(label_err);
+  lv_obj_add_style(label_err, &label_style, LV_PART_MAIN);
+  lv_obj_align(label_err, LV_ALIGN_CENTER, 0, 0);
+  lv_label_set_text(label_err, msg);
+  lv_obj_set_style_text_color(label_err, lv_color_hex(COLOR_PRIMARY_HEX),
+                              LV_PART_MAIN);
+  lv_obj_set_style_text_font(label_err, &lv_font_inter_bold_30, LV_PART_MAIN);
+  lv_obj_set_style_bg_opa(label_err, LV_OPA_COVER, LV_PART_MAIN);
 }
