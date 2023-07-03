@@ -82,8 +82,8 @@ typedef struct {
 
   struct {
     STEER_PROPERTY(float, current);
-    STEER_PROPERTY(float, voltage);
-    STEER_PROPERTY(uint16_t, total_voltage);
+    STEER_PROPERTY(uint32_t, voltage);
+    STEER_PROPERTY(uint32_t, total_voltage);
     STEER_PROPERTY(float, dcdc_temperature);
     STEER_PROPERTY(float, battery_temperature);
     STEER_PROPERTY(uint8_t, version_component);
@@ -139,8 +139,19 @@ typedef struct {
     STEER_PROPERTY(uint8_t, pumps_speed);
   } cooling_status;
 
+  struct {
+    lv_obj_t *hv_feedbacks[20];
+    lv_obj_t *hv_errors[16];
+    lv_obj_t *das_errors[9];
+    lv_obj_t *lv_errors[17];
+  } car_errors;
+
   lv_obj_t *notification_screen_label;
   lv_obj_t *custom_meter;
+
+  lv_obj_t *hv_bar;
+  lv_obj_t *lv_bar;
+
   lv_meter_indicator_t *indicator_blue;
   lv_meter_indicator_t *indicator_white;
 
@@ -160,6 +171,7 @@ void hv_feedback_update(primary_hv_feedbacks_status_t *data);
 void hv_temp_update(primary_hv_temp_t *data);
 void lv_total_voltage_update(primary_lv_total_voltage_t *data);
 void lv_cells_voltage_update(primary_lv_cells_voltage_t *data);
+void lv_control_update(primary_control_output_converted_t *data);
 void lv_currents_update(primary_lv_currents_t *data);
 void lv_cells_temp_update(primary_lv_cells_temp_t *data);
 void tlm_status_update(primary_tlm_status_t *data);
