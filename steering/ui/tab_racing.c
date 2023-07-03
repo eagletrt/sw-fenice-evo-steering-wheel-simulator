@@ -52,10 +52,10 @@ void tab_racing(lv_obj_t *parent) {
                        LV_GRID_ALIGN_CENTER, 0, 1);
 
   // lv state of charge bar
-  lv_obj_t *lv_bar = lv_bar_create(bar_panel_lv);
-  custom_side_bar(lv_bar);
+  steering.lv_bar = lv_bar_create(bar_panel_lv);
+  custom_side_bar(steering.lv_bar);
 
-  lv_obj_set_grid_cell(lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_END, 1,
+  lv_obj_set_grid_cell(steering.lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_END, 1,
                        1);
 
   // lv label
@@ -100,12 +100,12 @@ void tab_racing(lv_obj_t *parent) {
                        LV_GRID_ALIGN_CENTER, 2, 1);
 
   // hv state of charge bar
-  lv_obj_t *hv_bar = lv_bar_create(bar_panel_hv);
-  custom_side_bar(hv_bar);
-  lv_bar_set_value(hv_bar, 50, LV_ANIM_OFF);
-  lv_obj_set_style_bg_color(hv_bar, lv_color_hex(COLOR_ORANGE_STATUS_HEX),
+  steering.hv_bar = lv_bar_create(bar_panel_hv);
+  custom_side_bar(steering.hv_bar);
+  lv_bar_set_value(steering.hv_bar, 50, LV_ANIM_OFF);
+  lv_obj_set_style_bg_color(steering.hv_bar, lv_color_hex(COLOR_ORANGE_STATUS_HEX),
                             LV_PART_INDICATOR);
-  lv_obj_set_grid_cell(hv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER,
+  lv_obj_set_grid_cell(steering.hv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER,
                        1, 1);
 
   /*-------------------------------------*/
