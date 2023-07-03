@@ -139,6 +139,13 @@ typedef struct {
     STEER_PROPERTY(uint8_t, pumps_speed);
   } cooling_status;
 
+  struct {
+    lv_obj_t *hv_feedbacks[20];
+    lv_obj_t *hv_errors[16];
+    lv_obj_t *das_errors[9];
+    lv_obj_t *lv_errors[17];
+  } car_errors;
+
   lv_obj_t *notification_screen_label;
   lv_obj_t *custom_meter;
   lv_meter_indicator_t *indicator_blue;
