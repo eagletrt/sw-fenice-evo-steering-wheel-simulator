@@ -12,6 +12,7 @@ lv_group_t *g;
 tab_t current_tab;
 
 bool steering_initialized = false;
+bool on_animation = false;
 
 void tab_manager(void) {
   init_custom_styles();
@@ -74,9 +75,16 @@ void change_tab(bool forward) {
   load_current_tab();
 }
 
-void restore_previous_screen(lv_timer_t *timer) { load_current_tab(); }
+void restore_previous_screen(lv_timer_t *timer) { 
+  load_current_tab(); 
+  on_animation = false;
+}
 
 void display_notification(const char *label_content, uint32_t timeout_ms) {
+  if (on_animation) {
+    lv_timer_set_repeat_count(notification_timer, 0);
+  }
+  on_animation = true;
   notification_timer =
       lv_timer_create(restore_previous_screen, timeout_ms, NULL);
   lv_timer_set_repeat_count(notification_timer, 1);
