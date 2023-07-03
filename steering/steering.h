@@ -75,15 +75,15 @@ typedef struct {
   } inverters;
 
   struct {
-    STEER_PROPERTY(float, current);
-    STEER_PROPERTY(uint32_t, voltage);
-    STEER_PROPERTY(uint32_t, total_voltage);
-    STEER_PROPERTY(float, dcdc_temperature);
-    STEER_PROPERTY(float, battery_temperature);
-    STEER_PROPERTY(uint8_t, version_component);
-    STEER_PROPERTY(uint32_t, version_cancicd);
-    STEER_PROPERTY(uint32_t, errors);
-    STEER_PROPERTY(uint32_t, lv_percent);
+    STEER_PROPERTY(current);
+    STEER_PROPERTY(voltage);
+    STEER_PROPERTY(total_voltage);
+    STEER_PROPERTY(dcdc_temperature);
+    STEER_PROPERTY(battery_temperature);
+    STEER_PROPERTY(version_component);
+    STEER_PROPERTY(version_cancicd);
+    STEER_PROPERTY(errors);
+    STEER_PROPERTY(lv_percent);
   } lv;
 
   struct {
@@ -158,16 +158,26 @@ typedef struct {
 
 extern steering_t steering;
 
-void car_status_update(primary_car_status_t *data);
-void hv_errors_update(primary_hv_errors_t *data);
-void lv_errors_update(primary_lv_errors_t *data);
-void hv_feedback_update(primary_hv_feedbacks_status_t *data);
-void hv_temp_update(primary_hv_temp_t *data);
-void lv_total_voltage_update(primary_lv_total_voltage_t *data);
-void lv_cells_voltage_update(primary_lv_cells_voltage_t *data);
-void lv_control_update(primary_control_output_converted_t *data);
-void lv_currents_update(primary_lv_currents_t *data);
-void lv_cells_temp_update(primary_lv_cells_temp_t *data);
-void tlm_status_update(primary_tlm_status_t *data);
+void car_status_update(primary_car_status_converted_t *);
+void control_output_update(primary_control_output_converted_t *data);
+void tlm_status_update(primary_tlm_status_converted_t *);
+void ambient_temperature_update(primary_ambient_temperature_converted_t *);
+void speed_update(primary_speed_converted_t *);
+
+void hv_voltage_update(primary_hv_voltage_converted_t *);
+void hv_current_update(primary_hv_current_converted_t *);
+void hv_temp_update(primary_hv_temp_converted_t *);
+void hv_errors_update(primary_hv_errors_converted_t *);
+void hv_feedbacks_status_update(primary_hv_feedbacks_status_converted_t *);
+void hv_cells_voltage_update(primary_hv_cells_voltage_converted_t *);
+void hv_cells_temp_update(primary_hv_cells_temp_converted_t *);
+
+void das_errors_update(primary_das_errors_converted_t *);
+
+void lv_currents_update(primary_lv_currents_converted_t *);
+void lv_cells_voltage_update(primary_lv_cells_voltage_converted_t *);
+void lv_cells_temp_update(primary_lv_cells_temp_converted_t *);
+void lv_total_voltage_update(primary_lv_total_voltage_converted_t *);
+void lv_errors_update(primary_lv_errors_converted_t *);
 
 #endif
