@@ -50,7 +50,9 @@ steering_t steering = {
     .inverters.left_speed = 0,
 
     .lv.current = 0,
-    .lv.voltage = 0,
+    .lv.voltage_0 = 0,
+    .lv.voltage_1 = 0,
+    .lv.voltage_2 = 0,
     .lv.total_voltage = 0,
     .lv.dcdc_temperature = 0,
     .lv.battery_temperature = 0,

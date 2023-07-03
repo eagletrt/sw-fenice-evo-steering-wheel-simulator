@@ -83,7 +83,9 @@ typedef struct {
 
     struct {
         LV_PROPERTY(float, current);
-        LV_PROPERTY(float, voltage);
+        LV_PROPERTY(float, voltage_0);
+        LV_PROPERTY(float, voltage_1);
+        LV_PROPERTY(float, voltage_2);
         LV_PROPERTY(uint16_t, total_voltage);
         LV_PROPERTY(float, dcdc_temperature);
         LV_PROPERTY(float, battery_temperature);
