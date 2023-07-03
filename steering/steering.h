@@ -146,11 +146,21 @@ typedef struct {
     lv_obj_t *lv_errors[17];
   } car_errors;
 
+
+
   lv_obj_t *notification_screen_label;
+
+  /* Tab Racing */
   lv_obj_t *custom_meter;
   lv_meter_indicator_t *indicator_blue;
   lv_meter_indicator_t *indicator_white;
+  lv_obj_t *racing_hv_bar;
+  lv_obj_t *racing_lv_bar;
 
+  /* Tab Sensors */
+  
+
+  /* Calibration Tab */
   calibration_box_t curr_focus;
   lv_obj_t *slider;
 

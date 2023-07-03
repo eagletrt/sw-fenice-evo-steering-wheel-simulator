@@ -286,7 +286,7 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
     break;
 
   case 'd':
-    racing_error_notification("NO");
+    racing_error_notification("VEZ TE GHE LE GOMME SBUSE");
     break;
 
   default:
