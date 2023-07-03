@@ -13,6 +13,8 @@ lv_obj_t *hv_errors_panel;
 lv_obj_t *lv_errors_panel;
 lv_obj_t *das_errors_panel;
 
+extern tab_t current_tab;
+
 lv_obj_t *cell_create(lv_obj_t *parent, const char *text, uint8_t pos_col,
                       uint8_t pos_row, lv_style_t *style) {
   lv_obj_t *cell = lv_obj_create(parent);
@@ -473,7 +475,7 @@ ErrorTabID errors_focus = HV_ERRORS;
 
 void change_errors_view(bool dir_left) {
 
-  if (lv_disp_get_scr_act(NULL) == scr_debug) {
+  if (current_tab == TAB_DEBUG) {
 
     if (dir_left) {
       if (errors_focus == 0)

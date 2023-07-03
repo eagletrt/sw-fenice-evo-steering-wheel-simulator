@@ -9,7 +9,7 @@
 #include <time.h>
 #include <unistd.h>
 
-typedef enum { BSE, STEER, APPS } calibration_box_t;
+typedef enum { BSE, STEER, APPS, CALBOX_N } calibration_box_t;
 
 #define STEER_PROPERTY(type, name)                                             \
   type name;                                                                   \

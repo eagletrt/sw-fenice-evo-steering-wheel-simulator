@@ -36,7 +36,6 @@ void tab_manager(void) {
   tab_debug(tab_debug_ptr);
   tab_track_test(tab_track_test_ptr);
   tab_notification_screen_create(notif_screen);
-
   lv_scr_load(tab_racing_ptr);
   current_tab = TAB_RACING;
 

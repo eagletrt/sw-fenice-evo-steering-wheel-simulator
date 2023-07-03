@@ -42,9 +42,12 @@ void tab_racing(lv_obj_t *parent) {
   lv_obj_set_grid_cell(bar_panel_lv, LV_GRID_ALIGN_CENTER, 0, 1,
                        LV_GRID_ALIGN_START, 0, 1);
 
+  char init_buffer[64];
+
+  snprintf(init_buffer, sizeof(init_buffer), "%u", steering.lv.lv_percent);
   // lv percentage
   lv_obj_t *lv_perc = lv_horizontal_pair_label(
-      bar_panel_lv, &steering.lv.lb_lv_percent[TAB_RACING], "80",
+      bar_panel_lv, &steering.lv.lb_lv_percent[TAB_RACING], init_buffer,
       &lv_font_inter_bold_38, "%", &lv_font_inter_bold_20);
   lv_obj_align(lv_obj_get_child(lv_obj_get_child(lv_perc, 1), 0),
                LV_ALIGN_CENTER, 0, 5); // change "%" position
@@ -83,7 +86,7 @@ void tab_racing(lv_obj_t *parent) {
 
   // hv percentage
   lv_obj_t *hv_perc = lv_horizontal_pair_label(
-      bar_panel_hv, &steering.hv.lb_hv_percent[TAB_RACING], "50",
+      bar_panel_hv, &steering.hv.lb_hv_percent[TAB_RACING], "0",
       &lv_font_inter_bold_38, "%", &lv_font_inter_bold_20);
   lv_obj_align(lv_obj_get_child(lv_obj_get_child(hv_perc, 1), 0),
                LV_ALIGN_CENTER, 0, 5); // change "%" position
@@ -173,7 +176,7 @@ void tab_racing(lv_obj_t *parent) {
 
   /* inserting data into data left panel */
   lv_obj_t *best_time = lv_vertical_pair_label(
-      left_data_panel, &steering.steering.lb_best_time[TAB_RACING], " 1:24:03",
+      left_data_panel, &steering.steering.lb_best_time[TAB_RACING], " 00:00:00",
       &lv_font_inter_bold_38, "BEST TIME", &lv_font_inter_bold_22);
   lv_obj_align(lv_obj_get_child(lv_obj_get_child(best_time, 1), 0),
                LV_ALIGN_LEFT_MID, 10, 0); // change bottom label position
@@ -181,7 +184,7 @@ void tab_racing(lv_obj_t *parent) {
                        LV_GRID_ALIGN_CENTER, 0, 1);
 
   lv_obj_t *last_time = lv_vertical_pair_label(
-      left_data_panel, &steering.steering.lb_last_time[TAB_RACING], " 1:25:33",
+      left_data_panel, &steering.steering.lb_last_time[TAB_RACING], "00:00:00",
       &lv_font_inter_bold_38, "LAST TIME", &lv_font_inter_bold_22);
   lv_obj_align(lv_obj_get_child(lv_obj_get_child(last_time, 1), 0),
                LV_ALIGN_LEFT_MID, 10, 0); // change bottom label position

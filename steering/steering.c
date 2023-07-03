@@ -98,13 +98,8 @@ steering_t steering = {
     .timestamp = 0,
 };
 
-#define CHECK_STEER_INIT                                                       \
-  if (!steering_initialized)                                                   \
-    return;
-
 void car_status_update(primary_car_status_t *data) {
   uint8_t old = steering.das.car_status;
-  CHECK_STEER_INIT;
   if (data->car_status == old)
     return;
   steering.das.car_status = data->car_status;
@@ -152,7 +147,6 @@ void car_status_update(primary_car_status_t *data) {
 
 void hv_errors_update(primary_hv_errors_t *data) {
   // primary_hv_errors_t old = steering.hv.errors;
-  CHECK_STEER_INIT;
   steering.hv.errors = *data;
 }
 
@@ -164,7 +158,6 @@ void hv_temp_update(primary_hv_temp_t *data) {
   uint8_t old_max_t = steering.hv.max_temperature;
   uint8_t old_min_t = steering.hv.min_temperature;
   uint8_t old_avg_t = steering.hv.average_temperature;
-  CHECK_STEER_INIT;
   if (old_max_t == data->max_temp && old_min_t == data->min_temp &&
       old_avg_t == data->average_temp)
     return;
