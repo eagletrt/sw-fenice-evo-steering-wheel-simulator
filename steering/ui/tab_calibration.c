@@ -365,6 +365,8 @@ void shift_box_focus(bool move_right) {
       default:
         break;
       }
+
+      lv_scr_load(scr_calib);
     }
   }
 }
