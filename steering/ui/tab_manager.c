@@ -75,8 +75,8 @@ void change_tab(bool forward) {
   load_current_tab();
 }
 
-void restore_previous_screen(lv_timer_t *timer) { 
-  load_current_tab(); 
+void restore_previous_screen(lv_timer_t *timer) {
+  load_current_tab();
   on_animation = false;
 }
 

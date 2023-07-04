@@ -27,9 +27,6 @@ primary_lv_cells_temp_converted_t lv_cells_temp_last_message = {0};
 primary_lv_total_voltage_converted_t lv_total_voltage_last_message = {0};
 primary_lv_errors_converted_t lv_errors_last_message = {0};
 
-primary_steer_status_converted_t steer_status_last_message = {
-    .map_pw = 0, .map_sc = 0, .map_tv = 0};
-
 void car_status_update(primary_car_status_converted_t *data) {
 
   if (data->car_status != car_status_last_message.car_status) {
@@ -91,7 +88,8 @@ void control_output_update(primary_control_output_converted_t *data) {}
 
 void tlm_status_update(primary_tlm_status_converted_t *data) {}
 
-void ambient_temperature_update(primary_ambient_temperature_converted_t *data) {}
+void ambient_temperature_update(primary_ambient_temperature_converted_t *data) {
+}
 
 void speed_update(primary_speed_converted_t *data) {}
 
@@ -108,24 +106,24 @@ void hv_temp_update(primary_hv_temp_converted_t *data) {
   hv_temp_last_message.min_temp = data->min_temp;
   hv_temp_last_message.average_temp = data->average_temp;
   char buffer[64];
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->max_temp);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->max_temp);
   STEER_UPDATE_LABEL(steering.hv.lb_max_temperature, buffer);
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->min_temp);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->min_temp);
   STEER_UPDATE_LABEL(steering.hv.lb_min_temperature, buffer);
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->average_temp);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->average_temp);
   STEER_UPDATE_LABEL(steering.hv.lb_average_temperature, buffer);
 }
 
 void hv_errors_update(primary_hv_errors_converted_t *data) {}
 
-
 void hv_total_voltage_update(primary_hv_voltage_converted_t *data) {
-  uint16_t old_max_v =  hv_voltage_last_message.max_cell_voltage;
-  uint16_t old_min_v =  hv_voltage_last_message.min_cell_voltage;
-  uint16_t old_bus_v =  hv_voltage_last_message.bus_voltage;
+  uint16_t old_max_v = hv_voltage_last_message.max_cell_voltage;
+  uint16_t old_min_v = hv_voltage_last_message.min_cell_voltage;
+  uint16_t old_bus_v = hv_voltage_last_message.bus_voltage;
   uint16_t old_pack_v = hv_voltage_last_message.pack_voltage;
-  if (old_max_v == data->max_cell_voltage && old_min_v == data->min_cell_voltage &&
-      old_bus_v== data->bus_voltage && old_pack_v == data->pack_voltage)
+  if (old_max_v == data->max_cell_voltage &&
+      old_min_v == data->min_cell_voltage && old_bus_v == data->bus_voltage &&
+      old_pack_v == data->pack_voltage)
     return;
 
   hv_voltage_last_message.max_cell_voltage = data->max_cell_voltage;
@@ -134,19 +132,20 @@ void hv_total_voltage_update(primary_hv_voltage_converted_t *data) {
   hv_voltage_last_message.pack_voltage = data->pack_voltage;
 
   char buffer[64];
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->max_cell_voltage);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->max_cell_voltage);
   STEER_UPDATE_LABEL(steering.hv.lb_max_cell_voltage, buffer);
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->min_cell_voltage);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->min_cell_voltage);
   STEER_UPDATE_LABEL(steering.hv.lb_min_cell_voltage, buffer);
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->bus_voltage);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->bus_voltage);
   STEER_UPDATE_LABEL(steering.hv.lb_bus_voltage, buffer);
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->pack_voltage);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->pack_voltage);
   STEER_UPDATE_LABEL(steering.hv.lb_pack_voltage, buffer);
 
   lv_bar_set_value(steering.hv_bar, data->pack_voltage, LV_ANIM_OFF);
 }
 
-void hv_feedbacks_status_update(primary_hv_feedbacks_status_converted_t *data) {}
+void hv_feedbacks_status_update(primary_hv_feedbacks_status_converted_t *data) {
+}
 
 void hv_cells_voltage_update(primary_hv_cells_voltage_converted_t *data) {}
 
@@ -156,18 +155,17 @@ void das_errors_update(primary_das_errors_converted_t *data) {}
 
 void lv_currents_update(primary_lv_currents_converted_t *data) {
   uint16_t old_current_lv_battery = lv_currents_last_message.current_lv_battery;
-  if (old_current_lv_battery == data->current_lv_battery )
+  if (old_current_lv_battery == data->current_lv_battery)
     return;
   lv_currents_last_message.current_lv_battery = data->current_lv_battery;
   char buffer[64];
-  snprintf(buffer, sizeof(buffer), "%f", (float) data->current_lv_battery);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->current_lv_battery);
   STEER_UPDATE_LABEL(steering.lv.lb_current, buffer);
 }
 
-
 void lv_control_update(primary_control_output_converted_t *data) {
-  /*right now gps speed is used beacuse is the one conncected to the labels of the UI, later should be changed to existing
-  estimtated velocity variables*/
+  /*right now gps speed is used beacuse is the one conncected to the labels of
+  the UI, later should be changed to existing estimtated velocity variables*/
 
   float old_estimated_velocity = control_output_last_message.estimated_velocity;
   // TODO: the other field of the struct
@@ -177,11 +175,11 @@ void lv_control_update(primary_control_output_converted_t *data) {
   char buffer[64];
   snprintf(buffer, sizeof(buffer), "%f", data->estimated_velocity);
   STEER_UPDATE_LABEL(steering.telemetry.lb_gps_speed, buffer);
-  lv_meter_set_indicator_value(steering.custom_meter, steering.indicator_blue, data->estimated_velocity);
+  lv_meter_set_indicator_value(steering.custom_meter, steering.indicator_blue,
+                               data->estimated_velocity);
 }
 
-
-void lv_cells_voltage_update(primary_lv_cells_voltage_converted_t *data){
+void lv_cells_voltage_update(primary_lv_cells_voltage_converted_t *data) {
   uint16_t old_cells_voltage_0;
   uint16_t old_cells_voltage_1;
   uint16_t old_cells_voltage_2;
@@ -201,12 +199,19 @@ void lv_cells_voltage_update(primary_lv_cells_voltage_converted_t *data){
     lv_cells_voltage_last_message_2.voltage_2 = data->voltage_2;
   }
 
-  if (old_cells_voltage_0 == data->voltage_0 && old_cells_voltage_1 == data->voltage_1 && old_cells_voltage_2 == data->voltage_2)
+  if (old_cells_voltage_0 == data->voltage_0 &&
+      old_cells_voltage_1 == data->voltage_1 &&
+      old_cells_voltage_2 == data->voltage_2)
     return;
   char buffer[64];
-  uint16_t mean = (lv_cells_voltage_last_message_1.voltage_0 + lv_cells_voltage_last_message_1.voltage_1 + lv_cells_voltage_last_message_1.voltage_2 +
-                   lv_cells_voltage_last_message_2.voltage_0 + lv_cells_voltage_last_message_2.voltage_1 + lv_cells_voltage_last_message_2.voltage_2) / 6;
-  snprintf(buffer, sizeof(buffer), "%u", (unsigned int) mean);
+  uint16_t mean = (lv_cells_voltage_last_message_1.voltage_0 +
+                   lv_cells_voltage_last_message_1.voltage_1 +
+                   lv_cells_voltage_last_message_1.voltage_2 +
+                   lv_cells_voltage_last_message_2.voltage_0 +
+                   lv_cells_voltage_last_message_2.voltage_1 +
+                   lv_cells_voltage_last_message_2.voltage_2) /
+                  6;
+  snprintf(buffer, sizeof(buffer), "%u", (unsigned int)mean);
   STEER_UPDATE_LABEL(steering.lv.lb_voltage, buffer);
 }
 
@@ -214,14 +219,15 @@ void lv_cells_temp_update(primary_lv_cells_temp_converted_t *data) {
   float old_lv_temp_0 = lv_cells_temp_last_message.temp_0;
   float old_lv_temp_1 = lv_cells_temp_last_message.temp_1;
   float old_lv_temp_2 = lv_cells_temp_last_message.temp_2;
-  if (old_lv_temp_0 == data->temp_0 && old_lv_temp_1 == data->temp_1 && old_lv_temp_2 == data->temp_2)
+  if (old_lv_temp_0 == data->temp_0 && old_lv_temp_1 == data->temp_1 &&
+      old_lv_temp_2 == data->temp_2)
     return;
   lv_cells_temp_last_message.temp_0 = data->temp_0;
   lv_cells_temp_last_message.temp_1 = data->temp_1;
   lv_cells_temp_last_message.temp_2 = data->temp_2;
   uint16_t mean_temp = (data->temp_0 + data->temp_1 + data->temp_2) / 3;
   char buffer[64];
-  snprintf(buffer, sizeof(buffer), "%u", (unsigned int) mean_temp);
+  snprintf(buffer, sizeof(buffer), "%u", (unsigned int)mean_temp);
   STEER_UPDATE_LABEL(steering.lv.lb_battery_temperature, buffer);
 }
 
@@ -231,7 +237,7 @@ void lv_total_voltage_update(primary_lv_total_voltage_converted_t *data) {
     return;
   lv_total_voltage_last_message.total_voltage = data->total_voltage;
   char buffer[64];
-  snprintf(buffer, sizeof(buffer), "%f", (double) data->total_voltage);
+  snprintf(buffer, sizeof(buffer), "%f", (double)data->total_voltage);
   lv_bar_set_value(steering.lv_bar, data->total_voltage, LV_ANIM_OFF);
   STEER_UPDATE_LABEL(steering.lv.lb_total_voltage, buffer);
 }
