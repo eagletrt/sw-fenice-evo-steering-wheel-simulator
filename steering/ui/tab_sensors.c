@@ -344,30 +344,6 @@ void tab_sensors(lv_obj_t *parent) {
   lv_obj_set_grid_cell(motor_r_temp_lb, LV_GRID_ALIGN_CENTER, 3, 1,
                        LV_GRID_ALIGN_CENTER, 0, 1);
 
-    lv_obj_t *inv_r_temp_lb = lv_triple_label(
-      right_data_panel, &steering.inverters.lb_right_inverter_temp[TAB_SENSORS],
-      "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV R",
-      &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(inv_r_temp_lb, LV_GRID_ALIGN_CENTER, 1, 1,
-                       LV_GRID_ALIGN_CENTER, 0, 1);
-
-
-lv_obj_t *motor_l_temp_lb = lv_triple_label(
-      right_data_panel, &steering.inverters.lb_left_motor_temp[TAB_SENSORS],
-      "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR L",
-      &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(motor_l_temp_lb, LV_GRID_ALIGN_CENTER, 2, 1,
-                       LV_GRID_ALIGN_CENTER, 0, 1);
-            
-
-    lv_obj_t *motor_r_temp_lb = lv_triple_label(
-      right_data_panel, &steering.inverters.lb_right_motor_temp[TAB_SENSORS],
-      "X", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR R",
-      &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(motor_r_temp_lb, LV_GRID_ALIGN_CENTER, 3, 1,
-                       LV_GRID_ALIGN_CENTER, 0, 1);
-
-
   /* 2nd row HV */
 
   lv_obj_t *hv_temp_lb = lv_triple_label(
