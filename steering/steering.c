@@ -114,7 +114,185 @@ void hv_temp_update(primary_hv_temp_converted_t *data) {
   STEER_UPDATE_LABEL(steering.hv.lb_average_temperature, buffer);
 }
 
-void hv_errors_update(primary_hv_errors_converted_t *data) {}
+void hv_errors_update(primary_hv_errors_converted_t *data) {
+  
+  if(hv_errors_last_message.errors_cell_low_voltage != data->errors_cell_low_voltage){
+    hv_errors_last_message.errors_cell_low_voltage = data->errors_cell_low_voltage;
+
+    if(data->errors_cell_low_voltage)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[0], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[0], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_cell_under_voltage != data->errors_cell_under_voltage){
+    hv_errors_last_message.errors_cell_under_voltage = data->errors_cell_under_voltage;
+
+    if(data->errors_cell_under_voltage)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[1], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[1], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_cell_over_voltage != data->errors_cell_over_voltage){
+    hv_errors_last_message.errors_cell_over_voltage = data->errors_cell_over_voltage;
+
+    if(data->errors_cell_over_voltage)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[2], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[2], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_cell_high_temperature != data->errors_cell_high_temperature){
+    hv_errors_last_message.errors_cell_high_temperature = data->errors_cell_high_temperature;
+
+    if(data->errors_cell_high_temperature)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[3], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[3], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_cell_over_temperature != data->errors_cell_over_temperature){
+    hv_errors_last_message.errors_cell_over_temperature = data->errors_cell_over_temperature;
+
+    if(data->errors_cell_over_temperature)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[4], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[4], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_over_current != data->errors_over_current){
+    hv_errors_last_message.errors_over_current = data->errors_over_current;
+
+    if(data->errors_over_current)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[5], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[5], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_can != data->errors_can){
+    hv_errors_last_message.errors_can = data->errors_can;
+
+    if(data->errors_can)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[6], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[6], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_int_voltage_mismatch != data->errors_int_voltage_mismatch){
+    hv_errors_last_message.errors_int_voltage_mismatch = data->errors_int_voltage_mismatch;
+
+    if(data->errors_int_voltage_mismatch)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[7], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[7], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_cellboard_comm != data->errors_cellboard_comm){
+    hv_errors_last_message.errors_cellboard_comm = data->errors_cellboard_comm;
+
+    if(data->errors_cellboard_comm)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[8], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[8], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_cellboard_internal != data->errors_cellboard_internal){
+    hv_errors_last_message.errors_cellboard_internal = data->errors_cellboard_internal;
+
+    if(data->errors_cellboard_internal)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[9], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[9], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_connector_disconnected != data->errors_connector_disconnected){
+    hv_errors_last_message.errors_connector_disconnected = data->errors_connector_disconnected;
+
+    if(data->errors_connector_disconnected)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[10], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[10], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_fans_disconnected != data->errors_fans_disconnected){
+    hv_errors_last_message.errors_fans_disconnected = data->errors_fans_disconnected;
+
+    if(data->errors_fans_disconnected)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[11], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[11], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_feedback != data->errors_feedback){
+    hv_errors_last_message.errors_feedback = data->errors_feedback;
+
+    if(data->errors_feedback)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[12], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[12], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_feedback_circuitry != data->errors_feedback_circuitry){
+    hv_errors_last_message.errors_feedback_circuitry = data->errors_feedback_circuitry;
+
+    if(data->errors_feedback_circuitry)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[13], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[13], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_eeprom_comm != data->errors_eeprom_comm){
+    hv_errors_last_message.errors_eeprom_comm = data->errors_eeprom_comm;
+
+    if(data->errors_eeprom_comm)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[14], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[14], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+  if(hv_errors_last_message.errors_eeprom_write != data->errors_eeprom_write){
+    hv_errors_last_message.errors_eeprom_write = data->errors_eeprom_write;
+
+    if(data->errors_eeprom_write)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[15], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_errors[15], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+
+  }
+
+
+}
 
 void hv_total_voltage_update(primary_hv_voltage_converted_t *data) {
   uint16_t old_max_v = hv_voltage_last_message.max_cell_voltage;
@@ -145,13 +323,294 @@ void hv_total_voltage_update(primary_hv_voltage_converted_t *data) {
 }
 
 void hv_feedbacks_status_update(primary_hv_feedbacks_status_converted_t *data) {
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_implausibility_detected != data->feedbacks_status_feedback_implausibility_detected){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_implausibility_detected = data->feedbacks_status_feedback_implausibility_detected;
+
+    if(data->feedbacks_status_feedback_implausibility_detected)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[0], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[0], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_imd_cockpit != data->feedbacks_status_feedback_imd_cockpit){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_imd_cockpit = data->feedbacks_status_feedback_imd_cockpit;
+
+    if(data->feedbacks_status_feedback_imd_cockpit)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[1], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[1], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_tsal_green_fault_latched != data->feedbacks_status_feedback_tsal_green_fault_latched){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_tsal_green_fault_latched = data->feedbacks_status_feedback_tsal_green_fault_latched;
+
+    if(data->feedbacks_status_feedback_tsal_green_fault_latched)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[2], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[2], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_bms_cockpit != data->feedbacks_status_feedback_bms_cockpit){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_bms_cockpit = data->feedbacks_status_feedback_bms_cockpit;
+
+    if(data->feedbacks_status_feedback_bms_cockpit)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[3], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[3], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_ext_latched != data->feedbacks_status_feedback_ext_latched){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_ext_latched = data->feedbacks_status_feedback_ext_latched;
+
+    if(data->feedbacks_status_feedback_ext_latched)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[4], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[4], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_tsal_green != data->feedbacks_status_feedback_tsal_green){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_tsal_green = data->feedbacks_status_feedback_tsal_green;
+
+    if(data->feedbacks_status_feedback_tsal_green)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[5], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[5], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_ts_over_60v_status != data->feedbacks_status_feedback_ts_over_60v_status){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_ts_over_60v_status = data->feedbacks_status_feedback_ts_over_60v_status;
+
+    if(data->feedbacks_status_feedback_ts_over_60v_status)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[6], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[6], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_airn_status != data->feedbacks_status_feedback_airn_status){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_airn_status = data->feedbacks_status_feedback_airn_status;
+
+    if(data->feedbacks_status_feedback_airn_status)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[7], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[7], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_airp_status != data->feedbacks_status_feedback_airp_status){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_airp_status = data->feedbacks_status_feedback_airp_status;
+
+    if(data->feedbacks_status_feedback_airp_status)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[8], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[8], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_airp_gate != data->feedbacks_status_feedback_airp_gate){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_airp_gate = data->feedbacks_status_feedback_airp_gate;
+
+    if(data->feedbacks_status_feedback_airp_gate)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[9], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[9], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_airn_gate != data->feedbacks_status_feedback_airn_gate){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_airn_gate = data->feedbacks_status_feedback_airn_gate;
+
+    if(data->feedbacks_status_feedback_airn_gate)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[10], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[10], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_precharge_status != data->feedbacks_status_feedback_precharge_status){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_precharge_status = data->feedbacks_status_feedback_precharge_status;
+
+    if(data->feedbacks_status_feedback_precharge_status)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[11], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[11], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_tsp_over_60v_status != data->feedbacks_status_feedback_tsp_over_60v_status){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_tsp_over_60v_status = data->feedbacks_status_feedback_tsp_over_60v_status;
+
+    if(data->feedbacks_status_feedback_tsp_over_60v_status)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[12], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[12], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_imd_fault != data->feedbacks_status_feedback_imd_fault){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_imd_fault = data->feedbacks_status_feedback_imd_fault;
+
+    if(data->feedbacks_status_feedback_imd_fault)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[13], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[13], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_check_mux != data->feedbacks_status_feedback_check_mux){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_check_mux = data->feedbacks_status_feedback_check_mux;
+
+    if(data->feedbacks_status_feedback_check_mux)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[14], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[14], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_end != data->feedbacks_status_feedback_sd_end){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_end = data->feedbacks_status_feedback_sd_end;
+
+    if(data->feedbacks_status_feedback_sd_end)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[15], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[15], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_out != data->feedbacks_status_feedback_sd_out){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_out = data->feedbacks_status_feedback_sd_out;
+
+    if(data->feedbacks_status_feedback_sd_out)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[16], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[16], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_in != data->feedbacks_status_feedback_sd_in){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_in = data->feedbacks_status_feedback_sd_in;
+
+    if(data->feedbacks_status_feedback_sd_in)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[17], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[17], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_bms != data->feedbacks_status_feedback_sd_bms){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_bms = data->feedbacks_status_feedback_sd_bms;
+
+    if(data->feedbacks_status_feedback_sd_bms)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[18], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[18], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_imd != data->feedbacks_status_feedback_sd_imd){
+    hv_feedbacks_status_last_message.feedbacks_status_feedback_sd_imd = data->feedbacks_status_feedback_sd_imd;
+
+    if(data->feedbacks_status_feedback_sd_imd)
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[19], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.hv_feedbacks[19], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
 }
 
 void hv_cells_voltage_update(primary_hv_cells_voltage_converted_t *data) {}
 
 void hv_cells_temp_update(primary_hv_cells_temp_converted_t *data) {}
 
-void das_errors_update(primary_das_errors_converted_t *data) {}
+void das_errors_update(primary_das_errors_converted_t *data) {
+
+  if(das_errors_last_message.das_error_pedal_adc != data->das_error_pedal_adc){
+    das_errors_last_message.das_error_pedal_adc = data->das_error_pedal_adc;
+
+    if(data->das_error_pedal_adc)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[0], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[0], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_pedal_adc != data->das_error_pedal_implausibility){
+    das_errors_last_message.das_error_pedal_implausibility = data->das_error_pedal_implausibility;
+
+    if(data->das_error_pedal_implausibility)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[1], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[1], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_imu_tout != data->das_error_imu_tout){
+    das_errors_last_message.das_error_imu_tout = data->das_error_imu_tout;
+
+    if(data->das_error_imu_tout)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[2], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[2], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_irts_tout != data->das_error_irts_tout){
+    das_errors_last_message.das_error_irts_tout = data->das_error_irts_tout;
+
+    if(data->das_error_irts_tout)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[3], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[3], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_ts_tout != data->das_error_ts_tout){
+    das_errors_last_message.das_error_ts_tout = data->das_error_ts_tout;
+
+    if(data->das_error_ts_tout)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[4], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[4], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_invl_tout != data->das_error_invl_tout){
+    das_errors_last_message.das_error_invl_tout = data->das_error_invl_tout;
+
+    if(data->das_error_invl_tout)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[5], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[5], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_invr_tout != data->das_error_invr_tout){
+    das_errors_last_message.das_error_invr_tout = data->das_error_invr_tout;
+
+    if(data->das_error_invr_tout)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[6], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[6], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_steer_tout != data->das_error_steer_tout){
+    das_errors_last_message.das_error_steer_tout = data->das_error_steer_tout;
+
+    if(data->das_error_steer_tout)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[7], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[7], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+  if(das_errors_last_message.das_error_fsm != data->das_error_fsm){
+    das_errors_last_message.das_error_fsm = data->das_error_fsm;
+
+    if(data->das_error_fsm)
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[8], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.das_errors[8], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+}
 
 void lv_currents_update(primary_lv_currents_converted_t *data) {
   uint16_t old_current_lv_battery = lv_currents_last_message.current_lv_battery;
@@ -248,9 +707,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_cell_undervoltage = data->errors_cell_undervoltage;
 
     if(data->errors_cell_undervoltage)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[0], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[0], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[0], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
     
     
@@ -258,9 +717,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_cell_overvoltage = data->errors_cell_overvoltage;
 
     if(data->errors_cell_overvoltage)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[1], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[1], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[1], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -268,9 +727,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_battery_open_wire = data->errors_battery_open_wire;
 
     if(data->errors_battery_open_wire)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[2], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[2], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[2], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -278,9 +737,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_can = data->errors_can;
 
     if(data->errors_can)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[3], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[3], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[3], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -288,9 +747,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_spi = data->errors_spi;
 
     if(data->errors_spi)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[4], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[4], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[4], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -298,9 +757,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_over_current = data->errors_over_current;
 
     if(data->errors_over_current)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[5], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[5], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[5], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -308,9 +767,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_cell_under_temperature = data->errors_cell_under_temperature;
 
     if(data->errors_cell_under_temperature)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[6], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[6], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[6], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -318,9 +777,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_cell_over_temperature = data->errors_cell_over_temperature;
 
     if(data->errors_cell_over_temperature)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[7], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[7], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[7], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -328,9 +787,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_relay = data->errors_relay;
 
     if(data->errors_relay)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[8], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[8], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[8], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -338,9 +797,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_bms_monitor = data->errors_bms_monitor;
 
     if(data->errors_bms_monitor)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[9], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[9], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[9], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -348,9 +807,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_voltages_not_ready = data->errors_voltages_not_ready;
 
     if(data->errors_voltages_not_ready)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[10], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[10], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[10], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -358,9 +817,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_mcp23017 = data->errors_mcp23017;
 
     if(data->errors_mcp23017)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[11], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[11], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[11], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -368,9 +827,9 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_radiator = data->errors_radiator;
 
     if(data->errors_radiator)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[12], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[12], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[12], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
 
 
@@ -378,9 +837,38 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
     lv_errors_last_message.errors_fan = data->errors_fan;
 
     if(data->errors_fan)
-      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[13], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-    else
       lv_obj_set_style_bg_color(steering.car_errors.lv_errors[13], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[13], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
   }
-  
+
+
+  if(lv_errors_last_message.errors_pump != data->errors_pump){
+    lv_errors_last_message.errors_pump = data->errors_pump;
+
+    if(data->errors_pump)
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[14], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[14], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(lv_errors_last_message.errors_adc_init != data->errors_adc_init){
+    lv_errors_last_message.errors_adc_init = data->errors_adc_init;
+
+    if(data->errors_adc_init)
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[15], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[15], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
+
+
+  if(lv_errors_last_message.errors_mux != data->errors_mux){
+    lv_errors_last_message.errors_mux = data->errors_mux;
+
+    if(data->errors_mux)
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[16], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN);
+    else
+      lv_obj_set_style_bg_color(steering.car_errors.lv_errors[16], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+  }
 }
