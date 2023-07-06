@@ -19,6 +19,15 @@ typedef enum { BSE, STEER, APPS, CALBOX_N } calibration_box_t;
       lv_label_set_text_fmt(name[i], "%s", value);                             \
   }
 
+#define STEER_ERROR_UPDATE(device, error_name, aindex) \
+if ( device##_last_message.error_name != data->error_name ){ \
+  device##_last_message.error_name = data->error_name; \
+  if( data->error_name ) \
+    lv_obj_set_style_bg_color(steering.car_errors.device [ aindex ], lv_color_hex(COLOR_YELLOW_STATUS_HEX), LV_PART_MAIN); \
+  else \
+    lv_obj_set_style_bg_color(steering.car_errors.device [ aindex ], lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN); \
+}
+
 typedef struct {
   struct {
     STEER_PROPERTY(car_status);
@@ -134,13 +143,11 @@ typedef struct {
   } cooling_status;
 
   struct {
-    lv_obj_t *hv_feedbacks[20];
+    lv_obj_t *hv_feedbacks_status[20];
     lv_obj_t *hv_errors[16];
     lv_obj_t *das_errors[9];
     lv_obj_t *lv_errors[17];
   } car_errors;
-
-
 
   lv_obj_t *notification_screen_label;
 
