@@ -274,14 +274,14 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
     break;
 
   case 'o':
-    // calibration_tool_set_min_max(false); // setting min value
+    sim_calibration_tool_set_min_max(false); // setting min value
     break;
 
   case 'p':
-    // calibration_tool_set_min_max(true); // setting max value
+    sim_calibration_tool_set_min_max(true); // setting max value
     break;
 
-  case 'm':;
+  case 'm':
     display_notification("90 GRADI", 1000);
     break;
 

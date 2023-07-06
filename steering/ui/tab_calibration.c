@@ -219,51 +219,54 @@ void tab_calibration(lv_obj_t *parent){
   steering.curr_focus = 1;
 }
 
-void calibration_tool_set_min_max(bool setting_max_value){
-    if(lv_disp_get_scr_act(NULL) == scr_calib){
-        bool esito;
-        switch(steering.curr_focus)
-        {        
-        case BSE:
-            if(setting_max_value){
-                // calibrate max BSE 
-            }else{
-                // calibrate min BSE
-            }
-            esito = true;  // did it work?!
-            break;
-        case STEER:
-            if(setting_max_value){
-                // calibrate max STEER
-            }else{
-                // calibrate min STEER
-            }
-            esito = true;
-            break;
-        case APPS:
-            
-            if(setting_max_value){
-                // calibrate max APPS
-            }else{
-                // calibrate min APPS
-            }
-            esito = true;
-            break;
-        default:
-            break;
-        }
-        if(esito){
-            if(setting_max_value)
-                lv_obj_set_style_bg_color(set_max_btn, lv_color_hex(COLOR_GREEN_STATUS_HEX), LV_PART_MAIN);
-            else
-                lv_obj_set_style_bg_color(set_min_btn, lv_color_hex(COLOR_GREEN_STATUS_HEX), LV_PART_MAIN);
-        }else{
-            if(setting_max_value)
-                lv_obj_set_style_bg_color(set_max_btn, lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-            else
-                lv_obj_set_style_bg_color(set_min_btn, lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
-        }
+void sim_calibration_tool_set_min_max(bool setting_max_value) {
+  if (lv_disp_get_scr_act(NULL) == scr_calib) {
+    bool esito;
+    switch (steering.curr_focus) {
+    case BSE:
+      if (setting_max_value) {
+        // calibrate max BSE
+      } else {
+        // calibrate min BSE
+      }
+      esito = true; // did it work?!
+      break;
+    case STEER:
+      if (setting_max_value) {
+        // calibrate max STEER
+      } else {
+        // calibrate min STEER
+      }
+      esito = true;
+      break;
+    case APPS:
+
+      if (setting_max_value) {
+        // calibrate max APPS
+      } else {
+        // calibrate min APPS
+      }
+      esito = true;
+      break;
+    default:
+      break;
     }
+    if (esito) {
+      if (setting_max_value)
+        lv_obj_set_style_bg_color(
+            set_max_btn, lv_color_hex(COLOR_GREEN_STATUS_HEX), LV_PART_MAIN);
+      else
+        lv_obj_set_style_bg_color(
+            set_min_btn, lv_color_hex(COLOR_GREEN_STATUS_HEX), LV_PART_MAIN);
+    } else {
+      if (setting_max_value)
+        lv_obj_set_style_bg_color(
+            set_max_btn, lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+      else
+        lv_obj_set_style_bg_color(
+            set_min_btn, lv_color_hex(COLOR_RED_STATUS_HEX), LV_PART_MAIN);
+    }
+  }
 }
 
 void shift_box_focus(bool move_right) {
@@ -347,6 +350,8 @@ void shift_box_focus(bool move_right) {
       default:
         break;
       }
+
+      lv_scr_load(scr_calib);
     }
   }
 }

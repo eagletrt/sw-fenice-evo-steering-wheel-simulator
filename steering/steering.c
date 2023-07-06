@@ -1,184 +1,245 @@
 #include "steering.h"
 
+steering_t steering = {0};
 extern bool steering_initialized;
 
-steering_t steering = {
-    .das.car_status = primary_car_status_car_status_IDLE,
-    .das.inverter_left = primary_car_status_inverter_l_OFF,
-    .das.inverter_right = primary_car_status_inverter_r_OFF,
-    .das.left_speed_rads = 0,
-    .das.right_speed_rads = 0,
-    .das.speed = 0,
-    .das.apps = 0,
-    .das.bse = 0,
-    .das.steering_angle = 90,
-    .das.encoder_right = 0,
-    .das.encoder_left = 0,
-    .das.version_component = 0,
-    .das.version_cancicd = 0,
-    .das.errors = 0,
+primary_car_status_converted_t car_status_last_message = {0};
+primary_control_output_converted_t control_output_last_message = {0};
 
-    .hv.pack_voltage = 0,
-    .hv.bus_voltage = 0,
-    .hv.max_cell_voltage = 0,
-    .hv.min_cell_voltage = 0,
-    .hv.current = 0,
-    .hv.power = 0,
-    .hv.average_temperature = 0,
-    .hv.max_temperature = 0,
-    .hv.min_temperature = 0,
-    .hv.errors = 0,
-    .hv.feedbacks = 0,
-    .hv.warnings = 0,
-    .hv.ts_status = primary_ts_status_ts_status_OFF,
-    .hv.version_component = 0,
-    .hv.version_cancicd = 0,
-    .hv.hv_percent = 0,
+primary_ambient_temperature_converted_t ambient_temperature_last_message = {0};
+primary_tlm_status_converted_t tlm_status_last_message = {0};
+primary_speed_converted_t speed_last_message = {0};
 
-    .inverters.right_temperature = 0.0f,
-    .inverters.left_temperature = 0.0f,
-    .inverters.right_errors = 0,
-    .inverters.right_status = 0,
-    .inverters.right_io_info = 0,
-    .inverters.right_motor_temp = 0.0f,
-    .inverters.right_inverter_temp = 0.0f,
-    .inverters.right_speed = 0,
-    .inverters.left_errors = 0,
-    .inverters.left_status = 0,
-    .inverters.left_io_info = 0,
-    .inverters.left_motor_temp = 0.0f,
-    .inverters.left_inverter_temp = 0.0f,
-    .inverters.left_speed = 0,
+primary_hv_voltage_converted_t hv_voltage_last_message = {0};
+primary_hv_current_converted_t hv_current_last_message = {0};
+primary_hv_temp_converted_t hv_temp_last_message = {0};
+primary_hv_errors_converted_t hv_errors_last_message = {0};
+primary_hv_feedbacks_status_converted_t hv_feedbacks_status_last_message = {0};
+primary_hv_cells_voltage_converted_t hv_cells_voltage_last_message = {0};
+primary_hv_cells_temp_converted_t hv_cells_temp_last_message = {0};
 
-    .lv.current = 0,
-    .lv.voltage = 0,
-    .lv.total_voltage = 0,
-    .lv.dcdc_temperature = 0,
-    .lv.battery_temperature = 0,
-    .lv.version_component = 0,
-    .lv.version_cancicd = 0,
-    .lv.errors = 0,
-    .lv.lv_percent = 0,
+primary_das_errors_converted_t das_errors_last_message = {0};
 
-    .steering.temperature = 0,
-    .steering.ptt = false,
-    .steering.canlib_build_hash = 0,
-    .steering.debug_mode = false,
-    .steering.ambient_temperature = 0,
-    .steering.best_time = 0,
-    .steering.last_time = 0,
-    .steering.delta_time = 0,
-    .steering.estimated_velocity = 0,
+primary_lv_currents_converted_t lv_currents_last_message = {0};
+primary_lv_cells_voltage_converted_t lv_cells_voltage_last_message_1 = {0};
+primary_lv_cells_voltage_converted_t lv_cells_voltage_last_message_2 = {0};
+primary_lv_cells_temp_converted_t lv_cells_temp_last_message = {0};
+primary_lv_total_voltage_converted_t lv_total_voltage_last_message = {0};
+primary_lv_errors_converted_t lv_errors_last_message = {0};
 
-    .telemetry.status = false,
-    .telemetry.latitude = 0.0f,
-    .telemetry.longitude = 0.0f,
-    .telemetry.gps_speed = 0,
-    .telemetry.version_component = 0,
-    .telemetry.version_cancicd = 0,
-    .telemetry.lap_count = 0,
+void car_status_update(primary_car_status_converted_t *data) {
 
-    // check with dynamics team
-    .control.power = 0,
-    .control.torque = 0,
-    .control.slip = 0,
-
-    .tyre_temps.fl_temp = 0,
-    .tyre_temps.fr_temp = 0,
-    .tyre_temps.rl_temp = 0,
-    .tyre_temps.rr_temp = 0,
-    .tyre_pressures.fl_press = 0,
-    .tyre_pressures.fr_press = 0,
-    .tyre_pressures.rl_press = 0,
-    .tyre_pressures.rr_press = 0,
-
-    .cooling_status.radiators_speed = 0,
-    .cooling_status.pumps_speed = 0,
-
-    .timestamp = 0,
-};
-
-void car_status_update(primary_car_status_t *data) {
-  uint8_t old = steering.das.car_status;
-  if (data->car_status == old)
-    return;
-  steering.das.car_status = data->car_status;
-  switch (data->car_status) {
-  case primary_car_status_car_status_INIT:
-  case primary_car_status_car_status_ENABLE_INV_UPDATES:
-  case primary_car_status_car_status_CHECK_INV_SETTINGS:
-  case primary_car_status_car_status_IDLE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "IDLE");
-    break;
+  if (data->car_status != car_status_last_message.car_status) {
+    car_status_last_message.car_status = data->car_status;
+    switch (data->car_status) {
+    case primary_car_status_car_status_INIT:
+    case primary_car_status_car_status_ENABLE_INV_UPDATES:
+    case primary_car_status_car_status_CHECK_INV_SETTINGS:
+    case primary_car_status_car_status_IDLE: {
+      lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+      STEER_UPDATE_LABEL(steering.das.lb_speed, "IDLE");
+      break;
+    }
+    case primary_car_status_car_status_START_TS_PRECHARGE:
+    case primary_car_status_car_status_WAIT_TS_PRECHARGE: {
+      lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+      STEER_UPDATE_LABEL(steering.das.lb_speed, "PRCHG");
+      break;
+    }
+    case primary_car_status_car_status_WAIT_DRIVER: {
+      lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+      STEER_UPDATE_LABEL(steering.das.lb_speed, "SETUP");
+      break;
+    }
+    case primary_car_status_car_status_DRIVE: {
+      lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+      STEER_UPDATE_LABEL(steering.das.lb_speed, "DRIVE");
+      break;
+    }
+    case primary_car_status_car_status_DISABLE_INV_DRIVE:
+    case primary_car_status_car_status_START_TS_DISCHARGE:
+    case primary_car_status_car_status_WAIT_TS_DISCHARGE: {
+      lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+      STEER_UPDATE_LABEL(steering.das.lb_speed, "TSOFF");
+      break;
+    }
+    case primary_car_status_car_status_FATAL_ERROR: {
+      lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
+      STEER_UPDATE_LABEL(steering.das.lb_speed, "FATAL");
+      break;
+    }
+    default:
+      break;
+    }
   }
-  case primary_car_status_car_status_START_TS_PRECHARGE:
-  case primary_car_status_car_status_WAIT_TS_PRECHARGE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "PRCHG");
-    break;
+
+  primary_car_status_inverter_l invl = data->inverter_l;
+
+  if (invl != car_status_last_message.inverter_l) {
   }
-  case primary_car_status_car_status_WAIT_DRIVER: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "SETUP");
-    break;
-  }
-  case primary_car_status_car_status_DRIVE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "DRIVE");
-    break;
-  }
-  case primary_car_status_car_status_DISABLE_INV_DRIVE:
-  case primary_car_status_car_status_START_TS_DISCHARGE:
-  case primary_car_status_car_status_WAIT_TS_DISCHARGE: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "TSOFF");
-    break;
-  }
-  case primary_car_status_car_status_FATAL_ERROR: {
-    lv_label_set_text_fmt(steering.das.bottom_lb_speed, "-");
-    STEER_UPDATE_LABEL(steering.das.lb_speed, "FATAL");
-    break;
-  }
-  default:
-    break;
+
+  primary_car_status_inverter_r invr = data->inverter_r;
+
+  if (invr != car_status_last_message.inverter_r) {
   }
 }
 
-void hv_errors_update(primary_hv_errors_t *data) {
-  // primary_hv_errors_t old = steering.hv.errors;
-  steering.hv.errors = *data;
+void control_output_update(primary_control_output_converted_t *data) {}
+
+void tlm_status_update(primary_tlm_status_converted_t *data) {}
+
+void ambient_temperature_update(primary_ambient_temperature_converted_t *data) {
 }
 
-void lv_errors_update(primary_lv_errors_t *data) {}
+void speed_update(primary_speed_converted_t *data) {}
 
-void hv_feedback_update(primary_hv_feedbacks_status_t *data) {}
+void hv_voltage_update(primary_hv_voltage_converted_t *data) {}
 
-void hv_temp_update(primary_hv_temp_t *data) {
-  uint8_t old_max_t = steering.hv.max_temperature;
-  uint8_t old_min_t = steering.hv.min_temperature;
-  uint8_t old_avg_t = steering.hv.average_temperature;
-  if (old_max_t == data->max_temp && old_min_t == data->min_temp &&
-      old_avg_t == data->average_temp)
+void hv_current_update(primary_hv_current_converted_t *data) {}
+
+void hv_temp_update(primary_hv_temp_converted_t *data) {
+  if (data->average_temp == hv_temp_last_message.average_temp &&
+      data->max_temp == hv_temp_last_message.max_temp &&
+      data->min_temp == hv_temp_last_message.min_temp)
     return;
-  steering.hv.max_temperature = data->max_temp;
-  steering.hv.min_temperature = data->min_temp;
-  steering.hv.average_temperature = data->average_temp;
+  hv_temp_last_message.max_temp = data->max_temp;
+  hv_temp_last_message.min_temp = data->min_temp;
+  hv_temp_last_message.average_temp = data->average_temp;
   char buffer[64];
-  snprintf(buffer, sizeof(buffer), "%d", data->max_temp);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->max_temp);
   STEER_UPDATE_LABEL(steering.hv.lb_max_temperature, buffer);
-  snprintf(buffer, sizeof(buffer), "%d", data->min_temp);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->min_temp);
   STEER_UPDATE_LABEL(steering.hv.lb_min_temperature, buffer);
-  snprintf(buffer, sizeof(buffer), "%d", data->average_temp);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->average_temp);
   STEER_UPDATE_LABEL(steering.hv.lb_average_temperature, buffer);
 }
 
-void lv_total_voltage_update(primary_lv_total_voltage_t *data) {}
+void hv_errors_update(primary_hv_errors_converted_t *data) {}
 
-void lv_cells_voltage_update(primary_lv_cells_voltage_t *data) {}
+void hv_total_voltage_update(primary_hv_voltage_converted_t *data) {
+  uint16_t old_max_v = hv_voltage_last_message.max_cell_voltage;
+  uint16_t old_min_v = hv_voltage_last_message.min_cell_voltage;
+  uint16_t old_bus_v = hv_voltage_last_message.bus_voltage;
+  uint16_t old_pack_v = hv_voltage_last_message.pack_voltage;
+  if (old_max_v == data->max_cell_voltage &&
+      old_min_v == data->min_cell_voltage && old_bus_v == data->bus_voltage &&
+      old_pack_v == data->pack_voltage)
+    return;
 
-void lv_currents_update(primary_lv_currents_t *data) {}
+  hv_voltage_last_message.max_cell_voltage = data->max_cell_voltage;
+  hv_voltage_last_message.min_cell_voltage = data->min_cell_voltage;
+  hv_voltage_last_message.bus_voltage = data->bus_voltage;
+  hv_voltage_last_message.pack_voltage = data->pack_voltage;
 
-void lv_cells_temp_update(primary_lv_cells_temp_t *data) {}
+  char buffer[64];
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->max_cell_voltage);
+  STEER_UPDATE_LABEL(steering.hv.lb_max_cell_voltage, buffer);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->min_cell_voltage);
+  STEER_UPDATE_LABEL(steering.hv.lb_min_cell_voltage, buffer);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->bus_voltage);
+  STEER_UPDATE_LABEL(steering.hv.lb_bus_voltage, buffer);
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->pack_voltage);
+  STEER_UPDATE_LABEL(steering.hv.lb_pack_voltage, buffer);
 
-void tlm_status_update(primary_tlm_status_t *data) {}
+  lv_bar_set_value(steering.hv_bar, data->pack_voltage, LV_ANIM_OFF);
+}
+
+void hv_feedbacks_status_update(primary_hv_feedbacks_status_converted_t *data) {
+}
+
+void hv_cells_voltage_update(primary_hv_cells_voltage_converted_t *data) {}
+
+void hv_cells_temp_update(primary_hv_cells_temp_converted_t *data) {}
+
+void das_errors_update(primary_das_errors_converted_t *data) {}
+
+void lv_currents_update(primary_lv_currents_converted_t *data) {
+  uint16_t old_current_lv_battery = lv_currents_last_message.current_lv_battery;
+  if (old_current_lv_battery == data->current_lv_battery)
+    return;
+  lv_currents_last_message.current_lv_battery = data->current_lv_battery;
+  char buffer[64];
+  snprintf(buffer, sizeof(buffer), "%f", (float)data->current_lv_battery);
+  STEER_UPDATE_LABEL(steering.lv.lb_current, buffer);
+}
+
+void lv_control_update(primary_control_output_converted_t *data) {
+  /*right now gps speed is used beacuse is the one conncected to the labels of
+  the UI, later should be changed to existing estimtated velocity variables*/
+
+  float old_estimated_velocity = control_output_last_message.estimated_velocity;
+  // TODO: the other field of the struct
+  if (old_estimated_velocity == data->estimated_velocity)
+    return;
+  control_output_last_message.estimated_velocity = data->estimated_velocity;
+  char buffer[64];
+  snprintf(buffer, sizeof(buffer), "%f", data->estimated_velocity);
+  STEER_UPDATE_LABEL(steering.telemetry.lb_gps_speed, buffer);
+  lv_meter_set_indicator_value(steering.custom_meter, steering.indicator_blue,
+                               data->estimated_velocity);
+}
+
+void lv_cells_voltage_update(primary_lv_cells_voltage_converted_t *data) {
+  uint16_t old_cells_voltage_0;
+  uint16_t old_cells_voltage_1;
+  uint16_t old_cells_voltage_2;
+  if (data->start_index == 0) {
+    old_cells_voltage_0 = lv_cells_voltage_last_message_1.voltage_0;
+    old_cells_voltage_1 = lv_cells_voltage_last_message_1.voltage_1;
+    old_cells_voltage_2 = lv_cells_voltage_last_message_1.voltage_2;
+    lv_cells_voltage_last_message_1.voltage_0 = data->voltage_0;
+    lv_cells_voltage_last_message_1.voltage_1 = data->voltage_1;
+    lv_cells_voltage_last_message_1.voltage_2 = data->voltage_2;
+  } else {
+    old_cells_voltage_0 = lv_cells_voltage_last_message_2.voltage_0;
+    old_cells_voltage_1 = lv_cells_voltage_last_message_2.voltage_1;
+    old_cells_voltage_2 = lv_cells_voltage_last_message_2.voltage_2;
+    lv_cells_voltage_last_message_2.voltage_0 = data->voltage_0;
+    lv_cells_voltage_last_message_2.voltage_1 = data->voltage_1;
+    lv_cells_voltage_last_message_2.voltage_2 = data->voltage_2;
+  }
+
+  if (old_cells_voltage_0 == data->voltage_0 &&
+      old_cells_voltage_1 == data->voltage_1 &&
+      old_cells_voltage_2 == data->voltage_2)
+    return;
+  char buffer[64];
+  uint16_t mean = (lv_cells_voltage_last_message_1.voltage_0 +
+                   lv_cells_voltage_last_message_1.voltage_1 +
+                   lv_cells_voltage_last_message_1.voltage_2 +
+                   lv_cells_voltage_last_message_2.voltage_0 +
+                   lv_cells_voltage_last_message_2.voltage_1 +
+                   lv_cells_voltage_last_message_2.voltage_2) /
+                  6;
+  snprintf(buffer, sizeof(buffer), "%u", (unsigned int)mean);
+  STEER_UPDATE_LABEL(steering.lv.lb_voltage, buffer);
+}
+
+void lv_cells_temp_update(primary_lv_cells_temp_converted_t *data) {
+  float old_lv_temp_0 = lv_cells_temp_last_message.temp_0;
+  float old_lv_temp_1 = lv_cells_temp_last_message.temp_1;
+  float old_lv_temp_2 = lv_cells_temp_last_message.temp_2;
+  if (old_lv_temp_0 == data->temp_0 && old_lv_temp_1 == data->temp_1 &&
+      old_lv_temp_2 == data->temp_2)
+    return;
+  lv_cells_temp_last_message.temp_0 = data->temp_0;
+  lv_cells_temp_last_message.temp_1 = data->temp_1;
+  lv_cells_temp_last_message.temp_2 = data->temp_2;
+  uint16_t mean_temp = (data->temp_0 + data->temp_1 + data->temp_2) / 3;
+  char buffer[64];
+  snprintf(buffer, sizeof(buffer), "%u", (unsigned int)mean_temp);
+  STEER_UPDATE_LABEL(steering.lv.lb_battery_temperature, buffer);
+}
+
+void lv_total_voltage_update(primary_lv_total_voltage_converted_t *data) {
+  uint32_t old_total_v = lv_total_voltage_last_message.total_voltage;
+  if (old_total_v == data->total_voltage)
+    return;
+  lv_total_voltage_last_message.total_voltage = data->total_voltage;
+  char buffer[64];
+  snprintf(buffer, sizeof(buffer), "%f", (double)data->total_voltage);
+  lv_bar_set_value(steering.lv_bar, data->total_voltage, LV_ANIM_OFF);
+  STEER_UPDATE_LABEL(steering.lv.lb_total_voltage, buffer);
+}
+
+void lv_errors_update(primary_lv_errors_converted_t *data) {}
