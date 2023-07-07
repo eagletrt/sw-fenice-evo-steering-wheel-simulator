@@ -137,7 +137,8 @@ void tab_debug(lv_obj_t *parent) {
   lv_obj_remove_style_all(hv_feedbacks_panel);
   lv_obj_set_layout(hv_feedbacks_panel, LV_LAYOUT_GRID);
   lv_obj_clear_flag(hv_feedbacks_panel, LV_OBJ_FLAG_SCROLLABLE);
-  lv_obj_set_size(hv_feedbacks_panel, TAB_DEBUG_CELL_WIDTH * 4 + TAB_DEBUG_COLUMN_PADDING * 3,
+  lv_obj_set_size(hv_feedbacks_panel,
+                  TAB_DEBUG_CELL_WIDTH * 4 + TAB_DEBUG_COLUMN_PADDING * 3,
                   TAB_DEBUG_DATA_PANEL_HEIGHT);
 
   lv_obj_add_style(hv_feedbacks_panel, &grid_style, 0);
@@ -177,8 +178,8 @@ void tab_debug(lv_obj_t *parent) {
       hv_feedbacks_panel, "IMD COCKPIT", 0, 1, &box_debug_style_yellow);
   steering.car_errors.hv_feedbacks_status[5] = cell_create(
       hv_feedbacks_panel, "TSAL GREEN", 1, 1, &box_debug_style_yellow);
-  steering.car_errors.hv_feedbacks_status[10] = cell_create(hv_feedbacks_panel, "AIRN GATE",
-                                                2, 1, &box_debug_style_yellow);
+  steering.car_errors.hv_feedbacks_status[10] = cell_create(
+      hv_feedbacks_panel, "AIRN GATE", 2, 1, &box_debug_style_yellow);
   steering.car_errors.hv_feedbacks_status[16] =
       cell_create(hv_feedbacks_panel, "SD OUT", 3, 1, &box_debug_style_yellow);
 
@@ -198,39 +199,38 @@ void tab_debug(lv_obj_t *parent) {
       hv_feedbacks_panel, "AIRN STATUS", 1, 3, &box_debug_style_yellow);
   steering.car_errors.hv_feedbacks_status[12] = cell_create(
       hv_feedbacks_panel, "TSP OVER 60V STATUS", 2, 3, &box_debug_style_yellow);
-  steering.car_errors.hv_feedbacks_status[13] = cell_create(hv_feedbacks_panel, "IMD FAULT",
-                                                3, 3, &box_debug_style_yellow);
+  steering.car_errors.hv_feedbacks_status[13] = cell_create(
+      hv_feedbacks_panel, "IMD FAULT", 3, 3, &box_debug_style_yellow);
 
   steering.car_errors.hv_feedbacks_status[3] = cell_create(
       hv_feedbacks_panel, "BMS COCKPIT", 0, 4, &box_debug_style_yellow);
   steering.car_errors.hv_feedbacks_status[8] = cell_create(
       hv_feedbacks_panel, "AIRP STATUS", 1, 4, &box_debug_style_yellow);
-  steering.car_errors.hv_feedbacks_status[14] = cell_create(hv_feedbacks_panel, "CHECK MUX",
-                                                2, 4, &box_debug_style_yellow);
+  steering.car_errors.hv_feedbacks_status[14] = cell_create(
+      hv_feedbacks_panel, "CHECK MUX", 2, 4, &box_debug_style_yellow);
   steering.car_errors.hv_feedbacks_status[15] =
       cell_create(hv_feedbacks_panel, "SD END", 3, 4, &box_debug_style_yellow);
- 
-  steering.car_errors.hv_feedbacks_status[19] = cell_create(hv_feedbacks_panel, "SD IMD",
-                                                0, 5, &box_debug_style_yellow);
 
-  steering.car_errors.hv_feedbacks_status[9] = cell_create(hv_feedbacks_panel, "AIRP GATE",
-                                                1, 5, &box_debug_style_yellow);
+  steering.car_errors.hv_feedbacks_status[19] =
+      cell_create(hv_feedbacks_panel, "SD IMD", 0, 5, &box_debug_style_yellow);
+
+  steering.car_errors.hv_feedbacks_status[9] = cell_create(
+      hv_feedbacks_panel, "AIRP GATE", 1, 5, &box_debug_style_yellow);
   steering.car_errors.hv_feedbacks_status[17] =
       cell_create(hv_feedbacks_panel, "SD IN", 2, 5, &box_debug_style_yellow);
 
   steering.car_errors.hv_feedbacks_status[18] =
       cell_create(hv_feedbacks_panel, "SD BMS", 3, 5, &box_debug_style_yellow);
 
-
   /*--- creating HV ERRORS PANEL ---*/
 
   static lv_coord_t hvErrors_panel_cols[] = {
-      TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH,
-      LV_GRID_TEMPLATE_LAST};
+      TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH, TAB_DEBUG_CELL_WIDTH,
+      TAB_DEBUG_CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
   static lv_coord_t hvErrors_panel_rows[] = {
-      TAB_DEBUG_DATA_TITLE_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT,
+      TAB_DEBUG_DATA_TITLE_HEIGHT, TAB_DEBUG_CELL_HEIGHT,
       TAB_DEBUG_CELL_HEIGHT,       TAB_DEBUG_CELL_HEIGHT,
-      LV_GRID_TEMPLATE_LAST};
+      TAB_DEBUG_CELL_HEIGHT,       LV_GRID_TEMPLATE_LAST};
 
   hv_errors_panel = lv_obj_create(main_panel);
   lv_obj_remove_style_all(hv_errors_panel);
@@ -274,34 +274,34 @@ void tab_debug(lv_obj_t *parent) {
 
   steering.car_errors.hv_errors[0] = cell_create(
       hv_errors_panel, "CELL LOW VOLTAGE", 0, 1, &box_debug_style_yellow);
-  steering.car_errors.hv_errors[5] = cell_create(hv_errors_panel, "OVER CURRENT", 1,
-                                             1, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[5] = cell_create(
+      hv_errors_panel, "OVER CURRENT", 1, 1, &box_debug_style_yellow);
   steering.car_errors.hv_errors[12] =
       cell_create(hv_errors_panel, "FEEDBACK", 2, 1, &box_debug_style_yellow);
 
-  steering.car_errors.hv_errors[1] = cell_create(hv_errors_panel, "CELL UNDER VOLT",
-                                             0, 2, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[1] = cell_create(
+      hv_errors_panel, "CELL UNDER VOLT", 0, 2, &box_debug_style_yellow);
   steering.car_errors.hv_errors[6] =
       cell_create(hv_errors_panel, "CAN", 1, 2, &box_debug_style_yellow);
   steering.car_errors.hv_errors[13] = cell_create(
       hv_errors_panel, "FEEDBACK CIRCUITRY", 2, 2, &box_debug_style_yellow);
 
-  steering.car_errors.hv_errors[2] = cell_create(hv_errors_panel, "CELL OVER VOLT",
-                                             0, 3, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[2] = cell_create(
+      hv_errors_panel, "CELL OVER VOLT", 0, 3, &box_debug_style_yellow);
   steering.car_errors.hv_errors[7] = cell_create(
       hv_errors_panel, "INT VOLTAGE MISMATCH", 1, 3, &box_debug_style_yellow);
-  steering.car_errors.hv_errors[14] = cell_create(hv_errors_panel, "EEPROM COMM", 2,
-                                             3, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[14] = cell_create(
+      hv_errors_panel, "EEPROM COMM", 2, 3, &box_debug_style_yellow);
 
-  steering.car_errors.hv_errors[3] = cell_create(hv_errors_panel, "CELL HIGH TEMP",
-                                             0, 4, &box_debug_style_yellow);
-  steering.car_errors.hv_errors[8] = cell_create(hv_errors_panel, "CELLBOARD COMM",
-                                             1, 4, &box_debug_style_yellow);
-  steering.car_errors.hv_errors[15] = cell_create(hv_errors_panel, "EEPROM WHITE", 2,
-                                             4, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[3] = cell_create(
+      hv_errors_panel, "CELL HIGH TEMP", 0, 4, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[8] = cell_create(
+      hv_errors_panel, "CELLBOARD COMM", 1, 4, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[15] = cell_create(
+      hv_errors_panel, "EEPROM WHITE", 2, 4, &box_debug_style_yellow);
 
-  steering.car_errors.hv_errors[4] = cell_create(hv_errors_panel, "CELL OVER TEMP",
-                                             3, 1, &box_debug_style_yellow);
+  steering.car_errors.hv_errors[4] = cell_create(
+      hv_errors_panel, "CELL OVER TEMP", 3, 1, &box_debug_style_yellow);
   steering.car_errors.hv_errors[9] = cell_create(
       hv_errors_panel, "CELLBOARD INTERNAL", 3, 2, &box_debug_style_yellow);
 
@@ -363,15 +363,15 @@ void tab_debug(lv_obj_t *parent) {
   steering.car_errors.das_errors[5] =
       cell_create(das_errors_panel, "INVL TOUT", 1, 1, &box_debug_style_yellow);
 
-  steering.car_errors.das_errors[1] = cell_create(das_errors_panel, "PEDAL IMPLAUS",
-                                              0, 2, &box_debug_style_yellow);
+  steering.car_errors.das_errors[1] = cell_create(
+      das_errors_panel, "PEDAL IMPLAUS", 0, 2, &box_debug_style_yellow);
   steering.car_errors.das_errors[6] =
       cell_create(das_errors_panel, "INVR TOUT", 1, 2, &box_debug_style_yellow);
 
   steering.car_errors.das_errors[2] =
       cell_create(das_errors_panel, "IMU TOUT", 0, 3, &box_debug_style_yellow);
-  steering.car_errors.das_errors[7] = cell_create(das_errors_panel, "STEER TOUT", 1,
-                                              3, &box_debug_style_yellow);
+  steering.car_errors.das_errors[7] = cell_create(
+      das_errors_panel, "STEER TOUT", 1, 3, &box_debug_style_yellow);
 
   steering.car_errors.das_errors[3] =
       cell_create(das_errors_panel, "IRTS TOUT", 0, 4, &box_debug_style_yellow);
@@ -388,7 +388,8 @@ void tab_debug(lv_obj_t *parent) {
       TAB_DEBUG_CELL_WIDTH, LV_GRID_TEMPLATE_LAST};
   static lv_coord_t lvErrors_panel_rows[] = {
       TAB_DEBUG_DATA_TITLE_HEIGHT, TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT,
-      TAB_DEBUG_CELL_HEIGHT,       TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT, LV_GRID_TEMPLATE_LAST};
+      TAB_DEBUG_CELL_HEIGHT,       TAB_DEBUG_CELL_HEIGHT, TAB_DEBUG_CELL_HEIGHT,
+      LV_GRID_TEMPLATE_LAST};
 
   lv_errors_panel = lv_obj_create(main_panel);
   lv_obj_remove_style_all(lv_errors_panel);
@@ -429,17 +430,17 @@ void tab_debug(lv_obj_t *parent) {
   lv_obj_align(lv_errors_title, LV_ALIGN_CENTER, 0, 0);
   lv_label_set_text(lv_errors_title, "LV ERRORS");
 
-  steering.car_errors.lv_errors[0] = cell_create(lv_errors_panel, "CELL UNDERVOLT",
-                                             0, 1, &box_debug_style_yellow);
-  steering.car_errors.lv_errors[6] = cell_create(lv_errors_panel, "CELL UNDER TEMP",
-                                             1, 1, &box_debug_style_yellow);
+  steering.car_errors.lv_errors[0] = cell_create(
+      lv_errors_panel, "CELL UNDERVOLT", 0, 1, &box_debug_style_yellow);
+  steering.car_errors.lv_errors[6] = cell_create(
+      lv_errors_panel, "CELL UNDER TEMP", 1, 1, &box_debug_style_yellow);
   steering.car_errors.lv_errors[11] =
       cell_create(lv_errors_panel, "MCP23017", 3, 1, &box_debug_style_yellow);
 
-  steering.car_errors.lv_errors[1] = cell_create(lv_errors_panel, "CELL OVERVOLT",
-                                             0, 2, &box_debug_style_yellow);
-  steering.car_errors.lv_errors[7] = cell_create(lv_errors_panel, "CELL OVER TEMP",
-                                             1, 2, &box_debug_style_yellow);
+  steering.car_errors.lv_errors[1] = cell_create(
+      lv_errors_panel, "CELL OVERVOLT", 0, 2, &box_debug_style_yellow);
+  steering.car_errors.lv_errors[7] = cell_create(
+      lv_errors_panel, "CELL OVER TEMP", 1, 2, &box_debug_style_yellow);
   steering.car_errors.lv_errors[12] =
       cell_create(lv_errors_panel, "RADIATOR", 3, 2, &box_debug_style_yellow);
 
@@ -452,8 +453,8 @@ void tab_debug(lv_obj_t *parent) {
 
   steering.car_errors.lv_errors[3] =
       cell_create(lv_errors_panel, "CAN", 0, 4, &box_debug_style_yellow);
-  steering.car_errors.lv_errors[9] =
-      cell_create(lv_errors_panel, "BMS MONITOR", 2, 4, &box_debug_style_yellow);
+  steering.car_errors.lv_errors[9] = cell_create(lv_errors_panel, "BMS MONITOR",
+                                                 2, 4, &box_debug_style_yellow);
   steering.car_errors.lv_errors[14] =
       cell_create(lv_errors_panel, "PUMP", 3, 4, &box_debug_style_yellow);
 
@@ -463,10 +464,10 @@ void tab_debug(lv_obj_t *parent) {
   steering.car_errors.lv_errors[15] =
       cell_create(lv_errors_panel, "ADC INIT", 2, 2, &box_debug_style_yellow);
 
-  steering.car_errors.lv_errors[5] = cell_create(lv_errors_panel, "OVER CURRENT", 2,
-                                             3, &box_debug_style_yellow);
-  steering.car_errors.lv_errors[10] =
-      cell_create(lv_errors_panel, "VOLTS NOT READY", 1, 4, &box_debug_style_yellow);
+  steering.car_errors.lv_errors[5] = cell_create(
+      lv_errors_panel, "OVER CURRENT", 2, 3, &box_debug_style_yellow);
+  steering.car_errors.lv_errors[10] = cell_create(
+      lv_errors_panel, "VOLTS NOT READY", 1, 4, &box_debug_style_yellow);
 
   steering.car_errors.lv_errors[16] =
       cell_create(lv_errors_panel, "MUX", 0, 5, &box_debug_style_yellow);

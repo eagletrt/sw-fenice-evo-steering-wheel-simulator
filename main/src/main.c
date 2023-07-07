@@ -296,5 +296,5 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
 
 void data_init(void) {
   STEER_UPDATE_LABEL(steering.steering.lb_estimated_velocity, "0");
-  STEER_UPDATE_LABEL( steering.control.lb_power, "80");
+  STEER_UPDATE_LABEL(steering.control.lb_power, "80");
 }

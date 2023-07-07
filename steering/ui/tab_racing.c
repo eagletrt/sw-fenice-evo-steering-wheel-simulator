@@ -55,8 +55,8 @@ void tab_racing(lv_obj_t *parent) {
   steering.racing_lv_bar = lv_bar_create(bar_panel_lv);
   custom_side_bar(steering.racing_lv_bar);
 
-  lv_obj_set_grid_cell(steering.racing_lv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_END, 1,
-                       1);
+  lv_obj_set_grid_cell(steering.racing_lv_bar, LV_GRID_ALIGN_CENTER, 0, 1,
+                       LV_GRID_ALIGN_END, 1, 1);
 
   // lv label
 
@@ -103,10 +103,11 @@ void tab_racing(lv_obj_t *parent) {
   steering.racing_hv_bar = lv_bar_create(bar_panel_hv);
   custom_side_bar(steering.racing_hv_bar);
   lv_bar_set_value(steering.racing_hv_bar, 50, LV_ANIM_OFF);
-  lv_obj_set_style_bg_color(steering.racing_hv_bar, lv_color_hex(COLOR_ORANGE_STATUS_HEX),
+  lv_obj_set_style_bg_color(steering.racing_hv_bar,
+                            lv_color_hex(COLOR_ORANGE_STATUS_HEX),
                             LV_PART_INDICATOR);
-  lv_obj_set_grid_cell(steering.racing_hv_bar, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER,
-                       1, 1);
+  lv_obj_set_grid_cell(steering.racing_hv_bar, LV_GRID_ALIGN_CENTER, 0, 1,
+                       LV_GRID_ALIGN_CENTER, 1, 1);
 
   /*-------------------------------------*/
   // CENTRAL PANEL
@@ -224,7 +225,6 @@ void tab_racing(lv_obj_t *parent) {
   lv_obj_set_grid_cell(right_data_panel, LV_GRID_ALIGN_START, 2, 1,
                        LV_GRID_ALIGN_CENTER, 0, 1);
 
-
   /*inserting data into data right panel*/
   lv_obj_t *trq = lv_vertical_pair_label(
       right_data_panel, &steering.control.lb_torque[TAB_RACING], "30",
@@ -252,43 +252,45 @@ void tab_racing(lv_obj_t *parent) {
       right_data_panel, &steering.inverters.lb_left_inverter_temp[TAB_RACING],
       "60", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "INV",
       &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(inverter_temp, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER,
-                       1, 1);
+  lv_obj_set_grid_cell(inverter_temp, LV_GRID_ALIGN_CENTER, 0, 1,
+                       LV_GRID_ALIGN_CENTER, 1, 1);
 
   lv_obj_t *motor_temp = lv_triple_label(
       right_data_panel, &steering.inverters.lb_left_motor_temp[TAB_RACING],
       "30", &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "MOTOR",
       &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(motor_temp, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER,
-                       1, 1);
+  lv_obj_set_grid_cell(motor_temp, LV_GRID_ALIGN_CENTER, 1, 1,
+                       LV_GRID_ALIGN_CENTER, 1, 1);
 
   lv_obj_t *lv_temp = lv_triple_label(
       right_data_panel, &steering.lv.lb_battery_temperature[TAB_RACING], "20",
       &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "LV",
       &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(lv_temp, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_CENTER,
-                       2, 1);
+  lv_obj_set_grid_cell(lv_temp, LV_GRID_ALIGN_CENTER, 0, 1,
+                       LV_GRID_ALIGN_CENTER, 2, 1);
 
   lv_obj_t *hv_temp = lv_triple_label(
       right_data_panel, &steering.hv.lb_average_temperature[TAB_RACING], "12",
       &lv_font_inter_bold_38, "°C", &lv_font_inter_bold_22, "HV",
       &lv_font_inter_bold_20);
-  lv_obj_set_grid_cell(hv_temp, LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER,
-                       2, 1);
+  lv_obj_set_grid_cell(hv_temp, LV_GRID_ALIGN_CENTER, 1, 1,
+                       LV_GRID_ALIGN_CENTER, 2, 1);
 
   // DATA CENTER
 
   // power
-  lv_obj_t *power =
-      lv_horizontal_pair_label(central_panel, &steering.control.lb_power[TAB_RACING],
-                      "60", &lv_font_inter_bold_38, " POWER", &lv_font_inter_bold_22);
+  lv_obj_t *power = lv_horizontal_pair_label(
+      central_panel, &steering.control.lb_power[TAB_RACING], "60",
+      &lv_font_inter_bold_38, " POWER", &lv_font_inter_bold_22);
 
-  lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1); // center the label "POWER"
+  lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1,
+                       LV_GRID_ALIGN_CENTER, 0, 1); // center the label "POWER"
 
   lv_obj_set_grid_cell(power, LV_GRID_ALIGN_CENTER, 0, 1, LV_GRID_ALIGN_START,
                        0, 2);
-  //lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1, 1, LV_GRID_ALIGN_CENTER, 0, 1);
-  //lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
+  // lv_obj_set_grid_cell(lv_obj_get_child(power, 1), LV_GRID_ALIGN_CENTER, 1,
+  // 1, LV_GRID_ALIGN_CENTER, 0, 1);
+  // lv_obj_set_style_pad_bottom(lv_obj_get_child(power, 0), -1, 0);
   lv_obj_set_style_pad_top(power, 65, 0);
 
   // lv_obj_align(power, LV_ALIGN_CENTER, 0,0);
