@@ -173,6 +173,7 @@ void tab_debug(lv_obj_t *parent) {
   lv_obj_align(hv_feedbacks_title, LV_ALIGN_CENTER, 0, 0);
   lv_label_set_text(hv_feedbacks_title, "HV FEEDBACKS");
 
+
   steering.car_errors.hv_feedbacks_status[1] = cell_create(
       hv_feedbacks_panel, "IMD COCKPIT", 0, 1, &box_debug_style_yellow);
   steering.car_errors.hv_feedbacks_status[5] = cell_create(

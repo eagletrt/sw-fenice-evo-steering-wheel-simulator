@@ -19,6 +19,13 @@ typedef enum { BSE, STEER, APPS, CALBOX_N } calibration_box_t;
       lv_label_set_text_fmt(name[i], "%s", value);                             \
   }
 
+#define STEER_CAN_TO_LABEL_UPDATE(old_value, new_value, label)                  \
+  if ( old_value != new_value ){                                                \
+    sprintf(buffer, "%d", (int)new_value);                                     \
+    STEER_UPDATE_LABEL(label, buffer);                                          \
+    old_value = new_value;                                                      \
+  }
+
 #define STEER_ERROR_UPDATE(device, error_name, aindex) \
 if ( device##_last_message.error_name != data->error_name ){ \
   device##_last_message.error_name = data->error_name; \

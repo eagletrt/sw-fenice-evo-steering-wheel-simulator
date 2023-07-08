@@ -84,7 +84,28 @@ void car_status_update(primary_car_status_converted_t *data) {
   }
 }
 
-void control_output_update(primary_control_output_converted_t *data) {}
+void control_output_update(primary_control_output_converted_t *data) {
+  /*
+    if (data->estimated_velocity == control_output_last_message.estimated_velocity &&
+      data->tmax_l == control_output_last_message.tmax_l && 
+      data->tmax_r == control_output_last_message.tmax_r &&
+      data->torque_l == control_output_last_message.torque_l &&
+      data->torque_r == control_output_last_message.torque_r)
+      return;
+  */
+  char buffer[64];
+  
+  STEER_CAN_TO_LABEL_UPDATE(control_output_last_message.estimated_velocity, data->estimated_velocity, steering.steering.lb_estimated_velocity)
+  
+  if ( control_output_last_message.torque_l != data->torque_l || control_output_last_message.torque_r != data->torque_r ){
+    sprintf(buffer, "%d", (int) ((data->torque_l+data->torque_r)/2));
+    STEER_UPDATE_LABEL(steering.control.lb_torque, buffer)
+
+    control_output_last_message.torque_l = data->torque_l;
+    control_output_last_message.torque_r = data->torque_r;
+  } 
+  
+}
 
 void tlm_status_update(primary_tlm_status_converted_t *data) {}
 
