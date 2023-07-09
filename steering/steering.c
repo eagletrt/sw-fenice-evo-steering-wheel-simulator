@@ -27,6 +27,8 @@ primary_lv_cells_temp_converted_t lv_cells_temp_last_message = {0};
 primary_lv_total_voltage_converted_t lv_total_voltage_last_message = {0};
 primary_lv_errors_converted_t lv_errors_last_message = {1};
 
+secondary_tpms_converted_t tpms_last_message = {0};
+
 void car_status_update(primary_car_status_converted_t *data) {
 
   if (data->car_status != car_status_last_message.car_status) {
@@ -85,14 +87,6 @@ void car_status_update(primary_car_status_converted_t *data) {
 }
 
 void control_output_update(primary_control_output_converted_t *data) {
-  /*
-    if (data->estimated_velocity == control_output_last_message.estimated_velocity &&
-      data->tmax_l == control_output_last_message.tmax_l && 
-      data->tmax_r == control_output_last_message.tmax_r &&
-      data->torque_l == control_output_last_message.torque_l &&
-      data->torque_r == control_output_last_message.torque_r)
-      return;
-  */
   char buffer[64];
   
   STEER_CAN_TO_LABEL_UPDATE(control_output_last_message.estimated_velocity, data->estimated_velocity, steering.steering.lb_estimated_velocity)
@@ -206,7 +200,9 @@ void hv_feedbacks_status_update(primary_hv_feedbacks_status_converted_t *data) {
   STEER_ERROR_UPDATE(hv_feedbacks_status, feedbacks_status_feedback_sd_imd, 19)
 }
 
-void hv_cells_voltage_update(primary_hv_cells_voltage_converted_t *data) {}
+void hv_cells_voltage_update(primary_hv_cells_voltage_converted_t *data) {
+
+}
 
 void hv_cells_temp_update(primary_hv_cells_temp_converted_t *data) {}
 
@@ -329,4 +325,18 @@ void lv_errors_update(primary_lv_errors_converted_t *data) {
   STEER_ERROR_UPDATE(lv_errors, errors_pump, 14)
   STEER_ERROR_UPDATE(lv_errors, errors_adc_init, 15)
   STEER_ERROR_UPDATE(lv_errors, errors_mux, 16)
+}
+
+void tyres_info_update(secondary_tpms_converted_t *data){
+  char buffer[64];
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.fl_pressure, data->fl_pressure, steering.tyre_pressures.lb_fl_press);
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.fr_pressure, data->fr_pressure, steering.tyre_pressures.lb_fr_press);
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.rl_pressure, data->rl_pressure, steering.tyre_pressures.lb_rl_press);
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.rr_pressure, data->rr_pressure, steering.tyre_pressures.lb_rr_press);
+
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.fl_temperature, data->fl_temperature, steering.tyre_temps.lb_fl_temp);
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.fr_temperature, data->fr_temperature, steering.tyre_temps.lb_fr_temp);
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.rl_temperature, data->rl_temperature, steering.tyre_temps.lb_rl_temp);
+  STEER_CAN_TO_LABEL_UPDATE(tpms_last_message.rr_temperature, data->rr_temperature, steering.tyre_temps.lb_rr_temp);
+
 }

@@ -3,6 +3,7 @@
 
 #include "lvgl.h"
 #include "primary/primary_network.h"
+#include "secondary/secondary_network.h"
 #include "utils.h"
 #include <stdbool.h>
 #include <stdlib.h>
@@ -203,5 +204,7 @@ void lv_cells_voltage_update(primary_lv_cells_voltage_converted_t *);
 void lv_cells_temp_update(primary_lv_cells_temp_converted_t *);
 void lv_total_voltage_update(primary_lv_total_voltage_converted_t *);
 void lv_errors_update(primary_lv_errors_converted_t *);
+
+void tyres_info_update(secondary_tpms_converted_t *);
 
 #endif
