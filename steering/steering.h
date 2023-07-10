@@ -183,6 +183,7 @@ typedef struct {
 
 extern steering_t steering;
 
+void steer_status_update(primary_steer_status_converted_t *);
 void car_status_update(primary_car_status_converted_t *);
 void control_output_update(primary_control_output_converted_t *data);
 void tlm_status_update(primary_tlm_status_converted_t *);
@@ -206,5 +207,7 @@ void lv_total_voltage_update(primary_lv_total_voltage_converted_t *);
 void lv_errors_update(primary_lv_errors_converted_t *);
 
 void tyres_info_update(secondary_tpms_converted_t *);
+void lap_count_status_update(secondary_lap_count_converted_t *);
+
 
 #endif

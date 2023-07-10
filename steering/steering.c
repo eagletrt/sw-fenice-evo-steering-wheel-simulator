@@ -3,6 +3,8 @@
 steering_t steering = {0};
 extern bool steering_initialized;
 
+
+primary_steer_status_converted_t steer_status_last_message = {0};
 primary_car_status_converted_t car_status_last_message = {0};
 primary_control_output_converted_t control_output_last_message = {0};
 
@@ -28,6 +30,24 @@ primary_lv_total_voltage_converted_t lv_total_voltage_last_message = {0};
 primary_lv_errors_converted_t lv_errors_last_message = {1};
 
 secondary_tpms_converted_t tpms_last_message = {0};
+secondary_lc_status_converted_t lc_status_last_message = {0};  // older lap ?
+secondary_lap_count_converted_t lap_count_last_message = {0};
+
+void lap_count_status_update(secondary_lap_count_converted_t *data){
+  char buffer[64];
+  STEER_CAN_TO_LABEL_UPDATE(lap_count_last_message.lap_count, data->lap_count, steering.telemetry.lb_lap_count);
+  // lap time -> contact Davide Andreolli[SW]
+}
+
+void steer_status_update(primary_steer_status_converted_t *data){
+  char buffer[64];
+  STEER_CAN_TO_LABEL_UPDATE(steer_status_last_message.map_pw, data->map_pw, steering.control.lb_power);
+  STEER_CAN_TO_LABEL_UPDATE(steer_status_last_message.map_sc, data->map_sc, steering.control.lb_slip);
+  STEER_CAN_TO_LABEL_UPDATE(steer_status_last_message.map_tv, data->map_tv, steering.control.lb_torque);
+  
+  /* should be put from 0-100*/
+  //lv_meter_set_indicator_end_value(steering.custom_meter, steering.indicator_white, data->map_pw);
+}
 
 void car_status_update(primary_car_status_converted_t *data) {
 
@@ -91,6 +111,7 @@ void control_output_update(primary_control_output_converted_t *data) {
   
   STEER_CAN_TO_LABEL_UPDATE(control_output_last_message.estimated_velocity, data->estimated_velocity, steering.steering.lb_estimated_velocity)
   
+  /*  ???
   if ( control_output_last_message.torque_l != data->torque_l || control_output_last_message.torque_r != data->torque_r ){
     sprintf(buffer, "%d", (int) ((data->torque_l+data->torque_r)/2));
     STEER_UPDATE_LABEL(steering.control.lb_torque, buffer)
@@ -98,7 +119,7 @@ void control_output_update(primary_control_output_converted_t *data) {
     control_output_last_message.torque_l = data->torque_l;
     control_output_last_message.torque_r = data->torque_r;
   } 
-  
+  */
 }
 
 void tlm_status_update(primary_tlm_status_converted_t *data) {}

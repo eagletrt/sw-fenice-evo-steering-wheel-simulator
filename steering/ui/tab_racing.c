@@ -386,21 +386,15 @@ void lv_custom_meter(lv_obj_t **custom_meter,
 
   /*Add a scale first*/
   lv_meter_scale_t *scale = lv_meter_add_scale(*custom_meter);
-  // lv_obj_align(*custom_meter,  )
-  // lv_meter_set_scale_ticks(*custom_meter, scale, 11, 2, 10,
-  // lv_palette_main(LV_PALETTE_GREY));
   lv_meter_set_scale_ticks(*custom_meter, scale, 0, 0, 0,
                            lv_color_black()); /*to remove spedometer ticks*/
-  // lv_meter_set_scale_major_ticks(*custom_meter, scale, 1, 2, 30,
-  // lv_color_hex3(0xeee), 10); lv_meter_set_scale_range(*custom_meter, scale,
-  // 60, 100, 270, 90);
 
   lv_meter_set_scale_range(*custom_meter, scale, 0, 100, 240, 150);
 
   /*Add a three arc indicator*/
 
   lv_meter_indicator_t *back = lv_meter_add_arc(
-      *custom_meter, scale, 22, lv_color_hex(COLOR_SECONDARY_HEX), -5);
+      *custom_meter, scale, 22, lv_color_hex(COLOR_CAR_HEX), -5);
   *indicator_white = lv_meter_add_arc(*custom_meter, scale, 16,
                                       lv_color_hex(COLOR_TERTIARY_HEX), -8);
   *indicator_blue = lv_meter_add_arc(*custom_meter, scale, 18,
@@ -415,10 +409,10 @@ void lv_custom_meter(lv_obj_t **custom_meter,
 
   lv_meter_set_indicator_start_value(*custom_meter, *indicator_blue, 0);
   lv_meter_set_indicator_end_value(*custom_meter, *indicator_blue,
-                                   100); /*range values 0-100*/
+                                   0); /*range values 0-100*/
 
-  lv_meter_set_indicator_value(*custom_meter, *indicator_white, 0);
-  lv_meter_set_indicator_value(*custom_meter, *indicator_blue, 0);
+  //lv_meter_set_indicator_value(*custom_meter, *indicator_white, 100);
+  //lv_meter_set_indicator_value(*custom_meter, *indicator_blue, 60);
 
   // lv_meter_indicator_t * indic3 = lv_meter_add_arc(custom_meter, scale, 10,
   // lv_palette_main(LV_PALETTE_BLUE), 0);

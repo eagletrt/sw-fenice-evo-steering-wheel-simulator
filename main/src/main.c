@@ -287,6 +287,11 @@ void foo(lv_indev_drv_t *indev_drv, uint8_t e) {
 
   case 'd':
     racing_error_notification("VEZ TE GHE LE GOMME SBUSE");
+    lv_meter_set_indicator_end_value(steering.custom_meter, steering.indicator_white, 60);
+    break;
+
+  case 'k':
+    lv_meter_set_indicator_end_value(steering.custom_meter, steering.indicator_white, 80);
     break;
 
   default:
