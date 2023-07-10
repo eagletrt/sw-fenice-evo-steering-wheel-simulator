@@ -129,6 +129,9 @@ typedef struct {
     STEER_PROPERTY(power);
     STEER_PROPERTY(torque);
     STEER_PROPERTY(slip);
+    STEER_PROPERTY(ang_rate_x);
+    STEER_PROPERTY(ang_rate_y);
+    STEER_PROPERTY(ang_rate_z);
   } control;
 
   struct {
@@ -208,6 +211,7 @@ void lv_errors_update(primary_lv_errors_converted_t *);
 
 void tyres_info_update(secondary_tpms_converted_t *);
 void lap_count_status_update(secondary_lap_count_converted_t *);
-
+void steering_angle_update(secondary_steering_angle_converted_t *data);
+void imu_angular_rate_update(secondary_imu_angular_rate_converted_t *data);
 
 #endif

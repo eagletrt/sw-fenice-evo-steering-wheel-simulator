@@ -32,6 +32,20 @@ primary_lv_errors_converted_t lv_errors_last_message = {1};
 secondary_tpms_converted_t tpms_last_message = {0};
 secondary_lc_status_converted_t lc_status_last_message = {0};  // older lap ?
 secondary_lap_count_converted_t lap_count_last_message = {0};
+secondary_imu_angular_rate_converted_t imu_angular_rate_last_message = {0};
+secondary_steering_angle_converted_t steering_angle_last_message = {0};
+
+void steering_angle_update(secondary_steering_angle_converted_t *data){
+  char buffer[64];
+  STEER_CAN_TO_LABEL_UPDATE(steering_angle_last_message.angle, data->angle, steering.das.lb_steering_angle);
+}
+
+void imu_angular_rate_update(secondary_imu_angular_rate_converted_t * data){
+  char buffer[64];
+  STEER_CAN_TO_LABEL_UPDATE(imu_angular_rate_last_message.ang_rate_x, data->ang_rate_x, steering.control.lb_ang_rate_x);
+  STEER_CAN_TO_LABEL_UPDATE(imu_angular_rate_last_message.ang_rate_y, data->ang_rate_y, steering.control.lb_ang_rate_y);
+  STEER_CAN_TO_LABEL_UPDATE(imu_angular_rate_last_message.ang_rate_z, data->ang_rate_z, steering.control.lb_ang_rate_z);
+}
 
 void lap_count_status_update(secondary_lap_count_converted_t *data){
   char buffer[64];
